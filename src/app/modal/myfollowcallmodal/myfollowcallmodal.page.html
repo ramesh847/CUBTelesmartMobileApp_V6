@@ -1,0 +1,256 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title>{{Cusdata.CUSTOMER_NAME}}</ion-title>
+</ion-toolbar>
+<ion-content>
+  <form [formGroup]="MyfollowupForm" (submit)="onSubmitForm(MyfollowupForm)">
+    <ion-card>
+      <ion-card-header class="card_heder">
+        <span class="card_heading">Purpose: {{Cusdata.PURPOSE}}</span>
+        <span style="float:right;color:white">{{Cusdata.CUSTOMER_ID}}</span>
+      
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+        
+            <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Call Type</ion-label>
+                </div>
+                <ion-item class="input_field" >
+                 <ion-select class="select_field w-100-p" (ionChange)="changeCallType($event)"
+                    formControlName="calltype" placeholder="Select" disabled>
+                    <ion-select-option Value="T" >Telecall</ion-select-option>
+                    <ion-select-option Value="" >Select</ion-select-option>
+                    <ion-select-option Value="P" >Personal Visit</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Call OutCome</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeCallOutcome($event.target.value)"
+                    formControlName="calloutcome" placeholder="Select">
+                    <ion-select-option value="null" selected>Select</ion-select-option>
+                    <ion-select-option [(value)]="item.Value" *ngFor="let item of CallOutcomeItems">{{item.Text}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </div>
+
+            <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Product Type</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeProductType($event.target.value)"
+                    formControlName="producttype" placeholder="Select">
+                    <ion-select-option value="null" selected>Select</ion-select-option>
+                    <ion-select-option [(value)]="item.VALUE" *ngFor="let item of businessunit">{{item.TEXT}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="showProductGroupProduct">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Product Group</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeProductGroup($event.target.value)"
+                    formControlName="productgroup" placeholder="Select">
+                    <ion-select-option value="null" selected>Select</ion-select-option>
+                    <ion-select-option (value)="item.VALUE" *ngFor="let item of ProductGroups">{{item.TEXT}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="showProductGroupProduct">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Product</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeProductGroup($event.target.value)"
+                    formControlName="productgroup" placeholder="Select">
+                    <ion-select-option value="null" selected>Select</ion-select-option>
+                    <ion-select-option (value)="item.Value" *ngFor="let item of Product">{{item.Text}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="showFollowupDateTime">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Followup Date</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+                  <ion-popover trigger="date" size="cover">
+                    <ng-template>
+                      <ion-datetime presentation="date" [(ngModel)]="date" formControlName="followupdate"
+                        [showDefaultButtons]="true"></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+
+              </ion-col>
+            </div>
+            <div class="w-100-p" *ngIf="showFollowupDateTime">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked" trigger="open-datetime">Followup Time</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input value="{{ time | date: 'shortTime'}}" id="time" class="ion-text-end"></ion-input>
+                  <ion-popover trigger="time" size="cover">
+                    <ng-template>
+                      <ion-datetime presentation="time" [(ngModel)]="time" formControlName="followuptime"
+                        [showDefaultButtons]="true"></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="ShowDepositsCasaAdvanceInsurace">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Deposits </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="deposits"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="ShowDepositsCasaAdvanceInsurace">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">CASA </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="casa"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            <div class="w-100-p" *ngIf="ShowDepositsCasaAdvanceInsurace">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Advance </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="advance"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+            <div class="w-100-p" *ngIf="ShowDepositsCasaAdvanceInsurace">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Insurance </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="insurance"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+     
+            
+            <div class="w-100-p" *ngIf="ProductTypeFirstNameLastNameMobileEmail">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">First Name </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="firstname"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+            
+            
+            <div class="w-100-p"  *ngIf="ProductTypeFirstNameLastNameMobileEmail">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Last Name </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="lastname"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            
+            <div class="w-100-p"  *ngIf="ProductTypeFirstNameLastNameMobileEmail">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Mobile </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="mobile"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+            
+            <div class="w-100-p"  *ngIf="ProductTypeFirstNameLastNameMobileEmail">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Email </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="email"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+
+            <div class="w-100-p" >
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Remarks </ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-input  formControlName="remarks"></ion-input>
+                </ion-item>
+
+              </ion-col>
+            </div>
+          </ion-row>
+        </ion-grid>
+        <br>
+        <div class="update_button">
+          <ion-button style="--background:#87ceeb" type="submit" expand="block">Save</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

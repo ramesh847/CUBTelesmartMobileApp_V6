@@ -1,0 +1,48 @@
+.card_heder{
+    background-color: #ec0576;
+    padding:10px
+}
+.card_heading{
+    color:white;
+    border:0px
+}
+.card_left_text{
+    color: black;
+    text-align: left;
+    font-weight: bold;
+}
+.card_right_text{
+    color: black;
+    text-align: right;
+    font-weight: bold;
+}
+
+table,
+td,
+th {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #e7e5e5;
+}
+
+th,
+td {
+    padding: 15px;
+}
+.update_button{
+    width:60%;
+    margin-left: auto;
+    margin-right:auto;
+    // background-color: #ec0576;
+}
+// .col_height{
+//     min-height:
+// }

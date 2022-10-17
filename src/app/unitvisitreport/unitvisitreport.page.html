@@ -1,0 +1,58 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end' style="margin-right:0.5rem" defaultHref="">
+    <ion-icon name="home" class="home_icon" ></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Customers</ion-title>
+  </ion-toolbar>
+<ion-content class="bgUvrWall">
+  <ion-item style="--background:transparent;border-bottom: 1px solid white;">
+    <!-- <ion-label floating>My Label</ion-label> -->
+    <ion-input style="--background:white;height:26px;border-radius: 4px;color:black"  type="text" [(ngModel)]="Search.SearchData" (ionChange)="searchdosomthing($event)"></ion-input>
+    <ion-button style="float:right;color:white"  (click)="doSomething()" fill="clear" >
+      search
+    </ion-button>
+  </ion-item>
+  
+  <ion-card *ngFor = "let item of allCusData">
+ <ion-grid>
+  <ion-row>
+     <ion-col size="6" class="colomsize"><p class="card_content">Customer ID</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">{{item.CUSTOMERID}}</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">Customer Name</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">{{item.CUSTNAME}}</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">Branch Code</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">{{item.BRANCHCODE}}</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">Nature of activity</p></ion-col>
+    <ion-col size="6" class="colomsize"><p class="card_content">{{item.NATUREOFACTIVITY}}</p></ion-col>
+    <!-- <ion-col size="6" class="colomsize"><p class="card_content" >Position of credit facilities</p></ion-col> -->
+    <!-- <ion-col size="6" class="colomsize"><p class="card_content">{{item.NATUREOFACTIVITY}}</p></ion-col> -->
+    <ion-col size="6"><p class="card_content">Approve Comments</p></ion-col>
+    <ion-col size="6"><p class="card_content">-</p></ion-col>
+    <!-- <ion-col size="6"><p class="card_content">Position of facilities</p></ion-col> -->
+    <!-- <ion-col size="6"><p class="card_content">{{item.NATUREOFACTIVITY}}</p></ion-col> -->
+    
+  </ion-row>
+
+  
+ </ion-grid>
+ <ion-grid>
+  <ion-row style="background-color:#ec0576;border-radius: 5px;width:96%;margin-left: auto;margin-right: auto;">
+      <ion-col size-sm="4" size="4" class="ion-text-left button" (click)="goUVRsection(item)">
+          <ion-button expand="full"   fill="clear">Visit Entry</ion-button>
+      </ion-col>
+
+      <ion-col size-sm="4" size="4" class="ion-text-left button">
+          <ion-button expand="full"  fill="clear" (click)="goUVRHistorysection(item)">History</ion-button>
+      </ion-col>
+      <ion-col size-sm="4" size="4" class="ion-text-left button">
+        <ion-button expand="full"   fill="clear" (click)="goUVRpof(item)">POF</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<br>
+  </ion-card>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

@@ -1,0 +1,319 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title style="text-align:center">{{data.customerid}}</ion-title>
+  </ion-toolbar>
+<ion-content>
+  <ion-card >
+    <ion-card class="card_content">
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">First Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="data.firstname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Last Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="data.lastname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="data.mobile"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Email</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="data.email"></ion-input>
+        </ion-item>
+      </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Outcome</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.callout">
+          <ion-select-option selected="selected" value="">&lt;&lt; Call Outcome &gt;&gt;</ion-select-option>
+          <ion-select-option *ngFor="let items of callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Type</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.selectele">
+          <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+          <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+          <ion-select-option value="T">Tele Call</ion-select-option>
+          <ion-select-option value="P">Personal visit</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+<!-- 
+  <div class="w-100-p" >
+    <ion-col class="col_height">
+      <div class="input_heading">
+        <ion-label position="stacked">Followup Date</ion-label>
+      </div>
+      <ion-item>
+        <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+        <ion-popover trigger="date" size="cover">
+          <ng-template>
+            <ion-datetime presentation="date" [(ngModel)]="data.followupdate" 
+              [showDefaultButtons]="true"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+
+    </ion-col>
+  </div>
+  <div class="w-100-p" >
+    <ion-col class="col_height">
+      <div class="input_heading">
+        <ion-label position="stacked" trigger="open-datetime">Followup Time</ion-label>
+      </div>
+      <ion-item>
+        <ion-input value="{{ time | date: 'shortTime'}}" id="time" class="ion-text-end"></ion-input>
+        <ion-popover trigger="time" size="cover">
+          <ng-template>
+            <ion-datetime presentation="time" [(ngModel)]="data.followuptime" 
+              [showDefaultButtons]="true"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+
+    </ion-col>
+  </div> -->
+
+
+  <div class="content_item" *ngIf="data.callout == 2">
+    <ion-label position="stacked" class="input_heading">Followup Date</ion-label>
+    <ion-item class="input_field">
+      <ion-input value="{{ data.followupdate | date: 'dd/MM/yyyy' }}" id="data.followupdate" class="ion-text-end"></ion-input>
+      <ion-popover trigger="data.followupdate" size="cover">
+        <ng-template>
+          <ion-datetime presentation="data.followupdate" [(ngModel)]="data.followupdate" 
+            [showDefaultButtons]="true"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="data.callout == 2">
+    <ion-label position="stacked" class="input_heading" trigger="open-datetime">Followup Time</ion-label>
+    <ion-item class="input_field">
+      <ion-input value="{{ data.followuptime | date: 'shortTime'}}" id="data.followuptime" class="ion-text-end"></ion-input>
+      <ion-popover trigger="data.followuptime" size="cover">
+        <ng-template>
+          <ion-datetime presentation="data.followuptime" [(ngModel)]="data.followuptime" 
+            [showDefaultButtons]="true"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <!-- <ion-item class="input_field">
+      <input class="input-md textinput textInput form-control inputcolor" displayFormat="hh:mm A" id="followuptime" [(ngModel)]="data.followuptime" placeholder="Time" style="padding: 1em;    border: 1px solid rgb(221, 212, 212);"  type="time" required />
+    </ion-item> -->
+  </div>
+
+  <div class="form-group col-xs-12 col-sm-12
+  "*ngIf="data.selectele == 'P'" ng-click="clear()">
+                       <ion-checkbox  (ionChange)="checkbox($event.target.checked)"  style="font-size: 15px; background-color: transparent;padding-top: 0px;padding-bottom: 0px;overflow: hidden !important"> &nbsp; Joint Visit</ion-checkbox>
+                   </div>
+
+ 
+                   <div class="content_item" *ngIf="data.jointvisit == 'YES' && data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Emp Code</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input (ionBlur)="checkusercode(data.jointusercode)" [(ngModel)]="data.jointusercode"></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="data.jointvisit == 'YES' && data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Emp Name</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input [(ngModel)]="data.jointusername" disabled></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Enter Location</ion-label>
+                  <ion-item class="text_area" >
+                    <ion-textarea [(ngModel)]="data.addressname" placeholder="Enter here..."></ion-textarea>
+                  </ion-item>
+                </div>
+                <div class="content_item">
+                  <ion-label position="stacked" class="input_heading">Purpose</ion-label>
+                    <ion-item class="input_field">
+                      <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.courtesypurp">
+                        <ion-select-option selected="purpose" value="{{purposeID}}">{{purpose}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                </div>
+
+                <div class="content_item" *ngIf="data.courtesypurp == '3'">
+                  <ion-label position="stacked" class="input_heading">Business Unit</ion-label>
+                    <ion-item class="input_field">
+                      <ion-select  class="select_field"  [(ngModel)]="data.businessunit">
+                        <!-- <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option> -->
+                        <ion-select-option selected="selected" value="">&lt;&lt; Business Unit &gt;&gt;</ion-select-option>
+                        <ion-select-option *ngFor="let items of businessunit" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                        <!-- <ion-select-option value="Consortium">Consortium</ion-select-option> -->
+                      </ion-select>
+                    </ion-item>
+                </div>
+
+                <div class="content_item" *ngIf ="data.businessunit == 11 || data.businessunit == 14 || data.businessunit == 13 || data.businessunit == 12">
+                  <ion-label position="stacked" class="input_heading">Expected Business</ion-label>
+                </div>
+              
+              <!-- // DEEPING OF CUSTOMER -->
+                <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+                  <ion-label position="stacked" class="input_heading">Deposits</ion-label>
+                  <ion-item class="input_field" >
+                    <ion-input placeholder="Deposits" [(ngModel)]="data.deposits"></ion-input>
+                  </ion-item>
+                </div>
+                <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+                  <ion-label position="stacked" class="input_heading">CASA</ion-label>
+                  <ion-item class="input_field" >
+                    <ion-input placeholder="CASA" [(ngModel)]="data.casa"></ion-input>
+                  </ion-item>
+                </div>
+                <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+                  <ion-label position="stacked" class="input_heading">Advance</ion-label>
+                  <ion-item class="input_field" >
+                    <ion-input placeholder="Advance" [(ngModel)]="data.advance"></ion-input>
+                  </ion-item>
+                </div>
+              
+              <!-- //OTHERS -->
+              
+              <div class="content_item" *ngIf="data.businessunit == 13">
+                <ion-label position="stacked" class="input_heading">Caption</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Advance" [(ngModel)]="data.caption" type="text"></ion-input>
+                </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="data.businessunit == 13">
+                <ion-label position="stacked" class="input_heading">Amount</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Advance" [(ngModel)]="data.amount" type="number"></ion-input>
+                </ion-item>
+              </div>
+              
+                
+                <div class="content_item" *ngIf="data.businessunit == 12">
+                  <ion-label position="stacked" class="input_heading">Insurance</ion-label>
+                  <ion-item class="input_field" >
+                    <ion-input placeholder="Insurance" [(ngModel)]="data.insurance"></ion-input>
+                  </ion-item>
+                </div>
+              
+               <!-- INSURANCE CHANGES  -->
+
+              <div class="form-group col-xs-12 col-sm-12" *ngIf="data.courtesypurp == 5">
+                <ion-checkbox (ionChange)="checkbox2($event.target.checked)" [(ngModel)]="data.current"
+                  style="font-size: 15px; background-color: transparent;padding-top: 0px;padding-bottom: 0px;overflow: hidden !important">
+                  </ion-checkbox>
+              </div>
+              <div class="content_item" *ngIf="data.current == 'Y'">
+                <ion-label position="stacked" class="input_heading">Collected Date</ion-label>
+                <ion-item class="input_field">
+                  <ion-input value="{{ data.collected_date | date: 'dd/MM/yyyy' }}" id="data.collected_date" class="ion-text-end"></ion-input>
+                  <ion-popover trigger="data.collected_date" size="cover">
+                    <ng-template>
+                      <ion-datetime presentation="data.collected_date" [(ngModel)]="data.collected_date" 
+                        [showDefaultButtons]="true"></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+              </div>
+
+              <div class="content_item" *ngIf="data.current == 'Y'">
+                <ion-label position="stacked" class="input_heading">Account Number</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Account Number" (ionBlur)="getamount(data.customerid,data.collected_date,data.collected_accno)" [(ngModel)]="data.collected_accno"></ion-input>
+                </ion-item>
+              </div>
+
+              <div class="content_item" *ngIf="data.current == 'Y'">
+                <ion-label position="stacked" class="input_heading">Amount</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Amount"  [(ngModel)]="data.collectamount" disabled></ion-input>
+                </ion-item>
+              </div>
+<!-- 
+               <div class="content_item" *ngIf="data.businessunit == 12">
+                <ion-label position="stacked" class="input_heading">Cross Sell Product</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field"  [(ngModel)]="data.insurancetype" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_type" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="data.businessunit == 12">
+                <ion-label position="stacked" class="input_heading">Source of Lead</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field"  [(ngModel)]="data.leadsource" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_source" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="data.businessunit == 12 && data.leadsource == '3'">
+                <ion-label position="stacked" class="input_heading">Refered By</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Existing Customer ID" [(ngModel)]="data.referredby"></ion-input>
+                </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="data.businessunit == 12 && data.leadsource == '3'">
+                <ion-label position="stacked" class="input_heading">Cross Sell Product</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field"  [(ngModel)]="data.relationship" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_ref" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div> -->
+              
+              
+                <div class="content_item">
+                  <ion-label position="stacked" class="input_heading">Remarks</ion-label>
+                <ion-item class="text_area">
+                  <ion-textarea [(ngModel)]="data.Remarks" placeholder="Enter more information here..."></ion-textarea>
+                </ion-item>
+              </div>
+              
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-button style="--background:#ec0576;" (click)="saveSmaCustomer()" expand="block">save</ion-button>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-button style="--background:grey;width:100%" (click)="customerActionModal(items)" expand="block">cancel</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <dl style="padding-left: 10px;">
+              
+                <dd style="color:red;">*  Denotes Mandatory</dd>
+              
+                <dd style="color:red;">**  Denotes Any One Mandatory </dd>
+              </dl>
+                </ion-card>
+                </ion-card>
+</ion-content>

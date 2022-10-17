@@ -1,0 +1,128 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <!-- <ion-icon name="home" class="home_icon"></ion-icon> -->
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title >Call Connected</ion-title>
+  <a class="button" style="padding-top: 3px;
+  background-color: #2e3192 ;" (click)="closehistorymodal()">
+              <i class="icon ion-close-circled" aria-hidden="true" style="font-size: 21px;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;padding-top: 3px;position: relative;bottom: 4px;">
+           </i>
+          </a>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <div >
+    <!-- <script id="followupcallConnect.html" type="text/ng-template"> -->
+  
+      <ion-card *ngFor="let items of assignedvisitshistorydata">
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid!='11' && purposeid!='12' && purposeid!='13'">
+          Purpose: {{assignedvisit.Purpose}} <span style="float:right;">{{cust_id}}</span>
+          
+        </ion-card-header>
+        <!-- <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid!='11' && purposeid!='12' && purposeid!='13'">
+          Purpose: {{assignedvisit.Purpose}} <span style="float:right;">{{cust_id}}</span>
+          
+        </ion-card-header>
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid=='11' || purposeid=='12' || purposeid=='13'">
+          Purpose: Lead Generation&nbsp;/&nbsp;{{assignedvisit.Purpose}}<span style="float:right;">{{cust_id}}</span>
+         
+        </ion-card-header> -->
+        
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1">
+              </ion-col>
+              <ion-col size="10">
+
+                <p style="color: white;font-size: 14 px;font-weight: 500;" [(ngModel)]="customercode">{{items.CBSCustomerID}}</p>
+                <p style="float:right;" [(ngModel)]="mobileNumber">
+                  <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" (click)="callNumber({{items.Mobile}})" href="tel:{{items.Mobile}}"><u>{{items.Mobile}}</u></a></p>
+                <!-- <ion-label class="select_placeholder">Call OutCome</ion-label> -->
+              <!-- <ion-item class="input_field" id="selectfield" >
+                  <ion-select *ngIf="hidecalloutcome" [(ngModel)]="assignedvisit.calloutcome" class="select_field" placeholder="Select">
+                    <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                    <ion-select-option *ngFor="let items of callOutcome |filter:item.Text='Calls-FollowUp'" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    
+                  </ion-select>
+                  <ion-select *ngIf="!hidecalloutcome" [(ngModel)]="assignedvisit.calloutcome" class="select_field" placeholder="Select">
+                    <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                    <ion-select-option *ngFor="let items of callOutcome |filter:item.Text='Calls-FollowUp'" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    
+                  </ion-select>
+                </ion-item> -->
+
+              
+
+              </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="1">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label class="select_placeholder">Customer Name</ion-label>
+                  <ion-label class="select_placeholder">{{items.CustomerName}}</ion-label>
+                </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="1">
+                  </ion-col>
+                  <ion-col size="10">
+                    <ion-label class="select_placeholder">Call Type</ion-label>
+                    <p *ngIf="items.CallType == 'T'" style="font-size: 14px;">Telecall</p>
+                    <p *ngIf="items.CallType == 'P'" style="font-size: 14px;">Personal Visit</p>
+                   
+                  </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="1">
+                    </ion-col>
+                    <ion-col size="10">
+                      <ion-label class="select_placeholder">Emp Name</ion-label>
+                      <ion-label class="select_placeholder">{{items.EmpName}}</ion-label>
+                     
+                    </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                      <ion-col size="1">
+                      </ion-col>
+                      <ion-col size="10">
+                        <ion-label class="select_placeholder">Purpose</ion-label>
+                        <ion-label class="select_placeholder">{{items.Purpose}}</ion-label>
+                       
+                      </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col size="1">
+                        </ion-col>
+                        <ion-col size="10">
+                          <ion-label class="select_placeholder">Remarks</ion-label>
+                          <ion-label class="select_placeholder">{{items.Remarks}}</ion-label>
+                         
+                        </ion-col>
+                        </ion-row>
+
+
+
+
+
+
+
+              </ion-grid>
+             
+          
+
+
+        </ion-card-content>
+      </ion-card>
+    
+      
+      
+     
+  <!-- </script> -->
+</div>
+</ion-content>

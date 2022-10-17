@@ -1,0 +1,42 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='start'>
+    <ion-back-button defaultHref=""></ion-back-button>
+  </ion-buttons>
+  <ion-title >Position of Facilites</ion-title>
+  </ion-toolbar>
+
+
+  <ion-content class="bgUvrWall">
+    <ion-card class="toolbar_card">
+      {{SectionHeaderdata.CUSTOMERID}} - {{SectionHeaderdata.CUSTNAME}}
+        </ion-card>
+
+        <ion-card *ngIf="PofDataShow == true">
+          <ion-grid>
+           <ion-row>
+              <ion-col size="6" class="colomsize"><p class="card_content">Nature</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Nature}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Name of the borrower</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Nameoftheborrower}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Sanc_amount</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Sanc_amount}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Bal</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Bal}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Due_date</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Due_date | date: 'dd/MM/yyyy'}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Arrear</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.arrear}}</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">Exposure</p></ion-col>
+             <ion-col size="6" class="colomsize"><p class="card_content">{{PofData.Exposure}}</p></ion-col>
+             
+           </ion-row>
+         
+           
+          </ion-grid>
+        
+         <br>
+           </ion-card>
+  </ion-content>
+  <ion-footer class="footer">
+    <p class="footer_content">City Union Bank Ltd</p>
+  </ion-footer>

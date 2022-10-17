@@ -1,0 +1,136 @@
+
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >Add Insurance</ion-title>
+  </ion-toolbar>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="segment">
+        <!-- <ion-item> -->
+          <div>
+          <ion-checkbox slot="start" ([ngModel])="data1.exist"    checked="{{exist}}"   
+          (ionChange)="CheckBoxChange('exist',$event.target.checked)">
+              </ion-checkbox>
+              <ion-label position="stacked" class="input_heading">&nbsp;&nbsp;&nbsp;&nbsp; Existing</ion-label>
+        <!-- </ion-item> -->
+      </div>
+      <!-- <input type="checkbox"  id="checkbox1" > -->
+      </ion-col>
+      <ion-col class="segment">
+        <div>
+        <!-- <ion-item> -->
+          <ion-checkbox slot="start" ([ngModel])="data1.new" checked="{{new}}"      
+          (ionChange)="CheckBoxChange('new',$event.target.checked)">
+              </ion-checkbox>
+              <ion-label position="stacked" class="input_heading">&nbsp;&nbsp;&nbsp;&nbsp;New</ion-label>
+        <!-- </ion-item> -->
+      </div>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+    <ion-card >
+      <ion-card class="card_content">
+    <div class="content_item" *ngIf="data1.exist =='YES'">
+      <ion-label position="stacked" class="input_heading">Customer Id</ion-label>
+      <ion-item class="input_field">
+        <ion-input  [(ngModel)]="assigned.customerid" id="existingCustId"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Customer Name</ion-label>
+      <ion-item class="input_field">
+        <ion-input  [(ngModel)]="assigned.CustName" id="CustName"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="w-100-p" >
+      <ion-col class="col_height">
+        <div class="input_heading">
+          <ion-label position="stacked">DOB</ion-label>
+        </div>
+        <ion-item class="input_field">
+          <ion-input value="{{ entryMonth | date: 'dd/MM/yyyy' }}" id="Customer_DOB" class="ion-text-end"></ion-input>
+          <ion-popover trigger="Customer_DOB" size="cover">
+            <ng-template>
+              <ion-datetime presentation="entryMonth" id="Customer_DOB" [(ngModel)]="entryMonth" 
+                [showDefaultButtons]="true"></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+  
+      </ion-col>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Mobile Number</ion-label>
+      <ion-item class="input_field">
+        <ion-input  [(ngModel)]="mobNum" id="Contact_Number" ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Gender</ion-label>
+        <ion-item class="input_field">
+          <ion-select  class="select_field" placeholder="Select" id="Gender"  [(ngModel)]="selectseg">
+            <option selected="selected" value=""> &lt;&lt;Please Select &gt;&gt; </option>
+            <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+            <ion-select-option value="M">Male</ion-select-option>
+            <ion-select-option value="F">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Type</ion-label>
+        <ion-item class="input_field">
+          <ion-select  class="select_field" (ionChange)="onTypeSelected()" placeholder="Select" id="selectedType">
+            <ion-select-option selected="selected" value=""> &lt;&lt;Please Select &gt;&gt; </ion-select-option>
+            <ion-select-option  value="{{item.TEXT}}" *ngFor="let item of types">{{item.TEXT}}</ion-select-option>
+            <!-- <ion-select-option value="M">Male</ion-select-option>
+            <ion-select-option value="F">Female</ion-select-option> -->
+          </ion-select>
+        </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Companies</ion-label>
+        <ion-item class="input_field">
+          <ion-select  class="select_field" placeholder="Select" id="selectedCompany"  (ionChange)="onCompanySelected()">
+            <ion-select-option selected="selected" value=""> &lt;&lt;Please Select &gt;&gt; </ion-select-option>
+            <ion-select-option  value="{{item.TEXT}}" *ngFor="let item of companies">{{item.TEXT}}</ion-select-option>
+            <!-- <ion-select-option value="M">Male products</ion-select-option>
+            <ion-select-option value="F">Female</ion-select-option> -->
+          </ion-select>
+        </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Product</ion-label>
+        <ion-item class="input_field">
+          <ion-select  class="select_field" placeholder="Select" id="selectedProduct" (ionChange)="onProductSelected()">
+            <ion-select-option selected="selected" value=""> &lt;&lt;Please Select &gt;&gt; </ion-select-option>
+            <ion-select-option  value="{{item.TEXT}}" *ngFor="let item of products">{{item.TEXT}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </div>
+
+    <div class="content_item">
+      <ion-label position="stacked" class="input_heading">Plans</ion-label>
+        <ion-item class="input_field">
+          <ion-select  class="select_field" placeholder="Select" id="selectedPlan">
+            <ion-select-option selected="selected" value=""> &lt;&lt;Please Select &gt;&gt; </ion-select-option>
+            <ion-select-option  value="{{item.TEXT}}" *ngFor="let item of plans">{{item.TEXT}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </div>
+    <br>
+    <ion-button expand="full" class="submit_button" (click)="InsuranceInsertData()">send</ion-button>
+</ion-card>
+</ion-card>
+</ion-content>

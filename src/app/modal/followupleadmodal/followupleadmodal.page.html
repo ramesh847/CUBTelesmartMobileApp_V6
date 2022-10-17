@@ -1,0 +1,594 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title style="text-align:center">{{fullname}}</ion-title>
+  </ion-toolbar>
+<ion-content>
+  
+  <ion-card >
+    <div class="panel-heading" style="background-color: #ec0576 !important;color:white; font-weight: bold;padding:8px" >{{purpose}}:{{updatedname}}<span style="float:right;">{{customerid}}</span></div>
+    <ion-card class="card_content">
+      
+      
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Outcome</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.calloutcome">
+          <ion-select-option selected="selected" value="">&lt;&lt; Call Outcome &gt;&gt;</ion-select-option>
+          <ion-select-option *ngFor="let items of callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Type</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.calltype">
+          <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+          <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+          <ion-select-option value="T">Tele Call</ion-select-option>
+          <ion-select-option value="P">Personal visit</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+<!-- 
+  <div class="w-100-p" >
+    <ion-col class="col_height">
+      <div class="input_heading">
+        <ion-label position="stacked">Followup Date</ion-label>
+      </div>
+      <ion-item>
+        <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+        <ion-popover trigger="date" size="cover">
+          <ng-template>
+            <ion-datetime presentation="date" [(ngModel)]="data.followupdate" 
+              [showDefaultButtons]="true"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+
+    </ion-col>
+  </div>
+  <div class="w-100-p" >
+    <ion-col class="col_height">
+      <div class="input_heading">
+        <ion-label position="stacked" trigger="open-datetime">Followup Time</ion-label>
+      </div>
+      <ion-item>
+        <ion-input value="{{ time | date: 'shortTime'}}" id="time" class="ion-text-end"></ion-input>
+        <ion-popover trigger="time" size="cover">
+          <ng-template>
+            <ion-datetime presentation="time" [(ngModel)]="data.followuptime" 
+              [showDefaultButtons]="true"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+
+    </ion-col>
+  </div> -->
+
+
+  <div class="content_item" *ngIf="mylead.calloutcome =='2'">
+    <ion-label position="stacked" class="input_heading">Followup Date</ion-label>
+    <ion-item class="input_field">
+      <ion-input value="{{ mylead.followupdate | date: 'dd/MM/yyyy' }}" id="mylead.followupdate" class="ion-text-end"></ion-input>
+      <ion-popover trigger="mylead.followupdate" size="cover">
+        <ng-template>
+          <ion-datetime presentation="mylead.followupdate" [(ngModel)]="mylead.followupdate" 
+            [showDefaultButtons]="true"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.calloutcome =='2'">
+    <ion-label position="stacked" class="input_heading" trigger="open-datetime">Followup Time</ion-label>
+    <ion-item class="input_field">
+      <ion-input value="{{ mylead.followuptime | date: 'shortTime'}}" id="mylead.followuptime" class="ion-text-end"></ion-input>
+      <ion-popover trigger="mylead.followuptime" size="cover">
+        <ng-template>
+          <ion-datetime presentation="mylead.followuptime" [(ngModel)]="mylead.followuptime" 
+            [showDefaultButtons]="true"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <!-- <ion-item class="input_field">
+      <input class="input-md textinput textInput form-control inputcolor" displayFormat="hh:mm A" id="followuptime" [(ngModel)]="data.followuptime" placeholder="Time" style="padding: 1em;    border: 1px solid rgb(221, 212, 212);"  type="time" required />
+    </ion-item> -->
+  </div>
+
+  <div class="content_item" *ngFor="mylead.calloutcome == '3'">
+    <ion-label position="stacked" class="input_heading">Product Type</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.type" (ionChange)="getprodGroup(mylead.type)">
+          <ion-select-option selected="purpose" *ngFor="let items of businessunitlist" value="{{items.VALUE}}">{{items.TEXT}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.type == '12' || mylead.type == '13'">
+    <ion-label position="stacked" class="input_heading">Product Group</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.prodGroup" (ionChange)="getproduct(mylead.type,mylead.prodGroup)">
+          <ion-select-option selected="purpose" *ngFor="let items of productGroup" value="{{items.VALUE}}">{{items.TEXT}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.type == '12' || mylead.type == '13'">
+    <ion-label position="stacked" class="input_heading">Product</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.prod" >
+          <ion-select-option selected="purpose" *ngFor="let items of product" value="{{items.VALUE}}">{{items.TEXT}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.calloutcome == '3' &&  mylead.type == '11'">
+    <ion-label position="stacked" class="input_heading">CustomerId</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="mylead.customerid"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">First Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.firstname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Last Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.lastname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.mobile"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Email</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.email"></ion-input>
+        </ion-item>
+      </div> 
+
+
+      <div *ngIf="mylead.type == '13' && mylead.prodGroup == '12'">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Credit Card No</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Credit Limit</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.sumAssured"></ion-input>
+          </ion-item>
+        </div> 
+
+       
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">A/C Opening Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      </div>
+
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3' &&  mylead.type == '11'">
+    <ion-label position="stacked" class="input_heading">CustomerId</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="mylead.customerid"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">First Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.firstname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Last Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.lastname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.mobile"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item" *ngIf="mylead.calloutcome == '3'">
+        <ion-label position="stacked" class="input_heading">Email</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="mylead.email"></ion-input>
+        </ion-item>
+      </div> 
+
+
+      <div *ngIf="mylead.type == '13' && mylead.prodGroup == '12'">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Credit Card No</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Credit Limit</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.sumAssured"></ion-input>
+          </ion-item>
+        </div> 
+
+       
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">A/C Opening Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      </div>
+
+
+      <div *ngIf="mylead.type == '13' && mylead.prodGroup == '11'">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Client Code</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum"></ion-input>
+          </ion-item>
+        </div>
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Trading Code</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.sumAssured"></ion-input>
+          </ion-item>
+        </div> 
+       
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">A/C Opening Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      </div>
+
+
+      <div *ngIf="mylead.type == '13' && mylead.prodGroup == '10'">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Merchant ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">No of Machines</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+       
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Terminal ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.sumAssured"></ion-input>
+          </ion-item>
+        </div> 
+
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">Installation Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      </div>
+
+      <div *ngIf="mylead.type == '13' && mylead.prodGroup == '14'">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Locker Size</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Locker Rent</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+       
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Locker No</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.sumAssured"></ion-input>
+          </ion-item>
+        </div> 
+
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">Locker Open Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      </div>
+
+
+      
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading" *ngIf="mylead.prodGroup == '8' || mylead.prodGroup == '7' || mylead.prodGroup == '6' || mylead.prodGroup == '9'">Policy Number</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.policyNum" (ionChange)="validatepolicy(mylead.type,mylead.policyNum)" *ngIf= "mylead.prodGroup == '8'"></ion-input>
+            <ion-input [(ngModel)]="mylead.policyNum" ng-blur="validatepolicy(mylead.type,mylead.policyNum)" *ngIf= "mylead.prodGroup == '7' || mylead.prodGroup == '6' || mylead.prodGroup == '9'"></ion-input>
+          </ion-item>
+        </div>
+        
+        <div class="content_item" *ngIf="mylead.prodGroup == '6'">
+          <ion-label position="stacked" class="input_heading">Plan Number</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.plannum"></ion-input>
+          </ion-item>
+        </div> 
+       
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading">premPayTerm</ion-label>
+            <ion-item class="input_field">
+              <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.premPayTerm">
+                <ion-select-option *ngFor="let items of premiumPayTerm" value="{{items.val}}">{{items.text}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+        </div>
+
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading">Premium Paying Mode</ion-label>
+            <ion-item class="input_field">
+              <ion-select  class="select_field" placeholder="Select" [(ngModel)]="mylead.premPaymode">
+                <ion-select-option *ngFor="let items of premiumPayMode" value="{{items.val}}">{{items.text}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+        </div>
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading">Premium Amount</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.premiumAmount"></ion-input>
+          </ion-item>
+        </div> 
+
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading">Fee Income</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="mylead.feeIncome"></ion-input>
+          </ion-item>
+        </div> 
+        <div class="content_item" *ngIf="mylead.type == '12'">
+          <ion-label position="stacked" class="input_heading" trigger="open-datetime">Open Date</ion-label>
+          <ion-item class="input_field">
+            <ion-input value="{{ mylead.opendate | date: 'dd/MM/yyyy'}}" id="mylead.opendate" class="ion-text-end"></ion-input>
+            <ion-popover trigger="mylead.opendate" size="cover">
+              <ng-template>
+                <ion-datetime presentation="mylead.opendate" [(ngModel)]="mylead.opendate" 
+                  [showDefaultButtons]="true"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+        </div>
+      
+        <div class="content_item" *ngIf="purposeid == '11' || purposeid == '14'">
+          <ion-label position="stacked" class="input_heading">Deposits</ion-label>
+          <ion-item class="input_field" >
+            <ion-input placeholder="Deposits" [(ngModel)]="mylead.deposits"></ion-input>
+          </ion-item>
+        </div>
+        <div class="content_item" *ngIf="purposeid == '11' || purposeid == '14'">
+          <ion-label position="stacked" class="input_heading">CASA</ion-label>
+          <ion-item class="input_field" >
+            <ion-input placeholder="CASA" [(ngModel)]="mylead.casa"></ion-input>
+          </ion-item>
+        </div>
+        <div class="content_item" *ngIf="purposeid == '11' || purposeid == '14'">
+          <ion-label position="stacked" class="input_heading">Advance</ion-label>
+          <ion-item class="input_field" >
+            <ion-input placeholder="Advance" [(ngModel)]="mylead.advance"></ion-input>
+          </ion-item>
+        </div>
+        <div class="content_item" *ngIf="purposeid == '12'">
+          <ion-label position="stacked" class="input_heading">Insurance</ion-label>
+          <ion-item class="input_field" >
+            <ion-input placeholder="Insurance" [(ngModel)]="mylead.insurance"></ion-input>
+          </ion-item>
+        </div>
+
+
+               <div class="content_item" *ngIf="mylead.type == '12'">
+                <ion-label position="stacked" class="input_heading">Cross Sell Product</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field"  [(ngModel)]="mylead.InsuranceType" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_type" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="mylead.type == '12'">
+                <ion-label position="stacked" class="input_heading">Source of Lead</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field" (ionChange)="getInsurancedata(mylead.Insurance_Source)" [(ngModel)]="mylead.Insurance_Source" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_source" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="mylead.type == '12'">
+                <ion-label position="stacked" class="input_heading">Refered By</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Existing Customer ID" [(ngModel)]="mylead.referredby"></ion-input>
+                </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="mylead.type == '12'&&mylead.Insurance_Source=='Refferals'">
+                <ion-label position="stacked" class="input_heading">Relationship</ion-label>
+                  <ion-item class="input_field">
+                    <ion-select  class="select_field"  [(ngModel)]="mylead.ReffRelation" >
+                      <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+                      <ion-select-option *ngFor="let items of ins_ref" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+              </div> 
+
+              <div class="content_item" *ngIf="purposeid == 13">
+                <ion-label position="stacked" class="input_heading">Caption</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Advance" [(ngModel)]="mylead.caption" type="text"></ion-input>
+                </ion-item>
+              </div>
+              
+              <div class="content_item" *ngIf="purposeid == 13">
+                <ion-label position="stacked" class="input_heading">Amount</ion-label>
+                <ion-item class="input_field" >
+                  <ion-input placeholder="Advance" [(ngModel)]="mylead.amount" type="number"></ion-input>
+                </ion-item>
+              </div>
+  <div class="form-group col-xs-12 col-sm-12
+  "*ngIf="mylead.calltype == 'P'" ng-click="clear()">
+                       <ion-checkbox  (ionChange)="checkbox($event.target.checked)"  style="font-size: 15px; background-color: transparent;padding-top: 0px;padding-bottom: 0px;overflow: hidden !important"> &nbsp; Joint Visit</ion-checkbox>
+                   </div>
+
+ 
+                   <div class="content_item" *ngIf="mylead.JointVisit == 'Y'">
+                    <ion-label position="stacked" class="input_heading">Emp Code</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input (ionBlur)="checkusercode(mylead.jointusercode)" [(ngModel)]="mylead.jointusercode"></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="mylead.JointVisit == 'Y'">
+                    <ion-label position="stacked" class="input_heading">Emp Name</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input [(ngModel)]="mylead.jointusername" disabled></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="mylead.calltype =='P'">
+                    <ion-label position="stacked" class="input_heading">Enter Location</ion-label>
+                  <ion-item class="text_area" >
+                    <ion-textarea [(ngModel)]="mylead.addressname" placeholder="Enter here..."></ion-textarea>
+                  </ion-item>
+                </div>
+                <!-- <div class="content_item">
+                  <ion-label position="stacked" class="input_heading">Purpose</ion-label>
+                    <ion-item class="input_field">
+                      <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.courtesypurp">
+                        <ion-select-option selected="purpose" value="{{purposeID}}">{{purpose}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                </div> -->
+
+                
+              
+              <!-- // DEEPING OF CUSTOMER -->
+                
+              
+              <!-- //OTHERS -->
+              
+              
+              
+                
+                
+              
+              
+                <div class="content_item">
+                  <ion-label position="stacked" class="input_heading">Remarks</ion-label>
+                <ion-item class="text_area">
+                  <ion-textarea [(ngModel)]="mylead.remarks" placeholder="Enter more information here..."></ion-textarea>
+                </ion-item>
+              </div>
+              
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-button style="--background:#ec0576;" (click)="saveSmaCustomer()" expand="block">save</ion-button>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-button style="--background:grey;width:100%" (click)="customerActionModal(items)" expand="block">cancel</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <dl style="padding-left: 10px;">
+              
+                <dd style="color:red;">*  Denotes Mandatory</dd>
+              
+                <dd style="color:red;">**  Denotes Any One Mandatory </dd>
+              </dl>
+                </ion-card>
+                </ion-card>
+</ion-content>

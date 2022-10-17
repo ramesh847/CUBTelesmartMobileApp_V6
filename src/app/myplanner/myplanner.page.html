@@ -1,0 +1,310 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Planner</ion-title>
+  </ion-toolbar>
+  <ion-content style="background: url('img/bg32.png') repeat;">
+    <!-- <ion-refresher on-refresh="doRefresh()">
+                 
+  </ion-refresher> -->
+  <ion-row>
+    <ion-col class="segment">
+      <!-- <ion-item> -->
+        <div>
+        <ion-checkbox slot="start"     [checked]="TodaysAssigned"   
+        (ionChange)="CheckBoxTodaysAssigned('TodaysAssigned',$event.target.checked)"> 
+            </ion-checkbox>
+            <ion-label style="color: #fff;position: relative;
+            color: #fff;
+            left: 10px;
+            bottom: 3px;">Todays Assigned</ion-label>
+      <!-- </ion-item> -->
+    </div>
+    <!-- <input type="checkbox"  id="checkbox1" > -->
+    </ion-col>
+    <ion-col class="segment">
+      <div>
+      <!-- <ion-item> -->
+        <ion-checkbox slot="start" [checked]="TodaysFollowup"      
+        (ionChange)="CheckBoxTodaysFollowup('TodaysFollowup',$event.target.checked)"> 
+            </ion-checkbox>
+            <ion-label style="color: #fff; position: relative;
+            color: #fff;
+            left: 10px;
+            bottom: 3px;">Todays Followup</ion-label>
+      <!-- </ion-item> -->
+    </div>
+    </ion-col>
+  </ion-row>
+
+  <div class="animated bounceInRight" *ngIf="TodaysAssigned" style="box-shadow: 0 2px 1px rgba(253, 107, 13, 0.35);">
+    <div class="col-sm-6 col-md-6 " *ngFor="let item of todayfollowupdata">
+        <div class="card  col-sm-11 col-md-11 cardcolor"  style="margin-top: 30px;padding: 0px;padding-bottom:10px;">
+
+<div class="item item-divider" style="background-color:#ec0576!important">
+            <span style="color: white;font-size: 14px;font-weight: 500;" [(ngModel)]="customerCode">{{item.CUSTOMER_ID}}</span>
+            <span style="float:right;" *ngIf="ClickAccess" [(ngModel)]="mobileNumber" (click)="callNumber(item)">
+            <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;"  ><u>{{item.CONTACT_NO}}</u></a></span>
+            <span style="float:right;" [(ngModel)]="mobileNumber" *ngIf="ClickAccess">
+              <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;"  ><u>{{item.CONTACT_NO}}</u></a></span>
+        </div>
+<!-- 
+              <div class="item item-text-wrap" style="padding-left: 35px;padding-top:0px !important; "> -->
+<div class="item item-text-wrap" style="padding-top:0px !important; ">
+            <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Name</p>
+                </div>
+                <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{item.CUSTOMER_NAME}}</span>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Call Type</p>
+                    </div>
+                     <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{item.CallType || "-"}}</span>
+                </div>
+                    </div>
+                     <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Next Call Date</p>
+                    </div>
+                     <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{item.NEXT_CALL_DATE || "-"}}</span>
+                </div>
+                    </div>
+                    <div class="row"  >
+                <div class="col col-50" style="padding: 0px;">
+                    <p *ngIf="item.PURPOSE=='Insurance' || item.PURPOSE=='Banking' || item.PURPOSE=='Others'" style="font-weight:bold;">Lead Generation</p>
+                      <p *ngIf="item.PURPOSE !='Insurance' && item.PURPOSE !='Banking' && item.PURPOSE!='Others'" style="font-weight:bold;">Purpose</p>
+                    </div>
+                     <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{item.PURPOSE || "-"}}</span>
+                </div>
+                    </div>
+<!--   <div class="row" >
+    <div class="col col-50" style="padding: 0px;">
+        <p style="font-weight:bold;">Status</p>
+     </div>
+ <div class="col col-50" style="padding: 0px;">
+    <span style="font-size: 14px;">{{item.CustomerCategory || "-"}}</span>
+</div>
+</div> -->
+
+<div class = "row" style="padding: 0px;" *ngIf="item.PURPOSE=='Insurance' || item.PURPOSE=='Banking' || item.PURPOSE=='Others'|| item.PURPOSE== 'Lead Generation'" style="font-weight:bold;">
+<div class = "col"><p style="font-weight:bold;">Deposit</p></div>
+<!--    <div class = "col">{{item.Deposit_Amount || "-"}}</div> -->
+<div class = "col"><span style="font-size: 14px;" *ngIf="item.Deposit_Amount != 'undefined' && item.Deposit_Amount != 'null' && item.Deposit_Amount != undefined && item.Deposit_Amount != null && item.Deposit_Amount != ''">{{item.Deposit_Amount}}</span>
+<span *ngIf="item.Deposit_Amount == 'undefined' || item.Deposit_Amount == 'null' || item.Deposit_Amount == undefined || item.Deposit_Amount == null || item.Deposit_Amount == ''"  style="font-size: 14px;">-</span>
+</div>
+
+<!--  <span style="font-size: 14px;" *ngIf="item.Deposit_Amount != 'undefined' && item.Deposit_Amount != 'null' && item.Deposit_Amount != undefined && item.Deposit_Amount != null && item.Deposit_Amount != ''">{{item.Deposit_Amount}}</span>
+<span *ngIf="item.Deposit_Amount == 'undefined' || item.Deposit_Amount == 'null' || item.Deposit_Amount == undefined || item.Deposit_Amount == null || item.Deposit_Amount == ''"  style="font-size: 14px;">-</span> -->
+<div class = "col"><p style="font-weight:bold;">Insurance</p></div>
+<div class = "col"> <span style="font-size: 14px;" *ngIf="item.Insurance_Amount != 'undefined' && item.Insurance_Amount != 'null' && item.Insurance_Amount != undefined && item.Insurance_Amount != null && item.Insurance_Amount != ''">{{item.Insurance_Amount}}</span>
+<span *ngIf="item.Insurance_Amount == 'undefined' || item.Insurance_Amount == 'null' || item.Insurance_Amount == undefined || item.Insurance_Amount == null || item.Insurance_Amount == ''"  style="font-size: 14px;">-</span></div>
+<!--  <div class = "col">{{item.Insurance_Amount || "-"}}</div>
+-->
+</div>
+<div class = "row" style="padding: 0px;" *ngIf="item.PURPOSE=='Insurance' || item.PURPOSE=='Banking' || item.PURPOSE=='Others' || item.PURPOSE== 'Lead Generation'" style="font-weight:bold;">
+<div class = "col"><p style="font-weight:bold;">CASA</p></div>
+<!--  <div class = "col">{{item.Casa_Amount || "-"}}</div> -->
+<div class = "col"> <span style="font-size: 14px;" *ngIf="item.Casa_Amount != 'undefined' && item.Casa_Amount != 'null' && item.Casa_Amount != undefined && item.Casa_Amount != null && item.Casa_Amount != ''">{{item.Casa_Amount}}</span>
+<span *ngIf="item.Casa_Amount == 'undefined' || item.Casa_Amount == 'null' || item.Casa_Amount == undefined || item.Casa_Amount == null || item.Casa_Amount == ''"  style="font-size: 14px;">-</span></div>
+<div class = "col"><p style="font-weight:bold;">Advance</p></div>
+
+<!--   <div class = "col">{{item.Advance_Amount || "-"}}</div> -->
+<div class = "col"><span style="font-size: 14px;" *ngIf="item.Advance_Amount != 'undefined' && item.Advance_Amount != 'null' && item.Advance_Amount != undefined && item.Advance_Amount != null && item.Advance_Amount != ''">{{item.Advance_Amount}}</span>
+<span *ngIf="item.Advance_Amount == 'undefined' || item.Advance_Amount == 'null' || item.Advance_Amount == undefined || item.Advance_Amount == null || item.Advance_Amount == ''"  style="font-size: 14px;">-</span></div>
+
+
+</div>
+
+<!-- -->
+                   <!--  <div class="container-fluid">
+<div class="col-sm-12 text-center">
+<button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;" (click)="todayfollowUpdmodal(item)"  center>Action</button>
+
+</div>
+</div> -->
+
+<!-- -->
+<!-- <div class="row col-xs-12 col-sm-12 col-md-12">
+<div class="col-xs-4 col-sm-4 col-md-4" style="padding-right: 0px;padding-left: 0px;">
+<button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;" (click)="todayfollowUpdmodal(item)" center>Actionsss</button>
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4">
+<button class="schedulebutn fa fa-paper-plane" style="font-size: 13px;letter-spacing: 1px;" center (click)="startNavigationplanner()">&nbsp;&nbsp;Start&nbsp;&nbsp;</button>
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4" style="margin-left:14px;">
+<button class="schedulebutn fa fa-pause-circle-o" style="font-size: 13px;letter-spacing: 1px;" center (click)="endNavigationplanner()">&nbsp;&nbsp;End&nbsp;&nbsp;</button>
+</div>
+</div> -->
+
+<div class="row" *ngIf= "item.CallType =='Personal Visit'">
+    <div class=" col col-50"> 
+    <button class="schedulebutn schedulebutn1 fa fa-paper-plane" style="font-size: 13px;letter-spacing: 1px;" center (click)="startmyplanner(item)">&nbsp;Start&nbsp;</button>
+    </div>
+     <div class=" col col-50">
+            <!-- ng-disabled="myplannervalue!=0" -->
+        <button  class="schedulebutn schedulebutn1 fa fa-pause-circle-o" style="font-size: 13px;letter-spacing: 1px;" center (click)="End(item)">&nbsp;End&nbsp;</button>
+     </div>
+     <!-- endNavigationplanner(item) -->
+    </div>
+    <div class="row" *ngIf= "item.CallType =='Personal Visit'">
+    <div class=" col col-100"> 
+    <button class="schedulebutn schedulebutn1" style="font-size: 13px;letter-spacing: 1px;" center (click)="startNavigationplanner(item)">&nbsp;Navigation&nbsp;</button>
+    </div>
+     
+    </div>
+    <div class="row" *ngIf= "item.CallType =='Telecall'">
+    <div  class="container-fluid" >
+    <center>
+        <button  class="schedulebutn schedulebutn1 fa fa-pause-circle-o" style="font-size: 13px;letter-spacing: 1px;" center (click)="todayfollowUpdmodal(item)">&nbsp;&nbsp;Action&nbsp;&nbsp;</button>
+    </center>
+    </div>
+    </div>
+
+     <!-- <div class="row">
+    <div  class="container-fluid" >
+    <center>
+        <button  class="schedulebutn schedulebutn1 fa fa-pause-circle-o" style="font-size: 13px;letter-spacing: 1px;" center (click)="todayfollowUpdmodal(item)">&nbsp;&nbsp;Action&nbsp;&nbsp;</button>
+    </center>
+    </div>
+    </div> -->
+
+
+     <!-- 
+                         <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                   
+                    </div>
+                      <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">
+                      <button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;" (click)="todayfollowUpdmodal(item)">&nbsp;Action</button>
+                    </span>
+                </div>
+                    </div> -->
+                   
+             
+         
+                     </div>
+    
+
+            </div>
+        </div>
+
+         <center>
+                <p style="margin-top: 20px !important;color: white;font-size: bold;" *ngIf="todayfollowupdata.length == 0"> No Record Found</p>
+         </center>
+
+    </div>
+
+<!-- assigned -->
+
+<div class="animated bounceInRight" *ngIf="TodaysFollowup" style="box-shadow: 0 2px 1px rgba(253, 107, 13, 0.35);">
+    <div class="col-sm-6 col-md-6 " *ngFor="let items of todayassigneddata; let i = index">
+        <div class="card col-xs-11 col-sm-11 col-md-11 cardcolor" style="padding:0px;margin-bottom: 0px;">
+
+                        <div class="item item-divider" style="background-color:#ec0576!important">
+            <span style="color: white;font-size: 14px;font-weight: 500;" [(ngModel)]="customerCode">{{items.CUSTOMER_ID}}</span>
+            <span style="float:right;" *ngIf="ClickAccess" [(ngModel)]="mobileNumber" (click)="callNumber(items)">
+            <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.CONTACT_NO}}</u></a></span>
+            <span style="float:right;" [(ngModel)]="mobileNumber" *ngIf="ClickAccess">
+              <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.CONTACT_NO}}</u></a></span>
+        </div>
+
+
+              <div class="item item-text-wrap" style="padding-left: 35px;padding-top:0px !important; ">
+            <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Name</p>
+                </div>
+                <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{items.CUSTOMER_NAME}}</span>
+                </div>
+            </div>
+              <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Call Type</p>
+                </div>
+                <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{items.CallType}}</span>
+                </div>
+            </div>
+        
+              <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Purpose</p>
+                </div>
+                <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{items.PURPOSE}}</span>
+                </div>
+            </div>
+              <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                    <p style="font-weight:bold;">Status</p>
+                </div>
+                <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">{{items.CustomerCategory || "-"}}</span>
+                </div>
+            </div>
+
+             <!--   <div class="row" >
+                <div class="col col-50" style="padding: 0px;">
+                   
+                    </div>
+                     <div class="col col-50" style="padding: 0px;">
+                    <span style="font-size: 14px;">
+                      <button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;" (click)="todayassignedUpdmodal(items)">&nbsp;Action</button>
+                    </span>
+                </div>
+
+                    </div> -->
+         
+                         <div class="container-fluid">
+<div class="col-sm-12 text-center">
+<button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;" (click)="todayassignedUpdmodal(items)" center>Action</button>
+
+</div>
+</div>                      </div>
+    
+
+            </div>
+        </div>
+    
+
+    <center>
+                <p style="margin-top: 20px !important;color: white;font-size: bold;" *ngIf="todayassigneddata.length == 0"> No Record Found</p>
+            </center>
+
+</div>
+
+     <!-- <div class="row" style="margin-left: 1px;">
+            <div class="col col-50">
+     
+              <ion-checkbox class="checkfont checkfont1 checkfont2" (click)="assigned1()" [(ngModel)]="data.assigned"  style="font-size: 15px;background-color:  #eb0475; color:white;height: 0px;"><span class="fontwrap" style="font-weight: bold;position: absolute;margin-top: -10px;">Todays Assigned</span></ion-checkbox>
+            </div>
+           
+           <div class="col col-50">
+              <ion-checkbox class="checkfont checkfont1 checkfont2" (click)="follow1()" [(ngModel)]="data.follow"   style="font-size: 15px;background-color: #eb0475; color:white;height:0px;"><span style="font-weight: bold;position: absolute;margin-top: -10px;">Todays Followup</span></ion-checkbox>
+            </div>
+            </div> -->
+  </ion-content>
+  
+  <!-- <ion-footer class="footer">
+    <p class="footer_content">City Union Bank Ltd</p>
+  </ion-footer> -->
+
+
+
+
+
+
+  
+
+ 

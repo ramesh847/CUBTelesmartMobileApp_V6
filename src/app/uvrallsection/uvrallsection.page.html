@@ -1,0 +1,919 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='start'>
+    <ion-back-button defaultHref=""></ion-back-button>
+  </ion-buttons>
+  <ion-title >Sections</ion-title>
+  </ion-toolbar>
+
+
+<ion-content class="bgUvrWall">
+  <ion-card class="toolbar_card">
+    {{cusID}} - {{cusName}}
+  </ion-card>
+  <!-- <div *ngFor="let item of question">
+  <div class="content_item" *ngIf="item.QUERY == ''">
+    <ion-label position="stacked" class="input_heading">{{item.ALIAS_NAME}}</ion-label>
+    <ion-item class="input_field" (ionChange)="banking(item,$event)">
+      <ion-input [(ngModel)]="item.ALIAS_NAME"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="item.QUERY == 'Sole,Multiple,Consortium'">
+    <ion-label position="stacked" class="input_heading">{{item.ALIAS_NAME}}</ion-label>
+      <ion-item class="input_field">
+        <ion-select [(ngModel)]="bankingData.bngarrmnt" class="select_field" placeholder="Select" (ionChange)="bankingARR($event)">
+          <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+          <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option>
+          <ion-select-option value="Sole">Sole</ion-select-option>
+          <ion-select-option value="Multiple">Multiple</ion-select-option>
+          <ion-select-option value="Consortium">Consortium</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+  <div class="content_item" *ngIf="item.QUERY == 'Funded,NonFunded'">
+    <ion-label position="stacked" class="input_heading">{{item.ALIAS_NAME}}</ion-label>
+      <ion-item class="input_field">
+        <ion-select [(ngModel)]="bankingData.bngarrmnt" class="select_field" placeholder="Select" (ionChange)="bankingARR($event)">
+          <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+          <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option>
+          <ion-select-option value="Sole">Sole</ion-select-option>
+          <ion-select-option value="Multiple">Multiple</ion-select-option>
+          <ion-select-option value="Consortium">Consortium</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+</div> -->
+
+<ion-card *ngIf="sectionEvent != 'Othr_optn3'">
+  <ion-card class="card_content">
+  <div *ngIf="sectionEvent == 'Banking'" >
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Banking Arrangement:</ion-label>
+    <ion-item class="input_field">
+      <ion-select [(ngModel)]="bankingData.bngarrmnt" class="select_field" placeholder="Select" (ionChange)="bankingARR($event)">
+        <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+        <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Sole">Sole</ion-select-option>
+        <ion-select-option value="Multiple">Multiple</ion-select-option>
+        <ion-select-option value="Consortium">Consortium</ion-select-option>
+      </ion-select>
+    </ion-item>
+</div>
+
+<div class="content_item" *ngIf="BankArrShowHide == 'Multiple' || BankArrShowHide == 'Consortium' || bankingData.bngarrmnt =='Multiple' || bankingData.bngarrmnt =='Consortium'">
+  <ion-label position="stacked" class="input_heading">Name of the Bank :</ion-label>
+  <ion-item class="input_field">
+    <ion-input [(ngModel)]="bankingData.bankname"></ion-input>
+  </ion-item>
+</div>
+   
+
+ <div class="content_item">
+  <ion-label position="stacked" class="input_heading">Exposure with CUB(Rs. in Lakhs)</ion-label>
+  <ion-item class="input_field">
+    <ion-input [(ngModel)]="bankingData.exposurecub"></ion-input>
+    <!-- <ion-select [(ngModel)]="bankingData.exposurecub" class="select_field" placeholder="Select">
+      <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+      <ion-select-option value="Funded">Funded</ion-select-option>
+      <ion-select-option value="Non Funded">Non Funded</ion-select-option>
+      <ion-select-option value="Both">Both</ion-select-option>
+    </ion-select> -->
+  </ion-item>
+ </div>
+   
+ <div class="content_item">
+  <ion-label position="stacked" class="input_heading">Total Exposure with CUB:</ion-label>
+  <ion-item class="input_field">
+    <ion-input [(ngModel)]="bankingData.totalexposurecub"></ion-input>
+  </ion-item>
+</div>
+
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Any credit facility with other bank/s</ion-label>
+  <ion-item class="input_field">
+    <ion-select [(ngModel)]="bankingData.crdit_facility" class="select_field" placeholder="Select" (ionChange)="anycredit(bankingData.crdit_facility)">
+      <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+      <ion-select-option value="Yes">Yes</ion-select-option>
+      <ion-select-option value="No">No</ion-select-option>
+      
+    </ion-select>
+  </ion-item>
+</div>
+    
+
+<div *ngIf="getanycredit=='Yes' || bankingData.crdit_facility=='Yes'">
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Exposure with other Bank Name/s(Rs. in Lakhs)</ion-label>
+  <ion-item class="input_field">
+    <ion-input [(ngModel)]="bankingData.exposure_other_bngname"></ion-input>
+  </ion-item>
+</div>
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Exposure with other Banks Total(Rs. in Lakhs)</ion-label>
+  <ion-item class="input_field">
+    <ion-input [(ngModel)]="bankingData.exposure_other_bngTotal"></ion-input>
+  </ion-item>
+</div>
+</div>
+
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Status of the Account:</ion-label>
+  <ion-item class="input_field">
+    <ion-select class="select_field" placeholder="Select" [(ngModel)]="bankingData.status_account">
+      <ion-select-option value="STD">STD</ion-select-option>
+      <ion-select-option value="SMA">SMA</ion-select-option>
+   
+    </ion-select>
+  </ion-item>
+</div>
+<br>
+<ion-button expand="full" class="submit_button" (click)="uvrBankSubmit()">save</ion-button>
+
+</div>
+
+<!-- manufactureing unit -->
+<!-- Nature of commoditystart -->
+<div *ngIf="sectionEvent == 'Manuf_optn0' || sectionEvent == 'Trad_optn0' || sectionEvent=='Othr_optn0'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Nature of Commodity/Business</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_natureofcommodity.natureofcommodity"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+<ion-button expand="full" class="submit_button" (click)="uvrNatureofcommoditySubmit()">save</ion-button>
+  </div>
+
+<!-- Nature of commodity end -->
+<!-- About the unit machinery start -->
+<div *ngIf="sectionEvent == 'Manuf_optn1'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Location of the unit:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.loctn_unit"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Distance of the unit from the branch: </ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.distance_unit"></ion-input>
+    </ion-item>
+  </div>
+
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Locational advantages:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.loctnl_advantge"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">No. of Employees working in unit/Trading place:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.num_emp_unit"></ion-input>
+</ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">No. of Units:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.num_unit"></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Exposure with other Banks Total:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.exposure_bnk_total"></ion-input>
+    </ion-item>
+  </div> -->
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Unit Functioning Status </ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.unit_instald_capcity">
+        <ion-select-option value="100%">100%</ion-select-option>
+        <ion-select-option value="75%">75%</ion-select-option>
+        <ion-select-option value="50%">50%</ion-select-option>
+        <ion-select-option value="25%">25%</ion-select-option>
+        <ion-select-option value="Unit closed">Unit closed</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Installed capacity:</ion-label>
+    <ion-item class="input_field">
+      <ion-input maxlength="6" type="tel" [(ngModel)]="manuF_abt_manu_machnary.installed_capacity"></ion-input>
+    </ion-item>
+    </div>
+    <div class="content_item">
+      <!-- <ion-label position="stacked" class="input_heading">Operating capacity:</ion-label> -->
+      <ion-item class="input_field">
+        <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.installed_capacity_list">
+          <ion-select-option value="brown">Ton</ion-select-option>
+          <ion-select-option value="blonde">Kg</ion-select-option>
+          <ion-select-option value="blonde">Unit</ion-select-option>     
+        </ion-select>
+        </ion-item>
+    </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Operating capacity:</ion-label>
+    <ion-item class="input_field">
+      <ion-input maxlength="6" type="tel" [(ngModel)]="manuF_abt_manu_machnary.oprating_capacity"></ion-input>
+    </ion-item>
+    </div>
+  <div class="content_item">
+    <!-- <ion-label position="stacked" class="input_heading">Operating capacity:</ion-label> -->
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.oprating_capacity_list">
+        <ion-select-option value="brown">Ton</ion-select-option>
+        <ion-select-option value="blonde">Kg</ion-select-option>
+        <ion-select-option value="blonde">Unit</ion-select-option>     
+      </ion-select>
+      </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Value of stock (raw materials/work in progress/finished goods):</ion-label>
+    <ion-item class="input_field" (ionChange)="val_of_stk_showinput($event)">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.value_stock">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="NA">NA</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="val_of_stk_showinputF == 'Yes' || manuF_abt_manu_machnary.value_stock=='Yes'">
+    <!-- <ion-label position="stacked" class="input_heading" >Whether basic infrastructure of power,water ,transport ,labour , PCB and other safety measures are available:</ion-label> -->
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.producttext"></ion-input>
+    </ion-item>
+  </div>
+  <!-- <div class="content_item" *ngIf="val_of_stk_showinputF == 'Yes'">
+    <ion-label position="stacked" class="input_heading" >Fill the details:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.Fill_details"></ion-input>
+    </ion-item>
+  </div> -->
+  <div class="content_item" >
+    <ion-label position="stacked" class="input_heading" >Whether basic infrastructure of power,water ,transport ,labour , PCB and other safety measures are available:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.wther_basic_infra"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Any machinery finance by us has been replaced/removed:</ion-label>
+    <ion-item class="input_field" (ionChange)="machinery_finance($event)">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.machinery_finance">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="NA">NA</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+   <div class="content_item" *ngIf="Machinery_finance_SHOW == 'Yes'">
+    <ion-label position="stacked" class="input_heading" ></ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_abt_manu_machnary.machinery_teext_show"></ion-input>
+    </ion-item>
+  </div> 
+  <div class="content_item" >
+    <ion-label position="stacked" class="input_heading" >Total value of machineries installed</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.totl_machinary_installed"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether EB bill paid regular</ion-label>
+    <ion-item class="input_field" (ionChange)="EB_paid_reg($event)">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_abt_manu_machnary.wher_EB_paid">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="EB_paid_regular == 'No' || manuF_abt_manu_machnary.wher_EB_paid=='No'">
+    <ion-label position="stacked" class="input_heading" ></ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.EB_paid_regular_show"></ion-input>
+    </ion-item>
+  </div> 
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Last EB bill paid date:</ion-label>
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF_abt_manu_machnary.last_EB_paid_date | date: 'dd/MM/yyyy' }}" id="manuF_abt_manu_machnary.last_EB_paid_date" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF_abt_manu_machnary.last_EB_paid_date" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF_abt_manu_machnary.last_EB_paid_date"  [(ngModel)]="manuF_abt_manu_machnary.last_EB_paid_date" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+ 
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Last EB bill paid Amount:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_abt_manu_machnary.last_EB_paid"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrManuf_abut_machinarySubmit()">save</ion-button>
+</div>
+<!-- About the unit machinery end -->
+<!-- Machinery insurance start -->
+<div *ngIf="sectionEvent == 'Manuf_optn2'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether the machineries insured comprehensively with Bank Clause </ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF_machnary_insurance.whetr_macinary_insur" (ionChange)="machineryselect($event)">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+        <ion-select-option value="NA">NA</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="isvisible==true">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >IF so value of Insurance:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF_machnary_insurance.IF_value_insur"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Due date of the policy</ion-label>
+
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF_machnary_insurance.duedate | date: 'dd/MM/yyyy' }}" id="manuF_machnary_insurance.duedate" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF_machnary_insurance.duedate" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF_machnary_insurance.duedate"  [(ngModel)]="manuF_machnary_insurance.duedate" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Name of the insurance company:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="manuF_machnary_insurance.Name_insur_cmpny" ></ion-input>
+    </ion-item>
+  </div>
+  </div>
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrManuf_machinaryInsuranceSubmit()">save</ion-button>
+</div>
+<!-- Machinery insurance end -->
+<!-- About financial performance start -->
+
+<div *ngIf="sectionEvent == 'Manuf_optn3' ||sectionEvent == 'Othr_optn1' || sectionEvent == 'Trad_optn3' ">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Latest Audited B/S submission date</ion-label>
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF__insur_perf.latest_audited | date: 'dd/MM/yyyy' }}" id="manuF__insur_perf.latest_audited" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF__insur_perf.latest_audited" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF__insur_perf.latest_audited"  [(ngModel)]="manuF__insur_perf.latest_audited" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+   
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Sales projected for FY has been achieved </ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF__insur_perf.Salses_project" (ionChange)="salesdropdown()">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="getsalesdropdown=='No' || manuF__insur_perf.Salses_project=='No' ">
+    <!-- <ion-label position="stacked" class="input_heading" >Latest Audited B/S submission date</ion-label> -->
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF__insur_perf.latest_audited_comment | date: 'dd/MM/yyyy' }}" id="manuF__insur_perf.latest_audited_comment" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF__insur_perf.latest_audited_comment" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF__insur_perf.latest_audited_comment"  [(ngModel)]="manuF__insur_perf.latest_audited_comment" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+   
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">As per current year sales GST filed:</ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF__insur_perf.crrnt_gst_fill" (ionChange)="currentyeardropdown()">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="getyear=='Yes' || manuF__insur_perf.crrnt_gst_fill=='Yes'">
+    <!-- <ion-label position="stacked" class="input_heading" >Latest Audited B/S submission date</ion-label> -->
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF__insur_perf.crrnt_gst_fill_comment | date: 'dd/MM/yyyy' }}" id="manuF__insur_perf.crrnt_gst_fill_comment" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF__insur_perf.crrnt_gst_fill_comment" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF__insur_perf.crrnt_gst_fill_comment"  [(ngModel)]="manuF__insur_perf.crrnt_gst_fill_comment" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+
+
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether any sales reduction noticed: </ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF__insur_perf.wher_sales_reduct" (ionChange)="reductiondropdown()">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="reductionnoticedboolean==true || manuF__insur_perf.wher_sales_reduct=='Yes' ">
+    <!-- <ion-label position="stacked" class="input_heading" >Latest Audited B/S submission date</ion-label> -->
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ manuF__insur_perf.wher_sales_reduct_comment | date: 'dd/MM/yyyy' }}" id="manuF__insur_perf.wher_sales_reduct_comment" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="manuF__insur_perf.wher_sales_reduct_comment" size="center" >
+      <ng-template>
+        <ion-datetime presentation="manuF__insur_perf.wher_sales_reduct_comment"  [(ngModel)]="manuF__insur_perf.wher_sales_reduct_comment" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+   
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Conduct of the firm/unit:</ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="manuF__insur_perf.conct_unit" (ionChange)="conductformmethod()">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Good">Good</ion-select-option>
+        <ion-select-option value="Satisfactory">Satisfactory</ion-select-option>
+        <ion-select-option value="Moderate">Moderate</ion-select-option>
+        <ion-select-option value="Poor">Poor</ion-select-option>
+        <ion-select-option value="Closed">Closed</ion-select-option>
+     
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="isgoodpoorboolean==true || manuF__insur_perf.conct_unit=='Closed' || manuF__insur_perf.conct_unit=='Poor'">
+    <!-- <ion-label position="stacked" class="input_heading" >Latest Audited B/S submission date</ion-label> -->
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="manuF__insur_perf.conct_unit_comment" ></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrManuf_insur_perf_Submit()">save</ion-button>
+</div>
+<!-- About financial performance end -->
+<!-- General observations during the visit start -->
+<div *ngIf="sectionEvent == 'Manuf_optn4' || sectionEvent == 'Trad_optn4' || sectionEvent == 'Othr_optn2'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Display of our Bank’s Name board is displayed( If not found Hold stickers in hand to paste):</ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="gentral_observat_vist.Disply_bankName">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Whether the customer and his family are having our products, to improve the ERV:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="gentral_observat_vist.whter_cus_ERV"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Any specific mentioning about the  visit findings:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="gentral_observat_vist.specific_visit"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Visiting official’s Staff ID:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="gentral_observat_vist.official_staffID"></ion-input><i class="fa fa-search" (click)="searchkeyword()"></i>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Visiting official’s Name:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="gentral_observat_vist.official_name"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrManuf_gentral_observ_Submit()">save</ion-button>
+</div>
+<!-- General observations during the visit end -->
+
+<!-- About the unit start -->
+<div *ngIf="sectionEvent == 'Trad_optn1'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Location of the unit:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="trading_optn1_Data.loctn_unit" ></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Distance of the unit from the branch:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn1_Data.distance_unit"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Locational advantages:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn1_Data.locational_advant"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >No. of Employees working in unit/Trading place:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn1_Data.num_emp_wrk_unit"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >No. of Units:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn1_Data.num_unit"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrTrading_Opt1Submit()">save</ion-button>
+</div>
+<!-- About the unit end -->
+<!-- Stock Insurance start -->
+<div *ngIf="sectionEvent == 'Trad_optn2'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Date of stock/Book debt statement received</ion-label>
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{ trading_optn2_Data.dateofstock | date: 'dd/MM/yyyy' }}" id="trading_optn2_Data.dateofstock" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="trading_optn2_Data.dateofstock" size="center" >
+      <ng-template>
+        <ion-datetime presentation="trading_optn2_Data.dateofstock"  [(ngModel)]="trading_optn2_Data.dateofstock" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+    
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Value of stock(Rs. in Lakhs)</ion-label>
+    <ion-item class="input_field">
+      <ion-input type="date" [(ngModel)]="trading_optn2_Data.valueofstock" min="1" max="6"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Receivable O/S upto 180 days:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn2_Data.receivable_OS"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Receivables beyond 180 days:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="trading_optn2_Data.receivable_beyond" ></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Expected date of Realization of receivable beyond 180 days</ion-label>
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{trading_optn2_Data.receivable_beyond_Expecteddate | date: 'dd/MM/yyyy' }}" id="trading_optn2_Data.receivable_beyond_Expecteddate" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="trading_optn2_Data.receivable_beyond_Expecteddate" size="center" >
+      <ng-template>
+        <ion-datetime presentation="trading_optn2_Data.receivable_beyond_Expecteddate"  [(ngModel)]="trading_optn2_Data.receivable_beyond_Expecteddate" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+   
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Date of insurance of stock</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn2_Data.date_insurance_stock"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Amount of insurance(Rs. in Actuals)</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn2_Data.amnt_insur"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Due date of the insurance</ion-label>
+    <ion-item class="Input_field">
+      <ion-input placeholder="Date" value="{{trading_optn2_Data.due_date_insurance | date: 'dd/MM/yyyy' }}" id="trading_optn2_Data.due_date_insurance" ></ion-input>
+      
+    </ion-item>
+    <ion-popover trigger="trading_optn2_Data.due_date_insurance" size="center" >
+      <ng-template>
+        <ion-datetime presentation="trading_optn2_Data.due_date_insurance"  [(ngModel)]="trading_optn2_Data.due_date_insurance" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether insurance done comprehensively with  Bank clause:</ion-label>
+    <ion-item class="input_field" (ionChange)="Bank_cause($event)">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn2_Data.Wher_bnk_clause" (ionChange)="insurancedone()">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+   <div class="content_item" *ngIf="getinsurancedone=='Yes' || trading_optn2_Data.Wher_bnk_clause=='Yes'">
+    <ion-label position="stacked" class="input_heading" >Comments</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn2_Data.bnk_clause_show"></ion-input>
+    </ion-item>
+  </div> 
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Name of insurance Company:</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="trading_optn2_Data.name_insur_cmpny" ></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Balance of the a/c as on previous month end</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="trading_optn2_Data.balance_prev_month_end" ></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether the a/c is eligible for QIS submission</ion-label>
+    <ion-item class="input_field" (ionChange)="Bank_cause($event)">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn2_Data.whdr_QIS_submission" (ionChange)="qisubmission1()">
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="getqisubmission1=='Yes' || trading_optn2_Data.whdr_QIS_submission=='Yes'">
+    <!-- <ion-label position="stacked" class="input_heading" >Balance of the a/c as on previous month end</ion-label> -->
+    <ion-item class="input_field">
+      <ion-input type="date" [(ngModel)]="trading_optn2_Data.whdr_QIS_submission_comment" ></ion-input>
+    </ion-item>
+  </div>
+
+  <br>
+  <ion-button expand="full" class="submit_button" (click)="uvrTrading_Opt2Submit()">save</ion-button>
+</div>
+<!-- Stock Insurance end -->
+
+<!-- <div *ngIf="sectionEvent == 'Trad_optn3'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Sales projected for FY has been achieved </ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn3_Data.sale_projt_FY">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">As per current year sales GST filed:</ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn3_Data.curnt_year_GST">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether any sales reduction noticed: </ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn3_Data.wher_sales_reduc_notic">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Conduct of the firm/unit:</ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn3_Data.condct_firm_r_unit">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <br>
+<ion-button expand="full" class="submit_button" (click)="uvrtrading_opt3Submit()">save</ion-button>
+</div> -->
+
+<!-- <div *ngIf="sectionEvent == 'Trad_optn4'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Display of our Bank’s Name board is displayed( If not found Hold stickers in hand to paste):</ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="trading_optn4_Data.Display_bnk_name">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Whether the customer and his family are having our products, to improve the ERV:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn4_Data.cus_family_ERV"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Any specific mentioning about the  visit findings:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn4_Data.specific_visit_find"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Visiting official’s Staff ID:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn4_Data.visit_staff_id"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading" >Visiting official’s Name:</ion-label>
+    <ion-item class="input_field">
+      <ion-input  [(ngModel)]="trading_optn4_Data.visit_official_name"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+<ion-button expand="full" class="submit_button" (click)="uvrtrading_opt4Submit()">save</ion-button>
+</div> -->
+
+
+<!-- <div *ngIf="sectionEvent == 'Othr_optn1'">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Sales projected for FY has been achieved </ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="Othr_optn1_Data.sales_projt_FY">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">As per current year sales GST filed:</ion-label>
+    <ion-item class="input_field" >
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="Othr_optn1_Data.curnt_year_GST">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Whether any sales reduction noticed: </ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="Othr_optn1_Data.wher_sales_reduc_notic">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Conduct of the firm/unit:</ion-label>
+    <ion-item class="input_field">
+      <ion-select class="select_field" placeholder="Select" [(ngModel)]="Othr_optn1_Data.conct_firm_unit">
+        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option value="No">No</ion-select-option>
+           
+      </ion-select>
+    </ion-item>
+  </div>
+  <br>
+<ion-button expand="full" class="submit_button" (click)="uvrOthr_opt1Submit()">save</ion-button>
+</div> -->
+
+
+  
+
+<br><br>
+</ion-card>
+</ion-card>
+<div *ngIf="sectionEvent == 'Othr_optn3'">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card-header style="color:white">
+          Photo1
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="6" style="padding:0px">
+        <ion-icon class="camera_icon" name="camera" (click)="selectSource('1','48')" *ngIf="!FirstPhoto_base64 || FirstPhoto_base64 == 'undefined'"></ion-icon>
+       
+        <img class="Photo" [src]="FirstPhoto_base64" *ngIf="FirstPhoto_base64" (click)="selectSource('1','48')">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card-header style="color:white">
+          Photo2
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="6" style="padding:0px">
+        <ion-icon class="camera_icon" name="camera" (click)="selectSource('2','49')" *ngIf="!SecondPhoto_base64 || SecondPhoto_base64  == 'undefined'"></ion-icon>
+        
+        <img class="Photo" [src]="SecondPhoto_base64" *ngIf="SecondPhoto_base64" (click)="selectSource('2','49')">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card-header style="color:white">
+          Photo3
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="6" style="padding:0px">
+        <ion-icon class="camera_icon" name="camera" (click)="selectSource('3','50')" *ngIf="!ThirdPhoto_base64 || ThirdPhoto_base64 == 'undefinded'"></ion-icon>
+        
+        <img class="Photo" [src]="ThirdPhoto_base64" *ngIf="ThirdPhoto_base64" (click)="selectSource('2','50')">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card-header style="color:white">
+          Photo4
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="6" style="padding:0px">
+        <ion-icon class="camera_icon" name="camera" (click)="selectSource('4','51')" *ngIf="!ForthPhoto_base64 || ForthPhoto_base64 == 'undefinded'"></ion-icon>
+       
+        <img class="Photo" [src]="ForthPhoto_base64" *ngIf="ForthPhoto_base64" (click)="selectSource('4','51')">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card-header style="color:white">
+          Photo5
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="6" style="padding:0px">
+        <ion-icon class="camera_icon" name="camera" (click)="selectSource('5','52')" *ngIf="!FifthPhoto_base64 || FifthPhoto_base64 == 'undefinded'"></ion-icon>
+       
+        <img class="Photo" [src]="FifthPhoto_base64" *ngIf="FifthPhoto_base64 != 'undefinded' || FifthPhoto_base64" (click)="selectSource('5','58')">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+  
+  <br>
+  <ion-button expand="full" class="Photo_submit_button" (click)="uvrPhotoSubmit()">save</ion-button>
+  </div>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

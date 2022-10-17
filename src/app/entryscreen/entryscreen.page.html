@@ -1,0 +1,456 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >Entry Screen</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <form [formGroup]="EntryscreenForm" (submit)="onSubmitForm(EntryscreenForm)">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="segment">
+          <!-- <ion-item> -->
+            <div>
+            <ion-checkbox slot="start"     [checked]="checked"   
+            (ionChange)="CheckBoxChange('Existing',$event.target.checked)"> 
+                </ion-checkbox>
+                <ion-label style="color: #fff;position: relative;
+                color: #fff;
+                left: 10px;
+                bottom: 3px;">Existing</ion-label>
+          <!-- </ion-item> -->
+        </div>
+        <!-- <input type="checkbox"  id="checkbox1" > -->
+        </ion-col>
+        <ion-col class="segment">
+          <div>
+          <!-- <ion-item> -->
+            <ion-checkbox slot="start" [checked]="checkedNew"      
+            (ionChange)="CheckBoxChangeNew('New',$event.target.checked)"> 
+                </ion-checkbox>
+                <ion-label style="color: #fff; position: relative;
+                color: #fff;
+                left: 10px;
+                bottom: 3px;">New</ion-label>
+          <!-- </ion-item> -->
+        </div>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+    <ion-card>
+   
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngIf="showCustomerID">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Customer Id</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-input type="text" formControlName="customerid"></ion-input>
+              </ion-item>
+
+            </ion-col>
+            <ion-col size="6" class="col_height">
+             <ion-icon name="arrow-dropdown"> </ion-icon> <div (click)="getCustomer()">Search
+               
+                <!-- <ion-button style="--background:#87ceeb"   expand="block">cancel</ion-button> -->
+              </div>
+            </ion-col>
+          </ion-row>
+
+         
+
+          <div class="w-100-p" >
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">First Name</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input type="text" formControlName="firstname"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" >
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Last Name</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input type="text" formControlName="lastname"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" >
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Mobile</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input type="number" formControlName="mobile"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" >
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Email</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input type="text" formControlName="email"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Call OutCome</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changeCallOutcome($event.detail.value)"
+                  formControlName="calloutcome" placeholder="Select">
+                  <ion-select-option value="null" selected>Select</ion-select-option>
+                  <ion-select-option (value)="item.Value" *ngFor="let item of CallOutcomeItems">{{item.Text}}</ion-select-option>
+                  <!-- <ion-select-option value="Calls-FollowUp">Calls-FollowUp</ion-select-option> -->
+                </ion-select>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Call Type</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changeCallType($event.detail.value)"
+                  formControlName="calltype" placeholder="Select">
+                  <ion-select-option value="" selected>Select</ion-select-option>
+                  <ion-select-option value="T" selected>Telecall</ion-select-option>
+                  <ion-select-option value="P" selected>Personal Visit</ion-select-option>
+                  <!-- <ion-select-option value="Telecall" *ngFor="let item of CallTypeItem">Telecall</ion-select-option> -->
+                  <!-- <ion-select-option value="Personal Visit">Personal Visit</ion-select-option> -->
+                </ion-select>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showFollowupDateTime">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Followup Date</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+                <ion-popover trigger="date" size="cover">
+                  <ng-template>
+                    <ion-datetime presentation="date" [(ngModel)]="date" formControlName="followupdate"
+                      [showDefaultButtons]="true"></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p"  *ngIf="showFollowupDateTime" >
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked" trigger="open-datetime">Followup Time</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input value="{{ time | date: 'shortTime'}}" id="time" class="ion-text-end"></ion-input>
+                <ion-popover trigger="time" size="cover">
+                  <ng-template>
+                    <ion-datetime presentation="time" [(ngModel)]="time" formControlName="followuptime"
+                      [showDefaultButtons]="true"></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showJointVisitLocation">
+            <ion-col class="col_height">
+              <!-- {{jointvisitChecked}} -->
+              <input type="checkbox"  [value]="jointvisitChecked" (change)="jointVisit($event)" formControlName="jointvisit">
+              <!-- <ion-checkbox  value="jointvisitChecked" (ionChange)="jointVisit(jointvisitChecked)" formControlName="jointvisit"></ion-checkbox> -->
+              <!-- <ion-checkbox [checked] (ionChange)="jointVisit(jointvisitChecked)" formControlName="jointvisit"></ion-checkbox>  -->
+               &nbsp; &nbsp; <ion-label position="stacked">Joint Visit</ion-label>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showEmployeeDetails">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Emp Code</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-input type="number" formControlName="empcode"></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showEmployeeDetails">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Emp Name</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="empname"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showJointVisitLocation">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Enter Location</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="location"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Purpose</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changePurposeType($event.detail.value)"
+                  formControlName="purpose" placeholder="Select">
+                  <ion-select-option value="" selected>Purpose</ion-select-option>
+                  <ion-select-option [(value)]="item.Value" *ngFor="let item of entrypurpose">{{item.Text}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" *ngIf="showBusinessUnit">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Bussiness</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changeBussiness($event.detail.value)"
+                  formControlName="bussiness" placeholder="Select">
+                  <!-- <ion-select-option value="" selected>Purpose</ion-select-option> -->
+                  <ion-select-option [(value)]="item.Value" *ngFor="let item of businessunit">{{item.Text}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showDepositCasaAdvance">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Deposits</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="deposits"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showDepositCasaAdvance">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">CASA</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="casa"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showDepositCasaAdvance">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Advance</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="advance"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" *ngIf="captionAmount">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Caption</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="caption"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" *ngIf="captionAmount">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Amount</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="amount"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+          <div class="w-100-p" *ngIf="showInsuranceSellproductSourceLead">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">insurance</ion-label>
+              </div>
+             <ion-item class="input_field">
+                <ion-textarea formControlName="insurance"></ion-textarea>
+              </ion-item>
+
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" *ngIf="showInsuranceSellproductSourceLead">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Cross Sell Product</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changeBussiness($event.detail.value)"
+                  formControlName="crosssellproduct" placeholder="Select">
+                  <!-- <ion-select-option value="" selected>Purpose</ion-select-option> -->
+                  <ion-select-option (value)="item.Value" *ngFor="let item of businessunit">{{item.Text}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </div>
+
+          <div class="w-100-p" *ngIf="showInsuranceSellproductSourceLead">
+            <ion-col class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Source of Lead</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-select class="select_field w-100-p" (ionChange)="changeBussiness($event.detail.value)"
+                  formControlName="sourceoflead" placeholder="Select">
+                  <!-- <ion-select-option value="" selected>Purpose</ion-select-option> -->
+                  <ion-select-option (value)="item.Value" *ngFor="let item of businessunit">{{item.Text}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </div>
+          <!-- <ion-row> -->
+     
+            <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Remarks</ion-label>
+                </div>
+               <ion-item class="input_field">
+                  <ion-textarea formControlName="remarks"></ion-textarea>
+                </ion-item>
+  
+              </ion-col>
+            </div>
+            
+        
+         
+            <!-- <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Product Type</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeProductType($event)"
+                    formControlName="calltype" placeholder="Select">
+                    <ion-select-option value="" selected>Select</ion-select-option>
+                    <ion-select-option value="T" selected>Insurance</ion-select-option>
+                    <ion-select-option value="P" selected>Others</ion-select-option>
+                    <ion-select-option value="P" selected>Product Listing</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </ion-col>
+            </div>
+
+            <div class="w-100-p">
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Product Group</ion-label>
+                </div>
+                <ion-item class="input_field">
+                  <ion-select class="select_field w-100-p" (ionChange)="changeProductGroup($event)"
+                    formControlName="calltype" placeholder="Select">
+                    <ion-select-option value="" selected>Select</ion-select-option>
+                    <ion-select-option value="T" selected>Credit Card</ion-select-option>
+                    <ion-select-option value="P" selected>Demat</ion-select-option>
+                    <ion-select-option value="P" selected>Locker</ion-select-option>
+                    <ion-select-option value="P" selected>Pension</ion-select-option>
+                    <ion-select-option value="P" selected>POS</ion-select-option>
+                    <ion-select-option value="P" selected>SGB</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </ion-col>
+            </div> -->
+
+        
+        
+
+       
+
+         
+            <div class="w-100-p">
+              <ion-row>
+                <ion-col size="6" class="col_height">
+                  <div>
+                    <ion-button style="--background:deeppink"  type="submit" expand="block">Save</ion-button>
+                  </div>
+                </ion-col>
+                <ion-col size="6" class="col_height">
+                  <div>
+                    <ion-button style="--background:#87ceeb"   expand="block">cancel</ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            
+            </div>
+
+
+
+
+          <!-- </ion-row> -->
+        </ion-grid>
+
+
+
+        <br>
+        <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb" type="submit" expand="block">Save</ion-button>
+          <ion-button style="--background:#87ceeb" type="submit" expand="block">Cancel</ion-button>
+        </div> -->
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

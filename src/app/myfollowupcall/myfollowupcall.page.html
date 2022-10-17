@@ -1,0 +1,130 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Followup Calls</ion-title>
+  </ion-toolbar>
+  <ion-content class="body_bg">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid style="margin-top:1rem">
+      <ion-row>
+        <ion-col size="6">
+          <div class="content_item">
+            <div class="input_heading">
+              <ion-label position="stacked" >Customer ID</ion-label>
+            </div>
+  
+            <ion-item class="input_field">
+              <ion-input  type="text" [(ngModel)]="search.CBSCustomerID" (ionBlur)="custId(search.CBSCustomerID, search.Purpose)"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+  
+  <div class="content_item">
+    <div class="input_heading">
+      <ion-label position="stacked" >Type</ion-label>
+    </div>
+    <ion-item class="input_field">
+      <ion-select class="select_field" [(ngModel)]="search.Purpose" (ionChange)="custId(search.CBSCustomerID,search.Purpose)" placeholder="Select" >
+                      <ion-select-option [value]="purpos.Value" *ngFor="let purpos of purpose">{{purpos.Text}}</ion-select-option> 
+      </ion-select>
+    </ion-item>
+  </div>
+        </ion-col>
+      </ion-row>
+  
+    </ion-grid>
+  
+  
+  
+  
+    <ion-card *ngFor="let item of followupcallsdata">
+      <ion-card-header class="card_heder">
+        <span class="card_heading">{{item.CUSTOMER_ID}}</span>
+      
+        <span style="float:right;color:white">{{item.CONTACT_NO}}</span>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text"  >Name</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{item.CUSTOMER_NAME}}</p>
+            </div>
+          </ion-col>   
+           <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Next Call Date</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{item.NEXT_CALL_DATE}}</p>
+            </div>
+  
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Purpose</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{item.PURPOSE}}</p>
+            </div>
+  
+          </ion-col>
+          <ion-col size="12" class="col_height followup">
+            <div >
+              <ion-accordion-group>
+                <ion-accordion value="first">
+                  <ion-item slot="header" color="light">
+                    <!-- <ion-label>First Accordion</ion-label> -->
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                   
+                    <ion-button style="--background:#87ceeb;width: 30%; margin: auto;"  (click)="myfollowupActionModal(item)" expand="block">Action</ion-button>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
+            </div>
+          </ion-col>
+       
+        </ion-row>
+        </ion-grid>
+  
+  
+  
+        <br>
+  <!-- <div class="update_button">
+    <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+  
+  </div> -->
+      </ion-card-content>
+    </ion-card>
+  
+  
+  
+  
+  
+  </ion-content>
+  <ion-footer class="footer">
+    <p class="footer_content">City Union Bank Ltd</p>
+  </ion-footer>
+  

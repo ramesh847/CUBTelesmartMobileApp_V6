@@ -1,0 +1,70 @@
+
+<ion-content style=" --background: url(/assets/img/loginbg.jpg) 0 0/100% 100% no-repeat !important">
+    <!-- <ion-datetime #dateTime (ionFocus)="onDateFocused()"  display-format="MMM DD, YYYY"></ion-datetime> -->
+    <!-- <ion-col (click)="datePicker.open()" width-50>
+        <ion-icon name="calendar"></ion-icon>
+    
+        <div>
+            {{ selected.toDate() | amDateFormat:'DD' }} {{ selected.toDate() | amDateFormat:'MMM' }}, {{ selected.toDate() | amDateFormat:'YYYY'}}
+        </div>
+    
+        <ion-item no-lines hidden="true">
+            <ion-datetime  #datePicker
+                text-center
+                (ionChange)="dateChanged($event)"
+                displayFormat="DD MMM, YYYY" 
+                [(ngModel)]="date"></ion-datetime>
+        </ion-item>
+    </ion-col> -->
+    <!-- <ion-view cache-view="false" ng-init="getappversion()"> -->
+        <!-- <ion-content class="has-header-new" style="background:url('img/loginbg.jpg');background-size: 100%;background-repeat: no-repeat;background-size: cover;background-color: rgba(221, 221, 221, 0.61); "> -->
+            <div class="container centerwidth" style="text-align: center;display: flex;justify-content: center;align-items: center;">
+                <form ng-submit="doLogin()">
+                    <img src="../../assets/img/logo.png" class="animated fadeInDown" alt="Welcome" style="width:120px;height:auto;margin-top: 13.5vh;"><br><br>
+                    <!-- <p style="color:#23268f;" ng-model="app_ver" ng-show="app_ver!=null&&app_ver!=undefined&&app_ver!=''">V {{app_ver}}</p> app version--> 
+                    <!-- <div id="app_version"></div> -->
+                 <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;
+              
+                ">
+                        <i class="fa fa-user" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;color:black;font-size: 18px;"></i>
+                        <input type="text" placeholder="Emp Code" [(ngModel)]="logindata.user_name" [ngModelOptions]="{standalone: true}" ng-change="replacespace(logindata.user_name)">
+                    </div>
+                   
+                    <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;font-size: 18px;color:black"></i>
+                        <input type="password" placeholder="Password" [ngModelOptions]="{standalone: true}" [(ngModel)]="logindata.password">
+                    </div>
+                    <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                        <ion-button (click)="doLogin()" class="button button-assertive round" ng-disabled="">
+                            LOGIN
+                        </ion-button>
+                        </div>
+                        
+                        <!-- <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                           <span style="color: #fff;text-decoration: underline;" (click)="resetPwd()">Reset Password ?</span>
+                            </div> -->
+                       <!--  <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                        <button class="button button-assertive round" type="button" ng-disabled="" ng-click="verifydevice()">
+                            VERIFY DEVICE
+                        </button>
+                        </div> -->
+                        <!-- <div ng-show="showotpdiv">
+                        <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;" >
+                              
+                                <input type="number" placeholder="OTP" ng-model="logindata.otp" ng-change="verifyotp(logindata.otp)">
+    
+                            </div>
+                        </div>
+                            <p ng-show="invalidOTP" style="color:white;">Invalid OTP</p> -->
+                </form>
+                </div>
+                <!-- <p style="margin:20px;color:black;">{{fcm_token}}</p>
+                <textarea  type="textarea" ng-model = "fcm_token" style="width: -webkit-fill-available;
+                margin: 20px;height: 200px;" ></textarea> -->
+        <!-- </ion-content> -->
+        <!-- <ion-footer>
+            
+        </ion-footer> -->
+    <!-- </ion-view> -->
+    <!-- <ion-button  href="https://demo.herbie.ai/DevHerbieAngular/?q=dHlwZT1oZWFsdGhjYXJlJnRoZW1lPWdyZWVuJkVOQz1ZJkZ1bmN0aW9uPTEwMTQwJkRvbWFpbj1kZW1vLmhlcmJpZS5haSZzZWM9Tg==">StackOverFlow</ion-button> -->
+</ion-content>

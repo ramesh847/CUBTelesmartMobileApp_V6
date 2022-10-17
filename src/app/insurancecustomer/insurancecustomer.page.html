@@ -1,0 +1,129 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >Insurance Customer</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+
+  <ion-card *ngFor="let customer of insuranceCustomerData">
+    <ion-card-header class="card_heder">
+      <span class="card_heading">customer Id: {{customer.CustomerID}}</span>
+      <!-- <ion-card-title>Card Title</ion-card-title> -->
+      <!-- <span style="float:right;color:white">{{items.mobileno}}</span> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Customer Name</p>
+          </div> 
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Customer_Name}}</p>
+          </div>
+        </ion-col>
+
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Contact Number</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Contact_Number}}</p>
+          </div> 
+          
+        </ion-col>
+
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">DOB</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Customer_DOB}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Insurance Type</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.InsuranceType}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+
+        
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Company</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Insurance_Provider}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+
+        
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Product</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Insurance_Products}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Plans</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.Insurance_Available_Products}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Lead ID</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">{{customer.LeadID}}</p>
+            <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+          </div> 
+          
+        </ion-col>
+        
+      </ion-row>
+      </ion-grid>
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

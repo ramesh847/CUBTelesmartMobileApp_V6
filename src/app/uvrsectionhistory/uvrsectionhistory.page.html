@@ -1,0 +1,123 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='start'>
+    <ion-back-button defaultHref=""></ion-back-button>
+  </ion-buttons>
+  <ion-title >Sections History</ion-title>
+  </ion-toolbar>
+
+<ion-content class="bgUvrWall">
+  <ion-card class="toolbar_card">
+    {{SectionHeaderdata.CUSTOMERID}} - {{SectionHeaderdata.CUSTNAME}}
+      </ion-card>
+        <ion-item class="input_field">
+          <ion-label>Select visit date</ion-label>
+          <ion-select [(ngModel)]="dateValue" class="select_field" placeholder="Select" (ionChange)="SelectedEvent($event)" [disabled]="Data.length == 0">
+            <ion-select-option   *ngFor="let item of Data" >{{item.CreatedOn}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- <ion-card class="title">{{data}}</ion-card> -->
+        <ion-card *ngIf="HistoryData.length != 0 || HistoryDatamachinary.length != 0 || HistoryDatamachinary_insurance.length != 0
+        || HistoryFinancial_performance.length != 0 || HistoryStock_Insurance.length != 0 ">
+        <ion-card-title style="background-color: lightgray;padding: 20px" *ngIf="isbank">{{Banking_Arrangement}}</ion-card-title>
+          <!-- <ion-card-header>
+            
+          </ion-card-header> -->
+          <ion-card-content  *ngFor ="let item of HistoryData">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" *ngIf="iscommdity">{{commodity}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of Historycommodity">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          <!-- <img src="{{item.FIELD_VALUE}}" width="200px" height="200px" /> -->
+          </ion-card-content>
+        
+        <ion-card-title style="background-color: lightgray;padding: 20px;" *ngIf="isunitmachinery">{{About_unit_machinary}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of HistoryDatamachinary">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          <!-- <img src="{{item.FIELD_VALUE}}" width="200px" height="200px" /> -->
+          </ion-card-content>
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" *ngIf="ismachinery">{{Machinery_Insurance}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of HistoryDatamachinary_insurance">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+          
+          <ion-card-title style="background-color: lightgray;padding: 20px;" *ngIf="isaboutunit">{{abouttheunit}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of Historyaboutunit_performance">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" ngIf="isstock">{{Stock_Insurance}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of HistoryStock_Insurance">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" ngIf="isfinancial">{{Financial_performance}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of Historyaboutfinancial_performance">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+  
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" ngIf="isgeneral">{{Genral_obser_visit}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of HistoryGenral_obser_visit">
+          <p>{{item.ALIAS_NAME}}</p>
+          <p *ngIf="item.CONTROL_ID !='P'">{{item.FIELD_VALUE}}</p>
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          </ion-card-content>
+
+          <ion-card-title style="background-color: lightgray;padding: 20px;" ngIf="isphoto">{{Photo}}</ion-card-title>
+      
+          <ion-card-content  *ngFor ="let item of PhotoData">
+          <p>{{item.ALIAS_NAME}}</p>
+          <img *ngIf="item.CONTROL_ID =='P'" src="{{item.FIELD_VALUE}}" width="200px" height="200px" />
+          <p *ngIf="item.comments&&datum.comments!=null"><br><br>Comments : {{item.comments}}</p>
+          <p *ngIf="item.CONTROL_ID=='P' " >
+            <img src="{{item.FIELD_VALUE}}" width="200px" height="200px"></img></p>
+          <!-- <p>{{item.FIELD_VALUE}}</p> -->
+          </ion-card-content>
+    
+      </ion-card>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

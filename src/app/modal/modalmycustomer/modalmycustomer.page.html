@@ -1,0 +1,328 @@
+
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title style="text-align:center">{{entry.customerid}}</ion-title>
+  </ion-toolbar>
+
+
+<ion-content>
+  <ion-card >
+    <ion-card class="card_content">
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">First Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="entry.firstname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Last Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="entry.lastname"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="entry.mobile"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Email</ion-label>
+        <ion-item class="input_field">
+          <ion-input [(ngModel)]="entry.email"></ion-input>
+        </ion-item>
+      </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Outcome</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.callout">
+          <ion-select-option selected="selected" value="">&lt;&lt; Call Outcome &gt;&gt;</ion-select-option>
+          <ion-select-option *ngFor="let items of callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Call Type</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field" placeholder="Select" [(ngModel)]="data.selectele">
+          <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+          <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+          <ion-select-option value="T">Tele Call</ion-select-option>
+          <ion-select-option value="P">Personal visit</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf="data.callout == 2">
+    <ion-label position="stacked" class="input_heading">Followup Date</ion-label>
+    <input class="input-md textinput textInput form-control inputcolor" id="followuptime" [(ngModel)]="data.followupdate" placeholder="Date" style="padding: 1em;    border: 1px solid rgb(221, 212, 212);"  type="date" required />
+    <!-- <ion-item class="input_field"> -->
+      <!-- <input type="time" [(ngModel)]="data.followupdate"></input> -->
+    <!-- </ion-item> -->
+  </div>
+
+  <div class="content_item" *ngIf="data.callout == 2">
+    <ion-label position="stacked" class="input_heading">Followup Time</ion-label>
+    <ion-item class="input_field">
+      <input class="input-md textinput textInput form-control inputcolor" id="followuptime" [(ngModel)]="data.followuptime" placeholder="Date" style="padding: 1em;    border: 1px solid rgb(221, 212, 212);"  type="time" required />
+    </ion-item>
+  </div>
+
+  <div class="form-group col-xs-12 col-sm-12
+  "*ngIf="data.selectele == 'P'" ng-click="clear()">
+                       <ion-checkbox  (ionChange)="checkbox($event.target.checked)"  style="font-size: 15px; background-color: transparent;padding-top: 0px;padding-bottom: 0px;overflow: hidden !important"> &nbsp; Joint Visit</ion-checkbox>
+                   </div>
+
+ 
+                   <div class="content_item" *ngIf="data.jointvisit == 'YES' && data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Emp Code</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input (ionBlur)="checkusercode(data.jointusercode)" [(ngModel)]="data.jointusercode"></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="data.jointvisit == 'YES' && data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Emp Name</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input [(ngModel)]="data.jointusername" disabled></ion-input>
+                    </ion-item>
+                  </div>
+
+                  <div class="content_item" *ngIf="data.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Enter Location</ion-label>
+                  <ion-item class="text_area" >
+                    <ion-textarea [(ngModel)]="data.addressname" placeholder="Enter more information here..."></ion-textarea>
+                  </ion-item>
+                </div>
+         
+                
+                <div class="content_item">
+                  <ion-label position="stacked" class="input_heading">Purpose</ion-label>
+                    <ion-item class="input_field">
+                      <ion-select ngDefaultControl class="select_field" placeholder="Select"  [(ngModel)]="data.courtesypurp">
+                        <ion-select-option selected="{{data.courtesypurp}}" *ngFor="let items of callPurpose" value="{{items.Value}}" >{{items.Text}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                </div>
+
+
+  <div class="content_item" *ngIf="data.courtesypurp == '3'">
+    <ion-label position="stacked" class="input_heading">Business Unit</ion-label>
+      <ion-item class="input_field">
+        <ion-select  class="select_field"  [(ngModel)]="data.businessunit" (ionChange)="checkdeeping(data.businessunit)">
+          <!-- <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option> -->
+          <ion-select-option selected="selected" value="">&lt;&lt; Business Unit &gt;&gt;</ion-select-option>
+          <ion-select-option *ngFor="let items of businessunit" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+          <!-- <ion-select-option value="Consortium">Consortium</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item" *ngIf ="data.businessunit == 11 || data.businessunit == 14 || data.businessunit == 13 || data.businessunit == 12">
+    <ion-label position="stacked" class="input_heading">Expected Business</ion-label>
+  </div>
+
+<!-- // DEEPING OF CUSTOMER -->
+  <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+    <ion-label position="stacked" class="input_heading">Deposits</ion-label>
+    <ion-item class="input_field" >
+      <ion-input placeholder="Deposits" [(ngModel)]="data.deposits"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+    <ion-label position="stacked" class="input_heading">CASA</ion-label>
+    <ion-item class="input_field" >
+      <ion-input placeholder="CASA" [(ngModel)]="data.casa"></ion-input>
+    </ion-item>
+  </div>
+  <div class="content_item" *ngIf="data.businessunit == 11 || data.businessunit == 14">
+    <ion-label position="stacked" class="input_heading">Advance</ion-label>
+    <ion-item class="input_field" >
+      <ion-input placeholder="Advance" [(ngModel)]="data.advance"></ion-input>
+    </ion-item>
+  </div>
+
+<!-- //OTHERS -->
+
+<div class="content_item" *ngIf="data.businessunit == 13">
+  <ion-label position="stacked" class="input_heading">Caption</ion-label>
+  <ion-item class="input_field" >
+    <ion-input placeholder="Advance" [(ngModel)]="data.caption" type="text"></ion-input>
+  </ion-item>
+</div>
+
+<div class="content_item" *ngIf="data.businessunit == 13">
+  <ion-label position="stacked" class="input_heading">Amount</ion-label>
+  <ion-item class="input_field" >
+    <ion-input placeholder="Advance" [(ngModel)]="data.amount" type="number"></ion-input>
+  </ion-item>
+</div>
+
+  
+  <div class="content_item" *ngIf="data.businessunit == 12">
+    <ion-label position="stacked" class="input_heading">Insurance</ion-label>
+    <ion-item class="input_field" >
+      <ion-input placeholder="Insurance" [(ngModel)]="data.insurance"></ion-input>
+    </ion-item>
+  </div>
+
+ <!-- INSURANCE CHANGES  -->
+ <div class="content_item" *ngIf="data.businessunit == 12">
+  <ion-label position="stacked" class="input_heading">Cross Sell Product</ion-label>
+    <ion-item class="input_field">
+      <ion-select  class="select_field"  [(ngModel)]="data.insurancetype" >
+        <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+        <ion-select-option *ngFor="let items of ins_type" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+</div>
+
+<div class="content_item" *ngIf="data.businessunit == 12">
+  <ion-label position="stacked" class="input_heading">Source of Lead</ion-label>
+    <ion-item class="input_field">
+      <ion-select  class="select_field"  [(ngModel)]="data.leadsource" >
+        <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+        <ion-select-option *ngFor="let items of ins_source" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+</div>
+
+<div class="content_item" *ngIf="data.businessunit == 12 && data.leadsource == '3'">
+  <ion-label position="stacked" class="input_heading">Refered By</ion-label>
+  <ion-item class="input_field" >
+    <ion-input placeholder="Existing Customer ID" [(ngModel)]="data.referredby"></ion-input>
+  </ion-item>
+</div>
+
+<div class="content_item" *ngIf="data.businessunit == 12 && data.leadsource == '3'">
+  <ion-label position="stacked" class="input_heading">Cross Sell Product</ion-label>
+    <ion-item class="input_field">
+      <ion-select  class="select_field"  [(ngModel)]="data.relationship" >
+        <ion-select-option selected="selected" value="">&lt;&lt; select &gt;&gt;</ion-select-option>
+        <ion-select-option *ngFor="let items of ins_ref" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+</div>
+
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Remarks</ion-label>
+  <ion-item class="text_area">
+    <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+  </ion-item>
+</div>
+
+
+<div *ngIf="data.businessunit == 745">
+  <p style="margin: 15px !important;">Discussed Product Details</p>
+  <div *ngFor="let m of discussed;let indexOfelement = index;" style="margin: 15px">
+    <label>{{indexOfelement+1}}. Product<span class="mandfield">*</span></label>
+    <ion-select [(ngModel)]="m.prod" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select" (ionChange)="getsubproduct(m.prod,indexOfelement)">
+      <ion-select-option value="" selected>Select</ion-select-option>
+      <ion-select-option *ngFor="let items of products" value="{{items.TypeID}}">{{items.Product}}</ion-select-option>
+    </ion-select>
+
+    <label>Sub Product<span class="mandfield">*</span></label>
+    <ion-select [(ngModel)]="m.subprod" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select">
+      <ion-select-option value="" selected>Select</ion-select-option>
+      <ion-select-option *ngFor="let items of m.subprodopt" value="{{items.Product}}">{{items.Product}}</ion-select-option>
+    </ion-select>
+
+    <label>Interested?<span class="mandfield">*</span></label>
+    <ion-select [(ngModel)]="m.interested" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select">
+      <ion-select-option value="" selected>Select</ion-select-option>
+      <ion-select-option value="y" selected>Yes</ion-select-option>
+      <ion-select-option value="n" selected>No</ion-select-option>
+    </ion-select>
+
+    <!-- <ion-label position="stacked" class="input_heading">Enter Location</ion-label> -->
+    <ion-item class="text_area" >
+      <ion-textarea [(ngModel)]="m.descp" placeholder="Enter Comment"></ion-textarea>
+    </ion-item>
+    <ion-button (click)="Remove(indexOfelement)">Remove</ion-button>
+  <ion-button (click)="Add(indexOfelement)">Add</ion-button>
+  
+  
+  </div>
+</div>
+                <!-- Discussed Product Entry -->
+                <!-- <div *ngIf="data.businessunit == 745">
+                  <p style="margin: 15px !important;">Discussed Product Details</p>
+              <div *ngFor="let m of discussed" style="margin: 15px;
+              padding: 12px;
+              background: white;
+              border-radius: 7px;
+              box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;">
+              <label>{{$index+1}}. Product<span class="mandfield">*</span></label>
+                  <select  [(ngModel)]="m.prod" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select" (ionChange)="getsubproduct(m.prod,$index)">
+                      <option value="" selected>Select</option>
+                      <option *ngFor="let items of products" value="{{items.TypeID}}">{{items.Product}}</option>
+                  </select> 
+                  <label>Sub Product<span class="mandfield">*</span></label>
+                  <select  [(ngModel)]="m.subprod" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select">
+                      <option value="" selected>Select</option>
+                      <option *ngFor="items in m.subprodopt" value="{{items.Product}}">{{items.Product}}</option>
+                  </select> 
+                  <label>Interested?<span class="mandfield">*</span></label>
+                  <select  [(ngModel)]="m.interested" style="margin-bottom:8px;width:100%;border: 1px solid grey;background: white;
+                  height: 30px;border-radius:5px;" placeholder="Select">
+                          <option value="" selected>Select</option>
+                      <option value="y" selected>Yes</option>
+                      <option value="n" selected>No</option>
+                  </select> 
+                  <textarea [(ngModel)]="m.descp" placeholder="Enter Comment" style="margin-bottom:8px;padding: 5px;width:100%;height: 60px;border-radius:5px;background: white;border: 1px solid grey;"></textarea>
+                  <input type="button" (click)="Remove($index)" value="Remove" style="display: block;
+                  margin: auto;
+                  border: unset;
+                  padding: 8px 20px;
+                  background: #ec0576;
+                  color: white;
+                  border-radius: 5px;" />
+              </div>
+
+              <div style="text-align:center;padding: 20px;">
+            
+              
+              <input type="button" (click)="Add({{$index}})" value="Add" style="border: unset;
+              padding: 8px 20px;
+              background: deepskyblue;
+              color: white;
+              border-radius: 5px;
+              margin-left: 8px;" />
+              </div>
+          </div> -->
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button style="--background:#ec0576;" (click)="saveCourtesyCall(clickcall)" expand="block">save</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button style="--background:grey;width:100%" (click)="customerActionModal(items)" expand="block">cancel</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<dl style="padding-left: 10px;">
+
+  <dd style="color:red;">*  Denotes Mandatory</dd>
+
+  <dd style="color:red;">**  Denotes Any One Mandatory </dd>
+</dl>
+  </ion-card>
+  </ion-card>
+</ion-content>

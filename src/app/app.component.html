@@ -1,0 +1,56 @@
+<!-- <ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
+<ion-app>
+  <ion-menu contentId="content" side="end" type="reveal">
+    <ion-header>
+      <ion-toolbar class="menu_header">
+        <ion-title>CRM</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="--background: #161848">
+   
+      <div class="padding:10%">
+<h1 style="text-align:center;color:white;font-size: 18px;">SIJIN</h1>
+<h1 style="    text-align: center;
+color: gray;
+font-size: 18px;">329 - {{Date}}</h1>
+      </div>
+      <br>
+      <div *ngFor="let p of appPages" style="--background: #161848;">
+        <ion-menu-toggle *ngIf="p.url" >
+          <ion-item  style="--background: #161848;" (click)="sidemenuClick(p)" [routerDirection]="'root'" [routerLink]="[p.url]"  [routerLinkActive]="['active-menu']">
+            <ion-icon slot="start" [name]="p.icon" class="menu_icon_color"></ion-icon>
+            <ion-label class="menu-name">
+              {{p.title}}
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" style="--background: #161848;"
+          [class.active-parent]="p.open" detail="false">
+          <ion-icon slot="start" [name]="p.icon"  class="menu-name"></ion-icon>          
+          <ion-label class="menu-name">
+            {{p.title}}
+          </ion-label>
+          <ion-icon  slot="end" name="arrow-dropdown" *ngIf="p.open"></ion-icon>
+          <ion-icon  slot="end" name="arrow-dropright" *ngIf="!p.open"></ion-icon>
+        </ion-item>
+        <ion-list *ngIf="p.open" style="background-color: #ec0576;">
+          <ion-menu-toggle style="background-color: #ec0576;">
+            <ion-item  style="padding-left: 20px;--background: #ec0576;" *ngFor = "let sub of p.children" (click)="sidemenuClick(p)" [routerDirection]="'root'" [routerLink]="[sub.url]"  [routerLinkActive]="['active-menu']">
+              <ion-icon slot="start" [name]="sub.icon" class="menu_icon_color"></ion-icon>
+              <ion-label class="menu-name">
+                {{sub.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+       </div>
+    </ion-content>
+     <ion-footer class="MENU_footer">
+    <p class="footer_content">APP VER: 1.4</p>
+  </ion-footer>
+  </ion-menu>
+ 
+  <ion-router-outlet id="content" main></ion-router-outlet>
+</ion-app>

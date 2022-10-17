@@ -1,0 +1,97 @@
+.bar-subheader {
+    background-color: #ec0576;
+  }
+
+  .bar-subheader .sub {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .coolDiv {
+    position: absolute;
+    /*max-width: 33.33%;*/
+    height: 0%;
+    background-color: #ffffff;
+    border: 1.8px solid black;
+    min-width: 45%;
+    z-index: 9;
+    bottom: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  /*   table {
+      width: 100%;
+      border: 1px solid black;
+  }
+  
+  table td,
+  table th {
+      border: 1px solid #ddd;
+  }
+  
+  table .FirstColumn {
+      background-color: #9999dd;
+  }
+  
+  table thead tr {
+      background-color: blue;
+  }
+  
+  table tbody.secondHeader tr {
+      background-color: skyblue;
+  } */
+
+  .search-table-outter {
+    overflow-x: scroll;
+  }
+
+  .tablerow th {
+    background-color: rgb(46, 49, 146) !important;
+  }
+  /* 
+    .barcolor
+    {
+        background-color: #2e3192;
+    } */
+
+  .design {
+    border: 1px solid #ddd;
+  }
+
+  .designtd {
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 420px) {
+    .designtd {
+
+      padding: 3px !important;
+      text-align: center;
+    }
+    .heatmapfont {
+      font-size: 10px!important;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    .alignsm {
+
+      padding: 5px !important;
+      text-align: center;
+    }
+  }
+
+
+        /* GOOGLE MAP AUTO COMPLETE START*/
+        .pac-container {
+            z-index: 3000 !important;
+            }
+            .modal-open {
+              pointer-events: auto !important;
+            }
+        /* GOOGLE MAP AUTO COMPLETE END */

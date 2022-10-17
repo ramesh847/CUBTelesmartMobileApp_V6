@@ -1,0 +1,1671 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Exception Report</ion-title>
+</ion-toolbar>
+<ion-content class="body_bg">
+
+  <ion-card class="exception-card">
+    <ion-row style="width: 100%;">
+      <ion-col size="6" class="col_height">
+        <div>
+          <p class="card_left_text">Employee Details</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col_height text-r">
+        <div>
+          <p class="card_left_text">{{ecode}}-{{ename}}</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col_height">
+        <div>
+          <p class="card_left_text">Branch Details</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col_height text-r">
+        <div>
+          <p class="card_left_text">{{ebranch}}-{{ebranchname}}</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col_height">
+        <div>
+          <p class="card_left_text">Exception Date</p>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col_height text-r">
+        <div>
+          <p class="card_left_text">{{edate | date}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card *ngFor="let item of myexceptions">
+    <!-- <div *ngFor="let item of myexceptions"> -->
+    <!-- OVRD -->
+
+    <!-- <ion-row style="width: 100%;">
+    </ion-row> -->
+
+    <div *ngIf="item?.type == 'OVRD'">
+      <p style="margin:10px;">Overdue deposits</p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- DEPC -->
+    <div *ngIf="item?.type == 'DEPC'">
+
+      <p style="margin:10px;">Deposit accounts closed</p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+      <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+    
+    </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- OPEN -->
+    <div *ngIf="item?.type == 'OPEN'">
+
+      <p style="margin:10px;">Accounts opened yesterday</p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+    <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+  
+  </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- DACT -->
+    <div *ngIf="item?.type == 'DACT'">
+      <p style="margin:10px;">Accounts moved from in-operative</p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <!-- <ion-col size="6" class="col_height">
+              <div>
+                <p class="card_left_text">Tran Amount</p>
+              </div>
+            </ion-col>
+            <ion-col size="6" class="col_height">
+              <div>
+                <p class="card_right_text">{{item?.Balance}}</p>
+              </div> -->
+
+              <!-- </ion-col> -->
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+      <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+    
+    </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- DEPC -->
+    <!-- <div *ngIf="item?.type == 'DEPC'">
+
+        <p style="margin:10px;">Exception TYPE : {{item.type}}</p>               
+
+        <div class="card" *ngFor="let item of item.data">  
+
+          <div class="item item-divider" style="background-color:#ec0576;color:#fff !important;">
+            <div class="row">
+              <div class="col col-50">
+               <span >{{item?.AccountNumber}}</span>
+              </div>
+              <div class="col col-50">
+                <span style="float: right;">{{item?.CustomerName}}</span>                     
+              </div>
+              </div> 
+          </div>
+     
+          <div class="row">
+            <div class="col col-50">
+              <span>Product</span>
+            </div>
+            <div class="col col-50">
+              <span>{{item?.ProductDescription}}</span>                     
+            </div>
+            </div> 
+
+            <div class="row">
+              <div class="col col-50">
+                <span>Tran Amount</span>
+              </div>
+              <div class="col col-50">
+                <span>{{item?.Balance}}</span>                     
+              </div>
+              </div> 
+
+              <div class="row">
+                <div class="col col-50">
+                  <span>RM</span>
+                </div>
+                <div class="col col-50">
+                  <span>{{item?.RM}}</span>                     
+                </div>
+                </div>                          
+        </div>
+    </div> -->
+
+    <!-- NRIO -->
+    <div *ngIf="item?.ExceptionType == 'NRIO'">
+
+
+      <p style="margin:10px;">NRI accounts opened</p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+        <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+      
+      </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- NRIC -->
+    <div *ngIf="item?.type == 'NRIC'">
+
+      <p style="margin:10px;">NRI accounts closed
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- ODBD -->
+    <div *ngIf="item?.type == 'ODBD'">
+
+      <p style="margin:10px;">Bulk deposits overdue in next 7 days
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- LADM -->
+    <div *ngIf="item?.type == 'LADM'">
+
+      <p style="margin:10px;">LAD/ODAD balance with margin less than 20%
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Drawing</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- SBNE -->
+    <div *ngIf="item?.type == 'SBNE'">
+
+      <p style="margin:10px;">SB account with negative balance
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- ABRC -->
+    <div *ngIf="item?.type == 'ABRC'">
+      <p style="margin:10px;">Home branch change
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- OPER -->
+    <div *ngIf="item?.type == 'OPER'">
+      <p style="margin:10px;">Account status changed to operative accounts
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <!-- <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Tran Amount</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item?.Balance}}</p>
+                      </div>
+            
+                    </ion-col> -->
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- CASI -->
+    <div *ngIf="item?.type == 'CASI'">
+      <p style="margin:10px;">Incremental CASA above 5 lakhs
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- CASD-->
+    <div *ngIf="item?.type == 'CASD'">
+      <p style="margin:10px;">Decremental CASA above 5 lakhs
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- THRL -->
+    <div *ngIf="item?.type == 'THRL'">
+      <p style="margin:10px;">Threshold limit is exceeded
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">THRL LMT</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- LNAR -->
+    <div *ngIf="item?.type == 'LNAR'">
+      <p style="margin:10px;">Loan in arrear for more than 60 days
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+
+    <!-- TODE -->
+    <div *ngIf="item?.type == 'TODE'">
+      <p style="margin:10px;">TOD excess for more than 30 days
+      </p>
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+    </div>
+
+    <!-- DPBL -->
+    <div *ngIf="item?.type == 'DPBL'">
+      <p style="margin:10px;">Limits exceeds drawing power
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- LLOS -->
+    <div *ngIf="item?.type == 'LLOS'">
+      <p style="margin:10px;">Loan accounts closed
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+    </div>
+
+    <!-- CLOS -->
+    <div *ngIf="item?.type == 'CLOS'">
+      <p style="margin:10px;">Accounts closed within 6 months from the date of opening
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <!-- <ion-col size="6" class="col_height">
+                    <div>
+                      <p class="card_left_text">Balance</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size="6" class="col_height">
+                    <div>
+                      <p class="card_right_text">{{item?.Balance}}</p>
+                    </div>
+          
+                  </ion-col> -->
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+    <!-- NEFA -->
+    <div *ngIf="item?.type == 'NEFA'">
+      <p style="margin:10px;">NEFT transaction above Rs.5 Lakhs
+      </p>
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+
+
+    </div>
+
+    <!-- OUTC -->
+    <div *ngIf="item?.type == 'OUTC'">
+
+      <p style="margin:10px;">Outward clearing above Rs. 5 Lakhs
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+          <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+        
+        </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- ACTD -->
+    <div *ngIf="item?.type == 'ACTD'">
+      <p style="margin:10px;">INOPERATIVE ACCOUNT STATUS CHANGE
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Balance</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+
+    </div>
+
+    <!-- RTGA -->
+    <div *ngIf="item?.ExceptionType == 'RTGA'">
+      <p style="margin:10px;">RTGS transaction above Rs.5 Lakhs
+      </p>
+
+      <div class="card" *ngFor="let item of item.data">
+        <ion-card-header class="card_heder">
+          <span class="card_heading">{{item.AccountNumber}}</span>
+          <!-- <ion-card-title>Card Title</ion-card-title> -->
+          <span style="float:right;color:white">{{item.CustomerName}}</span>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Product</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item.ProductDescription}}</p>
+                </div>
+              </ion-col>
+
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text">Tran Amount</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{item?.Balance}}</p>
+                </div>
+
+              </ion-col>
+
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_left_text">RM</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height" *ngIf="userType!='4'&&userType!='11'">
+                <div>
+                  <p class="card_right_text">{{item?.RM}}</p>
+                </div>
+
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+
+
+
+          <br>
+          <!-- <div class="update_button">
+            <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+          
+          </div> -->
+        </ion-card-content>
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- </div> -->
+    <!-- <ion-card-header class="card_heder">
+        <span class="card_heading">XXXXXX034</span>
+      
+        <span style="float:right;color:white">Vishnu</span>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Product</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">Threshold Exception</p>
+            </div>
+  
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">THRL LMT</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">12000</p>
+            </div>
+  
+          </ion-col>
+         
+        </ion-row>
+        </ion-grid>
+  
+  
+  
+        <br>
+
+      </ion-card-content> -->
+  </ion-card>
+
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>
