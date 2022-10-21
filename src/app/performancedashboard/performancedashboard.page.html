@@ -1,0 +1,223 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >Performance Dashboard</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+  
+        <ion-row>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_left_text">Branch Code&nbsp;:&nbsp;{{branchcode}}</p>
+          </div> 
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">Branch Name&nbsp;:&nbsp;{{branchname}}</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">Emp.No&nbsp;:&nbsp;{{Usercode}}</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">Emp Name&nbsp;:&nbsp;{{username}}</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">Branch Name&nbsp;:&nbsp;{{branchname}}</p>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p class="card_right_text">Branch Name&nbsp;:&nbsp;{{branchname}}</p>
+          </div>
+        </ion-col>
+
+
+        </ion-row>
+        <dl style="padding-left: 10px;">
+          <dt style="color:#ec0576; margin-left: 60px" class="center-block">{{month0}}</dt>
+          <!-- <dd style="color:#ec0576;">Existing : Additional Business from Existing Customers
+          
+          <dd style="color:#ec0576;">New : Business from New Customers</dd> -->
+          </dl>
+        
+          <ion-card style="overflow: visible !important;">
+            <ion-card-header class="card_heder" style="background-color:#ec0576;color:#fff !important;padding: 0px;">
+              <span style="margin-left: 35px;">Target </span> 
+              <span style="float: right;margin-right: 35px;">Actual</span>
+                        </ion-card-header>
+                        <!-- <div class="item item-divider calm-bg customHeader center-block"  style="background-color:#ec0576;color:#fff !important;"> -->
+                          
+          
+            <ion-card-content>
+            
+
+                          <div class="button-bar" style="background-color:#696969;">
+                            <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Deposit  </a>
+                          </div> 
+                          
+                          <ion-row>
+                            <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#ccc;">
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing </a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                            
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                            </div>
+                              </ion-row>
+                              <ion-row style="    text-align: center;margin:0;">
+
+                               
+                                  <!--  <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{performdashboard[0].Deposit_New}}</div> -->
+                           
+                              
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Deposit_Existing0}}</div>
+                                    <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Deposit_New0}}</div>
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Deposit_Existing1}}</div>
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Deposit_New1}}</div>
+                                
+                                
+
+                              </ion-row>
+                              <div class="button-bar" style="background-color:#696969;">
+                                <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">CASA</a>
+                              </div>
+                              <ion-row>
+                              
+                                  <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#ccc;">
+                                  <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing</a>
+                                  <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                                
+                                  <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing</a>
+                                  <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                                </div>
+                              
+                              </ion-row>
+                              <ion-row>
+                                
+                                  <!--  <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{performdashboard[0].Casa_New}}</div> -->
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Casa_Existing0}}</div>
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Casa_New0}}</div>
+                                    <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Casa_Existing1}}</div>
+                                   <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Casa_New1}}</div>
+                              
+                              </ion-row>
+                              <div class="button-bar" style="background-color:#696969;">
+                                <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">ADVANCE</a>
+                              </div>
+                              <ion-row>
+                                <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#ccc;">
+                                <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing</a>
+                                <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                              
+                                <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">Existing</a>
+                                <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">New</a>
+                              </div>
+                             </ion-row>
+                             <ion-row style="    text-align: center;margin:0;">
+                              <!--  <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{performdashboard[0].Advance_New}}</div> -->
+                               <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Advance_Existing0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Advance_New0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Advance_Existing1}}</div>
+                               <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{Advance_New1}}</div>
+                             </ion-row>
+                             <div class="button-bar" style="background-color:#696969;">
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">NPA (To Be Collected)</a>
+                            </div>
+                            <ion-row style="    text-align: center;margin:0;">
+                              <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{NPA0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{NPA1}}</div>
+                            </ion-row>
+                            <div class="button-bar" style="background-color:#696969;">
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">INSURANCE(FEE INCOME)</a>
+                            </div>
+                            <ion-row style="    text-align: center;margin:0;">
+                              <div class="col" style="font-size: 12px;padding: 1px;width: 25%;font-weight:bold;">{{Insurance_Sp0}}</div>
+                              <!-- <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{performdashboard[0].Insurance_NSP}}</div> -->
+                              <div class="col" style="font-size: 12px;padding: 1px;width: 25%;font-weight:bold;">{{Insurance_Sp1}}</div>
+                              <!-- <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;">{{performdashboard[1].Insurance_NSP}}</div> -->
+                            </ion-row>
+                            <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#696969;">
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Telecall</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Personal Visits</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Telecall</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Personal Visits</a>
+                            </div>
+                            <ion-row>
+                              <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#ccc;">
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">{{Telecall0 | number:0}}</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">{{PersonalVisit0 | number:0}}</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">{{Telecall1 | number:0}}</a>
+                              <a class="customsalesbtn" style="font-size: 12px;width: 50%; color: #000;padding:5px;text-align:center;font-weight:bold">{{PersonalVisit1 | number:0}}</a>
+                            </div>
+                          </ion-row>
+                          <ion-row style="background-color:darkgray;">
+                            <a class="customsalesbtn" style="font-size: 12px;font-weight:bold;width: 100%; color: black;padding:5px;text-align:center;">Marks Obtained Out of 65:&nbsp;{{FiftyMark0}}</a>
+                           </ion-row>
+                              
+                              <ion-row style="text-align: center;margin:0;">
+                              <div class="col" style="font-size: 12px;font-weight:bold;width: 100%; color: black !important;padding:5px;text-align:center;"><a style=" color: black !important">Marks Obtained Out of 25:&nbsp;{{ThirtyMark0}}</a></div>
+                              </ion-row>
+                              <div class="button-bar col-xs-12 col-sm-12 col-md-12" style="background-color:#696969;">
+                                <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Marks Obtained Cumulative</a>
+                                 <a class="customsalesbtn" style="font-size: 12px;width: 100%; color: #ccc;padding:5px;text-align:center;">Grade</a>
+                              </div>
+                              <ion-row style="    text-align: center;margin:0;">
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: green;" *ngIf="isshowa==true">{{MaximumMark0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: green;" *ngIf="isshowaplus==true">{{MaximumMark0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: blue;" *ngIf="isshowb==true">{{MaximumMark0}}</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: blue;" *ngIf="isshowbplus==true">{{MaximumMark0}}</div>
+                                 <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: red;" *ngIf="isshowc==true">{{MaximumMark0}}</div>
+                                 <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: red;" *ngIf="isshowcplus==true">{{MaximumMark0}}</div>
+                                  <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: green;" *ngIf="isshowa1==true">A</div>
+                                  <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: green;" *ngIf="isshowaplus1==true">A+</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: blue;" *ngIf="isshowb1==true">B</div>
+                                <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: blue;" *ngIf="isshowbplus1==true">B+</div>
+                                 <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: red;" *ngIf="isshowc1==true">C</div>
+                                 <div class="col" style="font-size: 12px;padding: 1px;width: 12.5%;font-weight:bold;color: red;" *ngIf="isshowcplus1==true">C+</div>
+                        
+                              </ion-row>
+                              <ion-row style="background-color:darkgray;">
+        
+                                <a class="customsalesbtn"  *ngIf="isshowa1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: green;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                                <a class="customsalesbtn"  *ngIf="isshowaplus1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: green;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                                 <a class="customsalesbtn"  *ngIf="isshowb1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: blue;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                                 <a class="customsalesbtn"  *ngIf="isshowbplus1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: blue;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                                  <a class="customsalesbtn"  *ngIf="isshowc1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: red;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                                  <a class="customsalesbtn"  *ngIf="isshowcplus1==true" style="font-size: 12px;font-weight:bold;width: 100%; color: red;padding:5px;text-align:center;">Marks Obtained Out of 90:&nbsp;{{eightyMark0}}</a>
+                        
+                                  <div *ngIf="iseightymark0==true" style="font-size: 12px;font-weight:bold;width: 100%;padding:5px;text-align:center; color:black">
+                                  <a class="customsalesbtn"  style="font-size: 12px;font-weight:bold;width: 100%;padding:5px;text-align:center;color:black">Marks Obtained Out of 90:&nbsp;</a>
+                                </div>
+                        
+                                
+                              </ion-row>
+                              
+              </ion-card-content>
+              </ion-card>
+              <div class="container-fluid">
+                <div class="col-sm-12 text-center">
+                  <ion-button class="schedulebutn" style="font-size: 13px;letter-spacing: 1px;" (click)="plpCustomerBase(type,CBSCustomerID,CBSCustomerName,Branch)"
+                  center>PLP Customer Base</ion-button>
+  
+  
+                </div>
+            </div>
+            <dl style="padding-left: 10px;padding-top:10px;">
+              <dt style="color:red;font-size: 12px;">Note:&nbsp;** Actuals Taken As Average Balance Of "My Customers"</dt>
+              <!-- <dd style="color:#ec0576;">Existing : Additional Business from Existing Customers
+              
+              <dd style="color:#ec0576;">New : Business from New Customers</dd> -->
+              </dl>
+
+
+
+
+        </ion-content>

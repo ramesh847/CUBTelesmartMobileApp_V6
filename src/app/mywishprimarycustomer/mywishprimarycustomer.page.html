@@ -1,0 +1,108 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Wish Primary customer</ion-title>
+  </ion-toolbar>
+  <ion-content class="body_bg">
+    <ion-card *ngFor="let items of primaryCustomers">
+      <ion-card-header class="card_heder">
+        <span class="card_heading">Sn No: {{items.Sno}}</span>
+        <!-- <ion-card-title>Card Title</ion-card-title> -->
+        <span style="float:right;color:white">{{items.mobileno}}</span>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Name</p>
+            </div> 
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.COMPANYNAME}}</p>
+            </div>
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Mobile Number</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.mobileno}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Email ID</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.email || NA}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Segment</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.activity}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+  
+          
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Product</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.product}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+  
+          
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Expected Amount</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.expectedamount}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+  
+          
+          
+        </ion-row>
+        </ion-grid>
+        
+        <br>
+  <div class="update_button">
+    <ion-button style="--background:#87ceeb" (click)="customerActionModal(items)" expand="block">Update</ion-button>
+  
+  </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

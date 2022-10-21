@@ -1,0 +1,166 @@
+
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >RTGS-NEFT</ion-title>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="segment">
+        <!-- <ion-item> -->
+          <div>
+          <ion-checkbox slot="start" ([ngModel])="data1.partA"    checked="{{partA}}"   
+          (ionChange)="CheckBoxChange('chkbx_A',$event.target.checked)">
+              </ion-checkbox>
+        <!-- </ion-item> -->
+      </div>
+      <!-- <input type="checkbox"  id="checkbox1" > -->
+      </ion-col>
+      <ion-col class="segment">
+        <div>
+        <!-- <ion-item> -->
+          <ion-checkbox slot="start" ([ngModel])="data1.partB" checked="{{partB}}"      
+          (ionChange)="CheckBoxChange('chkbx_B',$event.target.checked)">
+              </ion-checkbox>
+        <!-- </ion-item> -->
+      </div>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+    <div class="col-md-12 form-group" style="margin-top: 10px;">
+      <span style="font-weight: bold;">Total Customers : &nbsp;&nbsp;{{RTGSNEFTlistCount}}</span>
+      <!-- <span style="font-weight: bold; color:#ec0576;float: right;">(Rs In Lakhs)</span> -->
+  </div>
+    <ion-card *ngFor="let items of RTGSNEFTlist">
+      <ion-card-header class="card_heder">
+        <span class="card_heading">{{items.CUSTOMERID}}</span>
+        <!-- <ion-card-title>Card Title</ion-card-title> -->
+        <span style="float:right;color:white">{{items.CONTACTNO}}</span>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Branch Name</p>
+            </div> 
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.DEST_BRANCHNAME}}</p>
+            </div>
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Customer Name</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.ORDERCUST}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Amount</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.AMOUNT || "-"}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Outstanding Amount</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.Amount || '-'}}</p>
+              <!-- <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p> -->
+            </div> 
+            
+          </ion-col>
+              <!-- <div *ngIf="data1.partA == 'YES'">  -->
+           <ion-col size="6" class="col_height" *ngIf="data1.partA == 'YES'">
+            <div >
+              <p class="card_left_text">Beneficiary Bank</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height" *ngIf="data1.partA == 'YES'">
+            <div>
+              <p class="card_right_text" >{{items.RECIVERBANK || "-"}}</p>
+            </div> 
+          
+          </ion-col> 
+        <!-- </div>  -->
+
+           <ion-col size="6" class="col_height" *ngIf="data1.partB == 'YES'">
+            <div>
+              <p class="card_left_text">Receiver Bank</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height" *ngIf="data1.partB == 'YES'">
+            <div>
+              <p class="card_right_text">{{items.RECIVERBANK || "-"}}</p>
+            </div> 
+            
+          </ion-col>
+        
+        <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Beneficiary Name</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.BENIFI_CUST || "-"}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height" *ngIf="data1.partB == 'YES'">
+            <div>
+              <p class="card_left_text">RM</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height" *ngIf="data1.partB == 'YES'">
+            <div>
+              <p class="card_right_text">{{items.USERCODE || "-"}}</p>
+            </div> 
+            
+          </ion-col>
+        
+      <!--      <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Date of Mapping</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.DateMapping ||'-'}}</p>
+            </div> 
+            
+          </ion-col>
+          -->
+        </ion-row>
+        </ion-grid>
+  <div class="update_button">
+    <ion-button style="--background:#87ceeb" (click)="customerActionModal(items)" expand="block">Update</ion-button>
+  
+  </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

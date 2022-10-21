@@ -1,0 +1,396 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+      <ion-icon name="home" class="home_icon"></ion-icon>
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Heat Map</ion-title>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-view view-title="Heat Map" cache-view="false">
+
+      <ion-nav-buttons side="right">
+          <button style="padding:0 5px;" (click)="goHome()" class="button button-icon"><span style="font-size:22px;"
+                  class="ion ion-ios-home"></span></button>
+          <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+      </ion-nav-buttons>
+      <div class="bar bar-subheader" style="background-color:#eb0475;padding:0px;border:0px;">
+          <div class="button-bar" style="width:100%;">
+              <a class="button button-clear tabs1" id="move1"
+                  style="color: black;font-size:14px;color:white;border-radius:0px !important;line-height:36px !important;margin-top: 2px;font-weight: 500;"
+                  (click)="tabvalues(1,'move1')" ng-class='{"chgbarcolor" : var==1 }'>Individuals</a>
+              <a class="button button-clear tabs2" id="move2"
+                  style="color: black;font-size:14px;color:white;border-radius:0px !important;line-height:36px !important;margin-top: 2px;font-weight: 500;"
+                  (click)="tabvalues(2,'move2')" ng-class='{"chgbarcolor" : var == 2 }'>
+                  Branch</a>
+          </div>
+          <span class="coolDiv"></span>
+      </div>
+      <ion-content style="background-image: url(img/bg32.png);">
+          <!-- <ion-refresher on-refresh="doRefresh()">
+          </ion-refresher> -->
+          <div class="container"  style="margin-top: 40px;">
+              <table class="table"
+                  style="text-align: center;width: 100% !important;margin-top: 25px;border-bottom: 1px solid #ded3d3;background-color: white;">
+                  <tr class="tablerow"
+                      style="font-size: 14px;color: white;font-weight: bold;background-color: rgb(46, 49, 146);">
+                      <th style="text-align: center;width: 50px;padding: 10px;padding:15px 0px 15px 0px;">SI.No</th>
+                      <th style="text-align: center;padding:15px 0px 15px 0px;">Emp&nbsp;No</th>
+                      <th style="text-align: center;padding:15px 0px 15px 0px;">Emp Name</th>
+                      <th style="text-align: center;padding:15px 0px 15px 0px;">Designation</th>
+                  </tr>
+                  <tr *ngFor="let items of individuals; let i = index" (click)="openstaff(items)">
+                      <td style="color: black !important;">{{i+1}}</td>
+                      <td style="text-align: left;color: black !important;">{{items.UserCode}}</td>
+                      <td style="color: black !important;">{{items.UserName}}</td>
+                      <td style="color: black !important;">{{items.Designation || "-"}}</td>
+                  </tr>
+              </table>
+          </div>
+          <!-- branch -->
+          <div class="container"  style="margin-top: 40px;padding:0px;">
+              <div class="animated bounceInRight">
+
+                  <!-- <div class="container" >
+                      <div class="row" style="margin-left: 1px;margin-top: -10px;">
+                          <div class="col col-100" style="background-color:transparent; color:white;">
+                              <span><i class="fa fa-list-ul"
+                                      style="font-size: 20px;margin-top: 7px;margin-left: 10px; color:#eb0475;"
+                                      (click)="tableshowbranch()"></i></span>
+                              <span><i class="fa fa-th-large"
+                                      style="font-size: 20px;margin-top: 7px;margin-left: 10px; color:#eb0475"
+                                      (click)="cardshowbranch()"></i></span>
+
+                          </div>
+
+                      </div>
+                  </div> -->
+                  <!-- ng-hide="tablebranch" -->
+                  <div class="col-sm-6 col-md-6" *ngFor="let items of mangermap  ; let i = index"
+                       style="padding:0px;margin-top: -20px;padding-bottom: 0.5px;">
+                      <div class="card col-sm-11 col-md-11" style="padding: 0px;">
+                          <div class="item item-divider heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                              style="padding-bottom: 0px;">
+
+                              <p class="heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                                  style="float:left;color: black !important;" ng-model="mobileNumber">VIP Customers(As
+                                  on {{ assignstartend}}) :&nbsp;{{items.totalNoCustomer}}</p>
+                              <span class="heatmapfont" style="float: right;margin-right: 15px; margin-top: 15px;">{{items.text}}</span>
+
+                          </div>
+                          <div class="item item-divider heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                              style="padding-bottom: 0px;">
+                              <p class="heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                                  style="float:left;color: black !important;" ng-model="mobileNumber">VIP Customers
+                                  Assigned to me (As on
+                                  {{assignstartdate}}):&nbsp;{{items.totalNoCustomer1 ||'-'}}</p>
+
+
+                          </div>
+
+
+                          <div class="item item-text-wrap"
+                              style="padding-top:0px !important; padding-left: 11px;padding-right: 5px;padding-bottom: 20px; ">
+
+
+                              <table class="table design"
+                                  style="margin-left:-4px;margin-top: 10px;width: 100% !important;font-size:13px;margin-bottom: 0px;">
+                                  <tr style="background-color: #d9cece;">
+                                      <th colspan="2" style="font-weight:bold;text-align: center;color:#444;">10 MTD
+                                      </th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;color:#444;">10 YTD
+                                      </th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;color:#444;">3 MTD
+                                      </th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;color:#444;">3 YTD
+                                      </th>
+
+                                  </tr>
+                                  <tbody>
+                                      <tr>
+                                          <th class="designtd alignsm " style="font-weight:bold;color:#444;">Cust</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Call</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Cust</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Call</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Cust</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Visit</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Cust</th>
+                                          <th class="designtd alignsm" style="font-weight:bold;color:#444;">Visit</th>
+                                      </tr>
+                                  </tbody>
+                                  <tr>
+
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;"  >
+                                          {{items.TM_NOOFCustomers}}</td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">{{items.TM_CallsMade}}
+                                      </td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">
+                                          {{items.T_NOOFCustomers}}</td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">{{items.T_CallsMade}}
+                                      </td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">
+                                          {{items.VM_NOOFCustomers}}</td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">{{items.VM_CallsMade}}
+                                      </td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">
+                                          {{items.V_NOOFCustomers}}</td>
+                                      <td class="designtd alignsm" style="text-align:center; color: black !important;">{{items.V_CallsMade}}
+                                      </td>
+
+                                  </tr>
+
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+
+              <!-- branch list view -->
+              <!-- ng-show="tablebranch" -->
+              <div class="container" >
+                  <div class="search-table-outter wrapper">
+                      <table class="table"
+                          style="text-align: center;margin-top: 25px;width: 100% !important;border-bottom: 1px solid #ded3d3;background-color: white;"
+                          *ngIf="staffmapdata!=0">
+
+                          <tr class="tablerow"
+                              style="font-size: 14px;color: white;font-weight: bold;background-color: rgb(46, 49, 146);">
+
+                              <th></th>
+                              <th>VIP Cust</th>
+                              <th>VIP Cust Assigned</th>
+
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  10&nbsp;YTD</th>
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  10&nbsp;MTD</th>
+
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  3&nbsp;YTD</th>
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  3&nbsp;MTD</th>
+
+                          </tr>
+                          <tr>
+
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Range</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">(As on {{assignstartend}})
+                              </th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;"> (As on {{assignstartdate}})
+                              </th>
+
+
+
+
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Call</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Call</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Visit</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Visit</th>
+                          </tr>
+                          <tr *ngFor="let items of mangermap  ; let i = index">
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.text}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.totalNoCustomer}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.totalNoCustomer1 ||"-"}}</td>
+
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.TM_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.TM_CallsMade}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.T_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.VM_CallsMade}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.T_CallsMade}}</td>
+
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.VM_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.V_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.V_CallsMade}}</td>
+
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+              <!-- branch list view -->
+
+
+
+          </div>
+          
+          <!-- <script id="staff.html" type="text/ng-template"> -->
+          <!-- <ion-modal-view> -->
+          <ion-header-bar align-title="center" class="barcolor" style="background-color: #2e3192;">
+              <span><i class="fa fa-list-ul" style="font-size: 20px;margin-top: 7px;margin-left: 10px; color:white;"
+                      (click)="tableshow()"></i></span>
+              <span><i class="fa fa-th-large" style="font-size: 20px;margin-top: 7px;margin-left: 10px; color:white"
+                      (click)="cardshow()"></i></span>
+              <h1 class="title" style="color:white;font-weight:normal !important;background-color: #2e3192;">
+                  {{username}}-&nbsp;{{code}}
+              </h1>
+              <a class="button" style="padding-top: 3px;
+              background-color: #2e3192 ;" (click)="closeUpdateModal()">
+                  <i class="icon ion-close-circled" aria-hidden="true"
+                      style="font-size: 21px;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;padding-top: 3px;position: relative;bottom: 4px;">
+                  </i>
+              </a>
+          </ion-header-bar>
+          <ion-content style="background:url('img/bg32.PNG');background-repeat:repeat;">
+              <!-- ng-show="card" -->
+              <div class="animated bounceInRight" >
+                  <div class="col-sm-6 col-md-6" *ngFor="let items of staffmapdata  ; let i = index"
+                      style="padding: 0px;" >
+                      <!-- ng-show="card" -->
+                      <div class="card col-sm-11 col-md-11" style="padding: 0px;">
+                          <!-- 
+       <div class="item item-divider" style="background-color:{{items.Color}}!important">
+                      <span style="color: black;font-size: 14px;font-weight: 500;" ng-model="customerCode">{{items.text}}</span>
+                      <span style="float:right;" ng-model="mobileNumber"
+                     style="color: white !important;background-color:{{items.Color}}!important;font-size: 14px;font-weight: 500;">VIP Cust :{{items.totalNoCustomer}}</span>
+                  </div> -->
+                          <div class="item item-divider heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                              style="padding-bottom: 0px;">
+                              <p class="heatmapfont" [ngStyle]="{'backgroundColor': items.Color }"
+                                  style="float:left;color: black !important;" ng-model="mobileNumber">VIP Customers(As
+                                  on {{assignstartend}}) :&nbsp;{{items.totalNoCustomer1}}</p>
+                              <span class="heatmapfont" style="float: right;margin-right: 15px; margin-top: 15px;">{{items.text}}</span>
+                          </div>
+                          <div class="item item-divider" [ngStyle]="{'backgroundColor': items.Color }"
+                              style="padding-bottom: 0px;padding-top: 0px">
+                              <p class="heatmapfont" style="font-weight: bold;font-size: 11px;color: black;">VIP
+                                  Customers assigned to me (As on {{ assignstartdate}}):&nbsp;{{items.totalNoCustomer
+                                  ||'-'}}</p>
+                          </div>
+                          <div class="item item-text-wrap"
+                              style="padding-top:0px !important;  padding-left:11px;padding-right: 5px;padding-bottom: 20px; ">
+                              <table class="table"
+                                  style="margin-left:-4px;margin-top: 10px;width: 100% !important;font-size:13px;margin-bottom: 0px;">
+                                  <tr style="background-color: #d9cece;">
+                                      <th colspan="2" style="font-weight:bold;text-align: center;">10 YTD</th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;">10 MTD</th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;">3 YTD</th>
+                                      <th colspan="2" style="font-weight:bold;text-align: center;">3 MTD</th>
+
+
+                                  </tr>
+                                  <tbody>
+                                      <tr>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Cust</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Call</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Cust</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Call</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Cust</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Visit</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Cust</th>
+                                          <th class="designtd alignsm"
+                                              style="font-weight:bold;background-color:#d9cece;">Visit</th>
+                                      </tr>
+                                  </tbody>
+                                  <tr>
+
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.T_NOOFCustomers}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.T_CallsMade}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.TM_NOOFCustomers}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.TM_CallsMade}}</td>
+
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.V_NOOFCustomers}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.V_CallsMade}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.VM_NOOFCustomers}}</td>
+                                      <td class="designtd" style="text-align:center; color: black !important;">{{items.VM_CallsMade}}</td>
+
+                                  </tr>
+                              </table>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- ng-hide="card" -->
+              <div class="container" >
+                  <div class="search-table-outter wrapper">
+                      <table class="table"
+                          style="text-align: center;margin-top: 25px;width: 100% !important;border-bottom: 1px solid #ded3d3;background-color: white;"
+                          *ngIf="staffmapdata!=0">
+                          <tr class="tablerow"
+                              style="font-size: 14px;color: white;font-weight: bold;background-color: rgb(46, 49, 146);">
+
+                              <th></th>
+                              <th>VIP Cust</th>
+                              <th>VIP Cust Assigned </th>
+
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  10&nbsp;YTD</th>
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  10&nbsp;MTD</th>
+
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  3&nbsp;YTD</th>
+                              <th colspan="2" style="text-align: center;width: 90px;padding:15px 15px 15px 15px;">
+                                  3&nbsp;MTD</th>
+
+                          </tr>
+                          <tr>
+
+                              <!-- <th style="text-align: center;padding:15px 0px 15px 0px;">Range</th> -->
+                              <!-- <th style="text-align: center;padding:15px 0px 15px 0px;">VIP Customers - (As on {{assignstartdate}})</th>
+                    <th style="text-align: center;padding:15px 0px 15px 0px;">VIP Customers assigned to me - (As on {{assignstartend}})</th> -->
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Range</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">(As on {{assignstartend}})
+                              </th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;"> (As on {{assignstartdate}})
+                              </th>
+
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Call</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Call</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Visit</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Cust</th>
+                              <th style="text-align: center;padding:15px 0px 15px 0px;">Visit</th>
+                          </tr>
+                          <tr *ngFor="let items of staffmapdata ; let i = index">
+                              <!--   <td *ngIf="staffmapdata==0">No record Found</td> -->
+
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.text}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.totalNoCustomer}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.totalNoCustomer1 ||'-'}}</td>
+
+
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.T_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.T_CallsMade}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.TM_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.TM_CallsMade}}</td>
+
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.V_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.V_CallsMade}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.VM_NOOFCustomers}}</td>
+                              <td [ngStyle]="{'backgroundColor': items.Color }">{{items.VM_CallsMade}}</td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+          
+              <center>
+                  <p style="margin-top: 20px !important;color: black;font-size: bold; " *ngIf="staffmapdata==0 "> No
+                      Record Found</p>
+              </center>
+          </ion-content>
+          <!-- </ion-modal-view> -->
+          <!-- </script> -->
+      </ion-content>
+  </ion-view>
+
+
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

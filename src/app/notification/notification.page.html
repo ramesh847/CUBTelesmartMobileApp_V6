@@ -1,0 +1,38 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >Notification</ion-title>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <div style="padding:10px;border:2px solid black;margin:10px;border-radius: 7px;height: 100%;overflow: scroll;">
+    <!-- <div style="text-align:center;" *ngIf='!notificationstat'><h4>No Notifications</h4></div> -->
+    
+    <div >
+        <ul class="list" *ngFor="let item of notifications ; let i = index" style="margin-bottom: 0px !important;" (click)="showcontent(i,item)">
+            <!--  -->
+            <li class="item" style="background: white;
+            border: 2px solid #ec0576 !important;
+            border-radius: 5px;padding: 10px !important;margin-top: 5px;">
+            <span style="font-weight: bold;color:#ec0576;text-transform: capitalize;font-size: small;"> {{item.Subject}}
+            <span style="color:darkblue;font-weight:bold;font-size: small;" *ngIf="item.ReadStatus == null"> - New</span>
+            <!-- *ngIf="!shownotifications[i]" -->
+            <span style="font-size:22px;float: right;"  *ngIf="!shownotifications[i]" class="ion ion-arrow-right-b"></span>
+            <!-- *ngIf="shownotifications[i]" -->
+            <span style="font-size:22px;float: right;"  *ngIf="shownotifications[i]" class="ion ion-arrow-down-b"></span>
+          </span>
+            <div *ngIf="shownotifications[i]" style="background: white !important;border-top: 1px solid;">
+            <p style="padding:10px 0;overflow: visible !important; white-space: break-spaces !important;text-align: justify;color:black !important;" >&emsp;&emsp;{{item.Message}} </p>
+            <p style="font-size: 11px;float: right;color:black !important;">Published : {{item.CreatedOn | date:"dd/MM/yyyy"}}</p>
+            </div>
+            <br>
+            </li>
+        </ul>
+    </div>
+</div>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

@@ -1,0 +1,88 @@
+
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Wish Add Customers</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+  <ion-card >
+    <ion-card class="card_content">
+  
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Customer Name</ion-label>
+        <ion-item class="input_field">
+          <ion-input id="customerName"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+        <ion-item class="input_field">
+          <ion-input id="mobileNumber"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="content_item">
+        <ion-label position="stacked" class="input_heading">Email ID</ion-label>
+        <ion-item class="input_field">
+          <ion-input id="emailID" ></ion-input>
+        </ion-item>
+      </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Activity</ion-label>
+      <ion-item class="input_field">
+        <ion-select id="selectedSegment" class="select_field" placeholder="Select" >
+          <ion-select-option selected="selected" value="">&lt;&lt; Please Select &gt;&gt;</ion-select-option>
+          <ion-select-option  *ngFor="let items of allsegments" value="{{items.SegmentName}}">{{items.SegmentName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Product</ion-label>
+      <ion-item class="input_field">
+        <ion-select id="selectedProduct" class="select_field" placeholder="Select" >
+          <ion-select-option selected="selected" value="">&lt;&lt; Please Select &gt;&gt;</ion-select-option>
+          <ion-select-option   value="Advance">Advance</ion-select-option>
+          <ion-select-option  value="CASA">CASA</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Expected Amount(in Lakhs)</ion-label>
+      <ion-item class="input_field">
+        <ion-input id="expectedAmount" ></ion-input>
+      </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Credit Facilities</ion-label>
+      <ion-item class="input_field">
+        <ion-input id="creditFacilities" ></ion-input>
+      </ion-item>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button style="--background:#ec0576;" (click)="saveCourtesyCall(clickcall)" expand="block">save</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button style="--background:grey;width:100%" (click)="customerActionModal(items)" expand="block">cancel</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <dl style="padding-left: 10px;">
+  
+    <dd style="color:red;">*  Denotes Mandatory</dd>
+  
+    <dd style="color:red;">**  Denotes Any One Mandatory </dd>
+  </dl>
+  </ion-card>
+  </ion-card>
+</ion-content>

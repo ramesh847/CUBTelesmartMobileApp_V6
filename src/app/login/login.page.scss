@@ -1,0 +1,40 @@
+input:focus {
+    outline: none !important;
+}
+input[type="text"] {
+    background: transparent;
+    border: none;
+   color:black
+}
+
+input[type="password"] {
+    background: transparent;
+    border: none;
+    color:black
+}
+
+input::-webkit-input-placeholder {
+    color: black;
+    font-size: 17px;
+}
+
+
+@media (min-width: 768px) {
+    .centerwidth {
+        width: 80%;
+        margin-left: 58px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .centerwidth {
+        width: 80%;
+        margin-left: 80px;
+    }
+}
+
+.round {
+    --background: #ec0576 !important;
+    // padding: 12px;
+}
+

@@ -1,0 +1,180 @@
+
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title >Update </ion-title>
+  </ion-toolbar>
+
+
+<ion-content>
+  <ion-card >
+    <ion-card class="card_content">
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">First Name</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="secondaryCust.firstname"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Last Name</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="secondaryCust.lastname"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Mobile</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="secondaryCust.mobileNo"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Email</ion-label>
+    <ion-item class="input_field">
+      <ion-input [(ngModel)]="emailid"></ion-input>
+    </ion-item>
+  </div>
+
+<div class="content_item">
+<ion-label position="stacked" class="input_heading">Wishlist</ion-label>
+  <ion-item class="input_field">
+    <ion-select  class="select_field" placeholder="Select" [(ngModel)]="secondaryCust.wishlist2021">
+      <ion-select-option selected="selected" >Wishlist 2021</ion-select-option>
+      <!-- <ion-select-option *ngFor="let items of callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option> -->
+    </ion-select>
+  </ion-item>
+</div>
+
+<div class="content_item">
+<ion-label position="stacked" class="input_heading">Call Type</ion-label>
+  <ion-item class="input_field">
+    <ion-select  class="select_field" placeholder="Select" [(ngModel)]="express.selectele">
+      <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option>
+      <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+      <ion-select-option value="T">Tele Call</ion-select-option>
+      <ion-select-option value="P">Personal visit</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Call Outcome</ion-label>
+    <ion-item class="input_field">
+      <ion-select  class="select_field" placeholder="Select" [(ngModel)]="express.callout">
+        <ion-select-option selected="selected" value="">Please Select</ion-select-option>
+        <ion-select-option value="1">Call Closed</ion-select-option>
+        <ion-select-option value="2">Call FollowUp</ion-select-option>
+        <!-- <ion-select-option selected="selected" value="">&lt;&lt; Call Outcome &gt;&gt;</ion-select-option>
+        <ion-select-option *ngFor="let items of callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+</div>
+<!-- 
+<div class="w-100-p" >
+<ion-col class="col_height">
+  <div class="input_heading">
+    <ion-label position="stacked">Followup Date</ion-label>
+  </div>
+  <ion-item>
+    <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+    <ion-popover trigger="date" size="cover">
+      <ng-template>
+        <ion-datetime presentation="date" [(ngModel)]="data.followupdate" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+
+</ion-col>
+</div>
+<div class="w-100-p" >
+<ion-col class="col_height">
+  <div class="input_heading">
+    <ion-label position="stacked" trigger="open-datetime">Followup Time</ion-label>
+  </div>
+  <ion-item>
+    <ion-input value="{{ time | date: 'shortTime'}}" id="time" class="ion-text-end"></ion-input>
+    <ion-popover trigger="time" size="cover">
+      <ng-template>
+        <ion-datetime presentation="time" [(ngModel)]="data.followuptime" 
+          [showDefaultButtons]="true"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+  </ion-item>
+
+</ion-col>
+</div> -->
+
+
+<div class="content_item" *ngIf="express.callout == 2">
+<ion-label position="stacked" class="input_heading">Followup Date</ion-label>
+<ion-item class="input_field">
+  <ion-input value="{{ express.followupdate | date: 'dd/MM/yyyy' }}" id="express.followupdate" class="ion-text-end"></ion-input>
+  <ion-popover trigger="express.followupdate" size="cover">
+    <ng-template>
+      <ion-datetime presentation="express.followupdate" [(ngModel)]="express.followupdate" 
+        [showDefaultButtons]="true"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+</ion-item>
+</div>
+
+<div class="content_item" *ngIf="express.callout == 2">
+<ion-label position="stacked" class="input_heading" trigger="open-datetime">Followup Time</ion-label>
+<ion-item class="input_field">
+  <ion-input value="{{ express.followuptime | date: 'shortTime'}}" id="express.followuptime" class="ion-text-end"></ion-input>
+  <ion-popover trigger="express.followuptime" size="cover">
+    <ng-template>
+      <ion-datetime presentation="express.followuptime" [(ngModel)]="express.followuptime" 
+        [showDefaultButtons]="true"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+</ion-item>
+
+<div class="form-group col-xs-12 col-sm-12
+  "*ngIf="express.selectele == 'P'" ng-click="clear()">
+                       <ion-checkbox  (ionChange)="checkbox($event.target.checked)"  style="font-size: 15px; background-color: transparent;padding-top: 0px;padding-bottom: 0px;overflow: hidden !important"> &nbsp; Joint Visit</ion-checkbox>
+                   </div>
+
+ 
+                   <div class="content_item" *ngIf="express.JointVisit == 'YES' && express.selectele=='P'">
+                    <ion-label position="stacked" class="input_heading">Emp Code</ion-label>
+                    <ion-item class="input_field">
+                      <ion-input (ionBlur)="checkusercode(express.jointusercode)" [(ngModel)]="express.jointusercode"></ion-input>
+                    </ion-item>
+                  </div>
+<!-- <ion-item class="input_field">
+  <input class="input-md textinput textInput form-control inputcolor" displayFormat="hh:mm A" id="followuptime" [(ngModel)]="data.followuptime" placeholder="Time" style="padding: 1em;    border: 1px solid rgb(221, 212, 212);"  type="time" required />
+</ion-item> -->
+</div>
+
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Remarks</ion-label>
+<ion-item class="text_area">
+  <ion-textarea [(ngModel)]="express.Remarks" placeholder="Enter more information here..."></ion-textarea>
+</ion-item>
+</div>
+
+<ion-grid>
+<ion-row>
+  <ion-col size="6">
+    <ion-button style="--background:#ec0576;" (click)="submitUpdatedSecondaryCustDetails()" expand="block">save</ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button style="--background:grey;width:100%" (click)="customerActionModal(items)" expand="block">cancel</ion-button>
+  </ion-col>
+</ion-row>
+</ion-grid>
+<dl style="padding-left: 10px;">
+
+<dd style="color:red;">*  Denotes Mandatory</dd>
+
+<dd style="color:red;">**  Denotes Any One Mandatory </dd>
+</dl>
+</ion-card>
+</ion-card>
+</ion-content>

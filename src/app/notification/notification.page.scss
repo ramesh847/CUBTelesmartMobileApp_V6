@@ -1,0 +1,185 @@
+@media (min-width: 680px) {
+    .modal {
+        top: 0% !important;
+        right: 0% !important;
+        bottom: 0% !important;
+        left: 0% !important;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 430px) {
+    .responsive {
+        width: 100% !important;
+    }
+}
+
+.iconcolor {
+    color: black !important;
+}
+
+
+
+.item-bg {
+    background-color: #94d6ca;
+    background-color: #94d6ca;
+
+    background-color: #94d6ca !important;
+}
+
+.test {
+    background-color: #ec0576 !important;
+    color: white;
+    height: 50px
+}
+
+.mandfield {
+    color: red;
+}
+
+/* .panelcolor {
+background-color: #728578 !important;
+}
+
+.panelbodycolor {
+background-color: #dedad7 !important;
+}
+*/
+.barcolor {
+    background-color: #2e3192 !important;
+}
+
+label {
+    font-weight: bold !important;
+}
+
+.inputcolor {
+    background-color: white !important;
+}
+
+.colorfont {
+    color: #f44336;
+    font-weight: bold;
+    font-size: 13px;
+
+}
+
+.colorfontmob {
+    color: #387ef5;
+    font-weight: bold;
+    font-size: 13px;
+
+}
+
+.tilefont {
+    font-weight: bold
+}
+
+.schedulebutn {
+    position: relative;
+
+
+    background: #009689;
+    border: none !important;
+    color: #e4e3e3;
+    border-radius: 2px;
+    padding: 6px 20px;
+
+    padding-bottom: 8px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 30px 0 rgba(0, 0, 0, 0.3);
+    -webkit-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+
+.spacers {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+table,
+td,
+th {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #e7e5e5;
+}
+
+th,
+td {
+    padding: 15px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 500px) {
+    .responsive_sm {
+
+        width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 720px) {
+    .responsive_sm {
+
+        width: 50% !important;
+    }
+
+}
+
+@media screen and (min-width: 721px) and (max-width: 990px) {
+    .responsive_sm {
+
+        width: 33.3333% !important;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 500px) {
+    .rowfield {
+        width: 100% !important;
+    }
+    .fontsize {
+        font-size: 11px
+    }
+}
+
+
+
+.panel-body {
+
+    background-color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.rating {
+color: #a9a9a9;
+margin: 0;
+padding: 0;
+}
+ul.rating {
+display: inline-block;
+}
+.rating li {
+list-style-type: none;
+display: inline-block;
+padding: 1px;
+text-align: center;
+font-weight: bold;
+cursor: pointer;
+}
+.rating .filled {
+color: #ffee33;
+}

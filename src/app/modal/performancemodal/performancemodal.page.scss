@@ -1,0 +1,20 @@
+.input_heading {
+    margin-bottom: 10px;
+  }
+  .select_field {
+    width: 100% !important;
+  }
+  .card_heder {
+    background: deeppink;
+    color: #fff !important;
+  }
+ .followup {
+    // :host(.ion-color:not(.item-fill-solid):not(.item-fill-outline)) .item-native {
+    //     background: white !important;
+    //   }
+      ::ng-deep ion-accordion.accordion-animated > [slot=header] .ion-accordion-toggle-icon {
+        background: skyblue;
+        padding: 10px;
+        border-radius: 28px;
+      }  
+ }

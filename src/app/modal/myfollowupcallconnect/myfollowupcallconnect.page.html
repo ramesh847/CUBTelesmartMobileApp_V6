@@ -1,0 +1,90 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title>Call Connected</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <form style="margin-top: 10px;" class="followupcallconnect">
+    <div class="item item-text-wrap" style="padding-left: 10px">
+
+      <ion-row>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p style="font-weight:bold;">Caller Name</p>
+            <span style="font-size: 14px;">{{callerName}}</span>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p style="font-weight:bold;">Customer Name</p>
+            <span style="font-size: 14px;">{{clickcall.CustomerName}}</span>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p style="font-weight:bold;">Caller Number</p>
+            <span style="font-size: 14px;">{{callerNumber}}</span>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="col_height">
+          <div>
+            <p style="font-weight:bold;">Customer Number</p>
+            <span style="font-size: 14px;">{{clickcall.Mobile}}</span>
+          </div>
+        </ion-col>
+        </ion-row>
+        <!-- <div class="row" style="">
+            <div class="col col-50" style="padding: 0px;">
+                <p style="font-weight:bold;">Caller Name</p>
+                <span style="font-size: 14px;">{{callerName}}</span>
+            </div>
+            <div class="col col-50" style="padding: 0px;">
+                <p style="font-weight:bold;">Customer Name</p>
+                <span style="font-size: 14px;">{{clickcall.CustomerName}}</span>
+            </div>
+        </div> -->
+        <!-- <div class="row" style="">
+            <div class="col col-50" style="padding: 0px;">
+                <p style="font-weight:bold;">Caller Number</p>
+                <span style="font-size: 14px;">{{callerNumber}}</span>
+            </div>
+            <div class="col col-50" style="padding: 0px;">
+                <p style="font-weight:bold;">Customer Number</p>
+                <span style="font-size: 14px;">{{clickcall.mobile}}</span>
+            </div>
+        </div> -->
+        <!-- <div class="container-fluid">
+            <div class="col-sm-12 text-center" style="text-align: center;
+            padding: 20px;">
+                <button class="schedulebutn fa fa-pencil-square-o"
+                    style="font-size: 13px;letter-spacing: 1px;"
+                   (click)="Endcall(clickcall)" ng-disabled="disablestart"
+                    center>End</button>
+
+            </div>
+        </div> -->
+
+
+        <div class="container-fluid">
+          <div class="col-sm-12 text-center" style="text-align: center;
+          padding: 20px;">
+              <button class="schedulebutn fa fa-pencil-square-o"
+                  style="font-size: 13px;letter-spacing: 1px; background: #248c72;
+                  padding: 10px;"
+                  (click)="Endcall()" ng-disabled="disablestart"
+                  center>End</button>
+
+          </div>
+      </div>
+        <div class="row" style="">
+            <span style="font-size:12px;margin-top: 10px;">Note: You can press end call button if it is a lengthy call with customer and update actions button later. As long as call was connected on click to call, it will be counted towards the same.</span>
+            </div>
+    </div>    
+</form>
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

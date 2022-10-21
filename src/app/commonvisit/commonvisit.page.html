@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>commonvisit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <div class="animated bounceInRight" style=""> 
+
+               <div class="row col-md-12" style="padding-bottom: 0px;">
+                <div class="col-xs-6 col-sm-6" style="margin-left: 20px;">
+                    <label>Customer ID</label>
+                <input class="input-md textinput textInput form-control inputcolor" style="padding: 1em ; border: 1px solid #ddd4d4;" placeholder="Customer ID" [(ngModel)]="search.CBSCustomerID" />
+                </div>
+                <div class=" col-xs-6 col-sm-6">
+                    <label>Purpose</label>
+                    <ion-select class="form-control" name="Purpose" style="margin-bottom: 10px;" [(ngModel)]="search.Purpose" (ionChange)="searchCommonVisits(search.Purpose,search.CBSCustomerID)">
+                        <ion-select-option value="">Select</ion-select-option>
+                        <ion-select-option *ngFor="items in callPurpose" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    </ion-select>
+                </div>
+            </div> 
+
+            <!-- <div class="col-sm-6 col-md-6 " *ngFor="items in filtered ">
+                <div class="card col-xs-11 col-sm-11 col-md-11 cardcolor" style="padding: 0px;margin-bottom: 0px;">
+
+    <div class="item item-divider" style="background-color:#ec0576!important">
+                    <span style="color: white;font-size: 14px;font-weight: 500;" [(ngModel)]="customerCode"> {{items.CBSCustomerID}}</span>
+                    <span style="float:right;" [(ngModel)]="mobileNumber" (click)="callNumber(items)" *ngIf="ClickAccess">
+                    <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.Mobile}}</u></a></span>
+                    <span style="float:right;" [(ngModel)]="mobileNumber" ng-hide="ClickAccess">
+                        <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.Mobile}}</u></a></span>
+                </div>
+         
+                     <div class="item item-text-wrap" style="padding-left: 35px;padding-top:0px !important; ">
+                    <div class="row" style="">
+                        <div class="col col-50" style="padding: 0px;">
+                            <p style="font-weight:bold;">Name</p>
+                        </div>
+                        <div class="col col-50" style="padding: 0px;">
+                            <span style="font-size: 14px;">{{items.CustomerName}}</span>
+                        </div>
+                    </div>
+                      <div class="row" style="">
+                        <div class="col col-50" style="padding: 0px;">
+                            <p style="font-weight:bold;">Account No</p>
+                        </div>
+                        <div class="col col-50" style="padding: 0px;">
+                            <span style="font-size: 14px;">{{items.AccountNumber}}</span>
+                        </div>
+                    </div>
+                      <div class="row" style="">
+                        <div class="col col-50" style="padding: 0px;">
+                            <p style="font-weight:bold;">Purpose</p>
+                        </div>
+                        <div class="col col-50" style="padding: 0px;">
+                            <span style="font-size: 14px;">{{items.Purpose}}</span>
+                        </div>
+                    </div>
+                     <div class="row" style="">
+                        <div class="col col-50" style="padding: 0px;">
+                            <p style="font-weight:bold;">Call Date</p>
+                        </div>
+                        <div class="col col-50" style="padding: 0px;">
+                            <span style="font-size: 14px;">{{items.ToCallDate || "-"}}</span>
+                               
+                        </div>
+                    </div>
+                         
+            <div class="container-fluid">
+                       <div class="col-sm-12 text-center" style="padding-bottom: 10px;">
+                        <button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;"  (click)="commonvisitUpdateModal(items)" center>Action</button>
+                          
+                       </div>
+                    </div>              
+
+                    </div>
+                </div>
+            </div>  -->
+        </div>
+
+         <!-- <center>
+                        <p style="margin-top: 20px !important;color: black;font-size: bold;" *ngIf="filtered==0"> No Record Found</p>
+                    </center> -->
+</ion-content>
+
+

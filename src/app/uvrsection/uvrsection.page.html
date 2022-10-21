@@ -1,0 +1,131 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='start'>
+    <ion-back-button defaultHref=""></ion-back-button>
+  </ion-buttons>
+  <ion-title >Sections</ion-title>
+  </ion-toolbar>
+
+<ion-content class="bgUvrWall">
+  <ion-card class="toolbar_card">
+{{SectionHeaderdata.CUSTOMERID}} - {{SectionHeaderdata.CUSTNAME}}
+  </ion-card>
+ 
+<ion-card class="card" (click)="allsection('Banking')">
+<h1 class="card_header">Banking arrangement</h1>
+</ion-card>
+
+<div class="content_item">
+
+    <ion-item class="input_field">
+      <ion-label  class="input_heading">Nature of the activity</ion-label>
+      <ion-select class="select_field" placeholder="Select" (ionChange)="DropDownClickEvnt($event)">
+        <!-- <option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </option> -->
+        <!-- <ion-select-option selected="selected" value="">&lt;&lt; Select &gt;&gt;</ion-select-option> -->
+        <ion-select-option value="">Select</ion-select-option>
+        <ion-select-option value="1">Manufacturing unit</ion-select-option>
+        <ion-select-option value="2">Trading unit</ion-select-option>
+        <ion-select-option value="3">Others</ion-select-option>
+      </ion-select>
+    </ion-item>
+</div>
+
+<!-- Manufacturing -->
+
+<div *ngIf="ManufacturingEvent == true">
+  <ion-card class="card" (click)="allsection('Manuf_optn0')">
+    <h1 class="card_header">Nature of Commodity/Business</h1>
+    </ion-card>
+  <ion-card class="card" (click)="allsection('Manuf_optn1')">
+    <h1 class="card_header">About the unit and machinery</h1>
+    </ion-card>
+    <ion-card class="card" (click)="allsection('Manuf_optn2')">
+      <h1 class="card_header">Machinery Insurance</h1>
+      </ion-card>
+      <ion-card class="card" (click)="allsection('Trad_optn2')">
+        <h1 class="card_header">Stock Insurance</h1>
+        </ion-card>
+      <ion-card class="card" (click)="allsection('Manuf_optn3')">
+        <h1 class="card_header">About Financial Performance </h1>
+        </ion-card>
+        <ion-card class="card" (click)="allsection('Manuf_optn4')">
+          <h1 class="card_header">General observations during the visit </h1>
+          </ion-card>
+          <ion-card class="card" (click)="allsection('Othr_optn3')">
+            <h1 class="card_header">Photo upload</h1>
+            </ion-card>
+</div>
+<!-- trading unit -->
+
+<div *ngIf="TradingEvent == true">
+  <ion-card class="card" (click)="allsection('Manuf_optn0')">
+    <h1 class="card_header">Nature of Commodity/Business</h1>
+    </ion-card>
+  <ion-card class="card" (click)="allsection('Trad_optn1')">
+    <h1 class="card_header">About the unit</h1>
+    </ion-card>
+    <ion-card class="card" (click)="allsection('Trad_optn2')">
+      <h1 class="card_header">Stock Insurance</h1>
+      </ion-card>
+      <ion-card class="card" (click)="allsection('Trad_optn3')">
+        <h1 class="card_header">About Financial Performance </h1>
+        </ion-card>
+        <ion-card class="card" (click)="allsection('Trad_optn4')">
+          <h1 class="card_header">General observations during the visit </h1>
+          </ion-card>
+          <ion-card class="card" (click)="allsection('Othr_optn3')">
+            <h1 class="card_header">Photo upload</h1>
+            </ion-card>
+</div>
+
+<!-- Others -->
+<div *ngIf="OthersEvent == true">
+  <ion-card class="card" (click)="allsection('Manuf_optn0')">
+    <h1 class="card_header">Nature of Commodity/Business</h1>
+    </ion-card>
+  <ion-card class="card" (click)="allsection('Othr_optn1')">
+    <h1 class="card_header">About Financial Performance </h1>
+    </ion-card>
+    <ion-card class="card" (click)="allsection('Othr_optn2')">
+      <h1 class="card_header">General observations during the visit </h1>
+      </ion-card>
+      <ion-card class="card" (click)="allsection('Othr_optn3')">
+        <h1 class="card_header">Photo upload</h1>
+        </ion-card>
+</div>
+
+<ion-button class="button button-block button-stable button-uvr" ng-disabled="" (click)="updateFinalSave(SectionHeaderdata.CUSTOMERID)">
+  Complete Visit
+</ion-button>
+<div *ngIf="visitID" style="text-align: center;background-color: #e0dada;padding: 10px;"><p style="color: #272770;font-size: 17px;font-weight: bold;">Your Visit ID : {{visitID}}</p></div>
+<!-- //signature pad -->
+<!-- <ion-card *ngIf="visitID">
+<div>
+  <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="danger" (click)="clearPad()">Clear</ion-button>
+      </ion-col>
+      <ion-col size="4" offset="2">
+        <ion-button color="secondary" (click)="savePad()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<img src='{{ signatureImg }}' />
+</ion-card>
+<div class="row" style="margin: 0;" *ngIf="visitID">
+  <div class="col">
+      <ion-button class="button button-block button-stable button-uvr" id="export">Export</ion-button>
+      <ion-button class="button button-block button-stable button-uvr" id="reset">Reset</ion-button>
+      <ion-button class="button button-block button-stable button-uvr" (click)="uploadsign()">Upload</ion-button>
+  </div>
+</div> -->
+
+
+
+</ion-content>
+
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

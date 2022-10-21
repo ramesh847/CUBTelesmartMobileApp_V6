@@ -1,0 +1,263 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >"0" Star Customers</ion-title>
+  </ion-toolbar>
+
+  <ion-content class="body_bg">
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid style="margin-top:-1rem">
+      <ion-row>
+        <ion-col size="6">
+          <div class="content_item">
+            <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+            <ion-item class="input_field">
+              <ion-input [(ngModel)]="search.CBSCustomerID" (ionBlur)="searchMycustomers(search.type,search.CBSCustomerID,search.cat)"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          
+  <div class="content_item">
+    <ion-label position="stacked" class="input_heading">Type</ion-label>
+    <ion-item class="input_field">
+      <ion-select [(ngModel)]="search.type" class="select_field" placeholder="Select" 
+      (ionChange)="searchMycustomers(search.type,search.CBSCustomerID,search.cat)">
+        <ion-select-option value="" selected>Select</ion-select-option>
+                      <ion-select-option value="F">New</ion-select-option>
+                      <ion-select-option value="E">Exisiting</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" style="margin-top:-1rem"> 
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Customer_Category</ion-label>
+          <ion-item class="input_field">
+            <ion-select (ionChange)="searchMycustomers(search.type,search.CBSCustomerID,search.cat)" class="select_field" placeholder="Select" [(ngModel)]="search.cat">
+              <ion-select-option  *ngFor="let item of cusCatogory">{{item.Text}}</ion-select-option>
+              
+            </ion-select>
+          </ion-item>
+        </div>
+      </ion-col>
+      <ion-col size="6"></ion-col>
+      </ion-row>
+      <p style="color:black;font-weight:bold;font-size:14px">Total Customers : &nbsp;&nbsp;{{getZeroCusCount}} <span style="float:right;color:#ec0576">(RS In Lakhs)</span></p>
+      <p style="color:black;font-weight:bold;font-size:14px">Total Existing Business INC/DEC Value : &nbsp;&nbsp;</p>
+      <p style="color:black;font-weight:bold;font-size:14px">Total New Business  Value : &nbsp;&nbsp;</p>
+    </ion-grid>
+
+
+
+    <ion-card *ngFor="let items of getZeroCusDetails">
+      <ion-card-header class="card_heder">
+        <span class="card_heading">{{items.CBSCustomerId}}</span>
+        <!-- <ion-card-title>Card Title</ion-card-title> -->
+        <span style="float:right;color:white" (click)="endcallmodel(items)">{{items.Mobile}}</span>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Name</p>
+            </div> 
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.CustomerName}}</p>
+            </div>
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Type</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.ParentName || "-"}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Opening Balance as on Mapping Date</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.Opening}}</p>
+              <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Average Balance as<br> On&nbsp;({{items.sdate}})</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.Average}}</p>
+              <p class="card_right_text" *ngIf="items.total!=null">(Rs In Lakhs)</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">INC/DEC</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text" >{{items.IncDec || "-"}}</p>
+            </div> 
+            
+          </ion-col>
+          <!-- <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Rating</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">({{items.custCat}})</p>
+            </div> 
+            
+          </ion-col> -->
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Cust-Category</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.Customer_Category}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Frequency of Visit</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.frequency}}</p>
+            </div> 
+            
+          </ion-col>
+  
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text">Date of Mapping</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.DateMapping ||'-'}}</p>
+            </div> 
+            
+          </ion-col>
+         
+        </ion-row>
+        </ion-grid>
+        
+       
+                          <!--  <div class="search-table-outter wrapper">     -->
+                            <table class="table" style="margin-left:-4px;margin-top: 5px;font-size:13px;">
+                              <tr>
+                                  <th class="fontsize" style="font-weight:bold;background-color:  #e7e5e5!important;color:#444444;">Monthly
+                                      Calls
+                                  </th>
+                                  <th class="fontsize" style="font-weight:bold;background-color:  #e7e5e5!important;color:#444444;">Yearly
+                                      Calls
+                                  </th>
+                                  <th class="fontsize" style="font-weight:bold;background-color:  #e7e5e5!important;background-color:  #e7e5e5!important;color:#444444;">Monthly
+                                      Visits
+                                  </th>
+  
+                                  <th class="fontsize" style="font-weight:bold;background-color:  #e7e5e5!important;color:#444444">Yearly
+                                      Visits
+                                  </th>
+                                  <!-- <th style="font-weight:bold;">Rs.In.Lakhs</th> -->
+                              </tr>
+                              <tr>
+                                  <td>{{items.MCall ||'-'}}</td>
+                                  <td>{{items.Ycall ||'-'}}</td>
+                                  <td>{{items.MVisit ||'-'}}</td>
+                                  <td>{{items.Yvisit ||'-'}}</td>
+                                  <!-- <td>{{items.total}}</td> -->
+                              </tr>
+                          </table>
+        <br>
+  <div class="update_button">
+    <ion-button style="--background:#87ceeb" (click)="customerActionModal(items)" expand="block">Update</ion-button>
+  
+  </div>
+      </ion-card-content>
+    </ion-card>
+  
+  
+  
+    <!-- <ion-modal #modal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-item>
+              <ion-avatar slot="start">
+                <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>Connor Smith</h2>
+                <p>Sales Rep</p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-avatar slot="start">
+                <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>Daniel Smith</h2>
+                <p>Product Designer</p>
+              </ion-label>
+            </ion-item>
+            
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal> -->
+  
+  </ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

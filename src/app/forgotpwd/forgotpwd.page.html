@@ -1,0 +1,126 @@
+
+
+      <!-- <ion-nav-buttons side="right">
+          <button style="padding:0 5px;" ng-click="goLogin()" class="button button-icon"><span style="font-size:22px;" class="ion ion-arrow-left-a"></span></button> -->
+      <!-- </ion-nav-buttons> -->
+      <ion-toolbar class="header">
+        <ion-buttons slot='end'>
+          <ion-back-button defaultHref=""></ion-back-button>
+          <!-- <ion-menu-button></ion-menu-button> -->
+        <!-- <ion-back-button defaultHref=""></ion-back-button> -->
+        </ion-buttons>
+        <ion-title >Reset Password</ion-title>
+        </ion-toolbar>
+          <ion-content class="has-header-new" style="--background: url(/assets/img/loginbg.jpg) 0 0/100% 100% no-repeat !important">
+              <div class="container centerwidth" style="text-align: center;width: 80%;margin-left: 13%;">
+                  <form>
+                      <img src="../../assets/img/logo.png" class="animated fadeInDown" alt="Welcome" style="width:120px;height:auto; margin-top:70px;margin-right: 20px;">
+                      <div *ngIf="showVerify==true">
+                   <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;margin-top: 20%;">
+                          <i class="fa fa-user" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+          font-size: 18px;"></i>
+                          <input type="number" placeholder="Emp Code" ng-model="logindata.user_name">
+                      </div>
+                      <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                          <i class="fa fa-calendar-o" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+          font-size: 18px;"></i>
+                          <input class="input" max={{dateToday}} placeholder="Enter your DOB" ng-model="logindata.dob" onfocus="(this.type='date')" style="border:none;">
+                      </div>
+                      <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                          <ion-button class="button button-assertive round" ng-disabled="" ng-click="sendOtp()">
+                              Send Otp
+                          </ion-button>
+                          </div>
+                         <!--  <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                          <button class="button button-assertive round" type="button" ng-disabled="" ng-click="verifydevice()">
+                              VERIFY DEVICE
+                          </button>
+                          </div> -->
+                          <!-- ng-show="showotpdiv" -->
+                          <!-- <div ng-show="showotpdiv">
+                          <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;" >
+                                 
+                                  <input type="number" placeholder="OTP" ng-model="logindata.otp">
+      
+                              </div>
+                         
+                              <p ng-show="invalidOTP" style="color:white;">Invalid OTP</p>
+                              <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                                  <button class="button button-assertive round" ng-disabled="" ng-click="verifyfwdotp()">
+                                      Submit
+                                  </button>
+                                  </div>
+                              </div> -->
+                          </div>
+                          <!-- ng-show="showUpdatepwd" -->
+                          <!-- <div ng-show="showUpdatepwd">
+                              <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;margin-top: 20%;">
+                                  <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+                  font-size: 18px;"></i>
+                                  <input type="password" placeholder="New Password" id="pwd" ng-model="logindata.pwd" ng-change="test_str('pwd')"  required>
+                              </div>
+                              <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck1">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
+                              <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                                  <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+                  font-size: 18px;"></i>
+                                  <input type="password" placeholder="Confirm Password" id="cnfpwd" ng-model="logindata.cnfpwd" ng-change="test_str('cnfpwd')"  required>
+                              </div>
+                              <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck2">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
+                              <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                                  <button class="button button-assertive round" ng-disabled="" ng-click="updatePwd(logindata.user_name)">
+                                      Update
+                                  </button>
+                                  </div>
+                          </div> -->
+                          <div *ngIf="showotpdiv==true"> 
+                            <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;" >
+                                   
+                                    <input type="number" placeholder="OTP" ng-model="logindata.otp">
+        
+                                </div>
+                           
+                                <p *ngIf="invalidOTP==true" style="color:white;">Invalid OTP</p>
+                                <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                                    <ion-button class="button button-assertive round" ng-disabled="" (click)="verifyfwdotp()">
+                                        Submit
+                                    </ion-button>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="showUpdatepwd==true">
+                                    <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;margin-top: 20%;">
+                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+                        font-size: 18px;"></i>
+                                        <input type="password" placeholder="New Password" id="pwd" ng-model="logindata.pwd" ng-change="test_str('pwd')"  required>
+                                    </div>
+                                    <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck1">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
+                                    <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
+                        font-size: 18px;"></i>
+                                        <input type="password" placeholder="Confirm Password" id="cnfpwd" ng-model="logindata.cnfpwd" ng-change="test_str('cnfpwd')"  required>
+                                    </div>
+                                    <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck2">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
+                                    <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
+                                        <ion-button class="button button-assertive round" ng-disabled="" (click)="updatePwd(logindata.user_name)">
+                                            Update
+                                        </ion-button>
+                                        </div>
+                                </div> 
+
+
+                  </form>
+  
+                
+                  <!-- <form >
+                      <img src="img/logo.png" class="animated fadeInDown" alt="Welcome" style="width:120px;height:auto; margin-top:70px;margin-right: 20px;">
+                  
+                      
+                  </form> -->
+                  </div>
+             
+          </ion-content>
+          <ion-footer class="footer">
+            <p class="footer_content">City Union Bank Ltd</p>
+          </ion-footer>
+    
+      

@@ -1,0 +1,66 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <!-- <ion-icon name="home" class="home_icon"></ion-icon> -->
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title >Call Connected</ion-title>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <div >
+    <!-- <script id="followupcallConnect.html" type="text/ng-template"> -->
+  
+      <ion-card>
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;">
+          Call Center
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <!-- <ion-card-title style="background-color: #ec0576 !important;color:white; font-weight: bold;">Call Center</ion-card-title> -->
+        </ion-card-header>
+      
+        <ion-card-content>
+          <form style="margin-top: 10px;">
+            <div class="item item-text-wrap" style="padding-left: 35px;padding-top:0px !important; ">
+                <div class="row" >
+                    <div class="col col-50" style="padding: 0px;">
+                        <p style="font-weight:bold;">Caller Name</p>
+                        <span style="font-size: 14px;">{{obj.callerName}}</span>
+                    </div>
+                    <div class="col col-50" style="padding: 0px;">
+                        <p style="font-weight:bold;">Customer Name</p>
+                        <span style="font-size: 14px;">{{obj.customerName}}</span>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col col-50" style="padding: 0px;">
+                        <p style="font-weight:bold;">Caller Number</p>
+                        <span style="font-size: 14px;">{{obj.callerMobile}}</span>
+                    </div>
+                    <div class="col col-50" style="padding: 0px;">
+                        <p style="font-weight:bold;">Customer Number</p>
+                        <span style="font-size: 14px;">{{obj.customerMobile}}</span>
+                    </div>
+                </div>
+                <!-- <div class="container-fluid"> -->
+                  
+                        <ion-button class="schedulebutn fa fa-pencil-square-o"
+                            style="font-size: 13px;letter-spacing: 1px;"
+                           (click)="Endcall(obj)" 
+                            >End</ion-button>
+    
+                    
+                <!-- </div> -->
+  
+                <div class="row" >
+                    <span style="font-size:12px;margin-top: 10px;">Note: You can press end call button if it is a lengthy call with customer and update actions button later. As long as call was connected on click to call, it will be counted towards the same.</span>
+                    </div>
+            </div>    
+        </form>
+        </ion-card-content>
+      </ion-card>
+    
+      
+      
+     
+  <!-- </script> -->
+</div>
+</ion-content>

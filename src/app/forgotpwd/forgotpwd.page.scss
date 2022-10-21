@@ -1,0 +1,35 @@
+
+input[type="number"] {
+    background: transparent;
+    border: none !important;
+}
+
+input[type="date"] {
+    background: transparent;
+    border: none !important;
+}
+
+input::-webkit-input-placeholder {
+    color: black;
+    font-size: 17px;
+    border: none !important;
+}
+
+@media (min-width: 768px) {
+    .centerwidth {
+        width: 80%;
+        margin-left: 58px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .centerwidth {
+        width: 80%;
+        margin-left: 80px;
+    }
+}
+
+.round {
+    --background: #ec0576 !important;
+    // padding: 5px;
+}

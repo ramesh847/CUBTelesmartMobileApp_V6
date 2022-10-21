@@ -1,0 +1,127 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >User Profile</ion-title>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="userForm" (submit)="saveuserDetails(userForm)">
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked" >Branch </ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="branch"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked">Emp Code</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="empcode"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked" >User Type</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="usertype"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked" >Emp Name</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="empname"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked">Email Id</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input   formControlName="emailid"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked">Mobile No</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="mobile"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="w-100-p">
+        <ion-col class="col_height">
+          <div class="input_heading">
+            <ion-label position="stacked">Date Of Birth</ion-label>
+          </div>
+       <ion-item class="input_field">
+            <ion-input  disabled formControlName="dob"></ion-input>
+          </ion-item>
+    
+        </ion-col>
+      </div>
+      <div class="update_button">
+        <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <ion-button style="--background:deeppink"  type="submit" expand="block">Save</ion-button>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <ion-button style="--background:#87ceeb"   expand="block" (click)="goToMyplannerPage()">cancel</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      
+       
+      </div> 
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <form name ="myform" style="margin-top: 15px;"> -->
+
+
+   
+    
+                            <!-- <div class="row" style="margin-left: -5px;">  
+      <div class="col">
+    <button type="button" class="btn btn-default button-block" style="background-color:#ec0576; margin-left: 10px;color: white;" ng-click="saveUserProfile()">Save</button></div>
+    <div class="col">
+    <button type="button" class="btn btn-default button-block" style="background-color:rgb(94, 87, 87);color: white;" ng-click="cancelbutt()">Cancel</button>
+    </div>
+    </div> -->
+    
+    <!-- </form> -->
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

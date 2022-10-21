@@ -1,0 +1,193 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >PLP Customer Base</ion-title>
+  </ion-toolbar>
+
+
+<ion-content class="body_bg">
+  <!-- <ion-card style="overflow: visible !important;"> -->
+    <!-- <ion-card-header class="card_heder" style="background-color:#ec0576;color:#fff !important;padding: 0px;">
+     
+        <p style="text-align:center;margin-top:15px !important;color:#ec0576;font-weight: bold;"><span style="color:white;">{{username}}</span></p>
+         
+                </ion-card-header> -->
+               
+  
+    <!-- <ion-card-content> -->
+
+
+   
+
+
+     <!-- -------------------------------- -->
+        <ion-row >
+          <ion-col size="6">
+            <div class="content_item">
+              <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+              <ion-item class="input_field">
+                <ion-input [(ngModel)]="search.CBSCustomerID" (ionBlur)="plpCustomerBaseDetails1(search.type,search.CBSCustomerID,search.CBSCustomerName,search.Branch)" placeholder="" interface="action-sheet"></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+
+          <ion-col size="6">
+            <div class="content_item">
+              <ion-label position="stacked" class="input_heading">Type</ion-label>
+              <ion-item class="input_field" id="selectfield" >
+                <ion-select [(ngModel)]="search.type" class="select_field" placeholder="Select" (ionChange)="plpCustomerBaseDetails1(search.type,search.CBSCustomerID,search.CBSCustomerName,search.Branch)">
+                  <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                  <ion-select-option  value="F">New</ion-select-option>
+                  <ion-select-option  value="E">Existing</ion-select-option>
+                  
+                </ion-select>
+              </ion-item>
+            </div>
+          </ion-col>
+
+        
+        
+        </ion-row>
+       
+
+        <ion-row >
+
+          <ion-col size="6">
+            <div class="content_item">
+              <ion-label position="stacked" class="input_heading">Customer Name</ion-label>
+              <ion-item class="input_field">
+                <ion-input id="selectfield" [(ngModel)]="search.CBSCustomerName" placeholder="" interface="action-sheet" (ionBlur)="plpCustomerBaseDetails1(search.type,search.CBSCustomerID,search.CBSCustomerName,search.Branch)"></ion-input>
+              </ion-item>
+            </div>
+</ion-col>
+<ion-col size="6">
+  <div class="content_item">
+    <ion-label class="select_placeholder">Branch</ion-label>
+    <ion-item class="input_field" id="selectfield" >
+      <ion-select [(ngModel)]="search.Branch" class="select_field" placeholder="Select" (ionChange)="plpCustomerBaseDetails1(search.type,search.CBSCustomerID,search.CBSCustomerName,search.Branch)">
+         
+               
+                  <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                <ion-select-option *ngFor="let items of plpBranchList" value="{{items.Value}}">{{items.TEXT}}</ion-select-option>
+                  
+                </ion-select>
+              </ion-item>
+        
+  
+            <!-- <ion-item class="input_field" id="selectfield" *ngIf="hidecalloutcome">
+              <ion-select [(ngModel)]="crdit_facility" class="select_field" placeholder="Select">
+                <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                <ion-select-option *ngFor="let items of plpBranchList" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                
+              </ion-select>
+            </ion-item> -->
+  </div>
+</ion-col>
+
+         
+         
+        </ion-row>
+
+        <ion-card *ngFor="let items of plpCustomerList">
+          <ion-card-header class="card_heder">
+            <span class="card_heading">{{items.CustomerID}}</span>
+          
+            <!-- <span style="float:right;color:white;cursor: pointer;" class="fa fa-mobile" (click)="callNumber(items)"><u>{{items.CONTACT_NO}}</u></span> -->
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <div class="col col-50" style="padding: 0px;">
+                  <p style="font-weight:bold;">Customer Name</p>
+              </div>
+              <div class="col col-50" style="padding: 0px">
+                  <span style="font-size: 14px;">{{items.CustomerName}}</span>
+              </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Branch Name</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.BranchCode}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Type</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.Type}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Opening Bal Date</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.OpeningBalDate}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Date of Mapping</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.DateOfMapping || "-"}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Date UpTo</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.DateUpTo || "-"}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Opening Balance</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.OpenBal}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Average Bal As On</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.AvgBalance || "-"}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">INC/DEC</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.INCDEC || "-"}}</span>
+                  </div>
+                  </ion-row>
+                  <ion-row>
+                    <div class="col col-50" style="padding: 0px;">
+                      <p style="font-weight:bold;">Status</p>
+                  </div>
+                  <div class="col col-50" style="padding: 0px">
+                      <span style="font-size: 14px;">{{items.status}}</span>
+                  </div>
+                  </ion-row>
+                  
+                  </ion-grid>
+
+
+     
+
+
+
+      
+    </ion-card-content>
+  </ion-card>
+  </ion-content>
+  

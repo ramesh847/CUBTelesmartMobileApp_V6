@@ -1,0 +1,296 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <!-- <ion-icon name="home" class="home_icon"></ion-icon> -->
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title >{{fullname}}</ion-title>
+  <a class="button" style="padding-top: 3px;
+  background-color: #2e3192 ;" (click)="closeUpdateModal()">
+              <i class="icon ion-close-circled" aria-hidden="true" style="font-size: 21px;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;padding-top: 3px;position: relative;bottom: 4px;">
+           </i>
+          </a>
+  </ion-toolbar>
+
+<ion-content class="body_bg">
+  <div >
+    <!-- <script id="followupcallConnect.html" type="text/ng-template"> -->
+  
+      <ion-card>
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid!='11' && purposeid!='12' && purposeid!='13'">
+          Purpose: {{assignedvisit.Purpose}} <span style="float:right;">{{cust_id}}</span>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <!-- <ion-card-title style="background-color: #ec0576 !important;color:white; font-weight: bold;">Call Center</ion-card-title> -->
+        </ion-card-header>
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid!='11' && purposeid!='12' && purposeid!='13'">
+          Purpose: {{assignedvisit.Purpose}} <span style="float:right;">{{cust_id}}</span>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <!-- <ion-card-title style="background-color: #ec0576 !important;color:white; font-weight: bold;">Call Center</ion-card-title> -->
+        </ion-card-header>
+        <ion-card-header style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid=='11' || purposeid=='12' || purposeid=='13'">
+          Purpose: Lead Generation&nbsp;/&nbsp;{{assignedvisit.Purpose}}<span style="float:right;">{{cust_id}}</span>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <!-- <ion-card-title style="background-color: #ec0576 !important;color:white; font-weight: bold;">Call Center</ion-card-title> -->
+        </ion-card-header>
+        <!-- <div class="panel-heading" style="background-color: #ec0576 !important;color:white; font-weight: bold;" ng-if="purposeid!='11' && purposeid!='12' && purposeid!='13'">Purpose: {{assignedvisit.Purpose}} <span style="float:right;">{{cust_id}}</span></div> -->
+        <!-- <div class="panel-heading" style="background-color: #ec0576 !important;color:white; font-weight: bold;" ng-if="purposeid=='11' || purposeid=='12' || purposeid=='13'">Purpose: Lead Generation&nbsp;/&nbsp;{{assignedvisit.Purpose}}<span style="float:right;">{{cust_id}}</span></div> -->
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1">
+              </ion-col>
+              <ion-col size="10">
+                <ion-label class="select_placeholder">Call OutCome</ion-label>
+              <ion-item class="input_field" id="selectfield" >
+                  <ion-select *ngIf="hidecalloutcome" [(ngModel)]="assignedvisit.calloutcome" class="select_field" placeholder="Select">
+                    <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                    <ion-select-option *ngFor="let items of callOutcome |filter:item.Text='Calls-FollowUp'" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    
+                  </ion-select>
+                  <ion-select *ngIf="!hidecalloutcome" [(ngModel)]="assignedvisit.calloutcome" class="select_field" placeholder="Select">
+                    <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                    <ion-select-option *ngFor="let items of callOutcome |filter:item.Text='Calls-FollowUp'" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    
+                  </ion-select>
+                </ion-item>
+
+                <ion-item class="input_field" id="selectfield" *ngIf="!hidecalloutcome">
+                  <ion-select [(ngModel)]="crdit_facility" class="select_field" placeholder="Select">
+                    <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                    <ion-select-option *ngFor="let items of callout" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                    
+                  </ion-select>
+                </ion-item>
+
+              </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="1">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label class="select_placeholder">Call Type</ion-label>
+                  <ion-item class="input_field" id="selectfield">
+                    <ion-select [(ngModel)]="assignedvisit.calltype" class="select_field" placeholder="Select " *ngIf="assignedvisit.calltype='P'" >
+                      <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+                      <ion-select-option  value="T">Telecall</ion-select-option>
+                      <ion-select-option  value="P">Personal Visit</ion-select-option>
+                      
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                </ion-row>
+<ion-row *ngIf="assignedvisit.calloutcome == '2'">
+  <ion-col size="1">
+  </ion-col>
+  <ion-col size="10">
+    <ion-label class="select_placeholder">Product Type</ion-label>
+    <ion-item class="input_field" id="selectfield">
+      <ion-select [(ngModel)]="producttype" class="select_field" placeholder="Select " >
+        <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+        <ion-select-option *ngFor="let items of businessunit" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="followupvisits.type == '12' || followupvisits.type == '13'">
+  <ion-col size="1">
+  </ion-col>
+  <ion-col size="10">
+    <ion-label class="select_placeholder">Product Group</ion-label>
+    <ion-item class="input_field" id="selectfield">
+      <ion-select [(ngModel)]="productgroup" class="select_field" placeholder="Select " >
+        <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+        <ion-select-option *ngFor="let items of productGroup" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="followupvisits.type == '12' || followupvisits.type == '13'">
+  <ion-col size="1">
+  </ion-col>
+  <ion-col size="10">
+    <ion-label class="select_placeholder">Product </ion-label>
+    <ion-item class="input_field" id="selectfield">
+      <ion-select [(ngModel)]="product" class="select_field" placeholder="Select " >
+        <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+        <ion-select-option *ngFor="let items of product" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  </ion-col>
+</ion-row>
+
+<ion-row *ngIf="followupvisits.calloutcome == '3' && followupvisits.type == '11'">
+  <ion-col size="1"></ion-col>
+  <ion-col size="5">
+      <ion-label>Customer ID</ion-label>
+      <ion-input id="selectfield" class="ionSelect" placeholder="Broking Branch" [(ngModel)] interface="action-sheet"  
+      class="inputBox"></ion-input>
+  </ion-col>
+  <ion-col size="5">
+    <!-- <ion-label>CASA</ion-label>
+    <ion-input id="selectfield" class="ionSelect" placeholder="Broking Branch" disabled interface="action-sheet"  
+    class="inputBox"></ion-input> -->
+  </ion-col>
+  <ion-col size="1"></ion-col>
+
+</ion-row>
+<ion-row *ngIf="assignedvisit.calloutcome== '2'">
+  <ion-col size="1"></ion-col>
+  <ion-col size="5">
+      <ion-label>Followup Date</ion-label>
+      <ion-input id="selectfield" type="date" class="ionSelect" placeholder="firstname" [(ngModel)]="assignedvisit.followdate" interface="action-sheet"  
+      class="inputBox"></ion-input>
+  </ion-col>
+  <ion-col size="5">
+    <!-- <ion-label>CASA</ion-label>
+    <ion-input id="selectfield" class="ionSelect" placeholder="Broking Branch" disabled interface="action-sheet"  
+    class="inputBox"></ion-input> -->
+  </ion-col>
+  <ion-col size="1"></ion-col>
+
+</ion-row>
+
+<ion-row *ngIf="assignedvisit.calloutcome == '2'">
+  <ion-col size="1"></ion-col>
+  <ion-col size="5">
+      <ion-label>Followup Time</ion-label>
+      <ion-input id="selectfield" class="ionSelect" placeholder="assignedvisit.followtime" [(ngModel)]="assignedvisit.followtime" interface="action-sheet"  
+      class="inputBox"></ion-input>
+  </ion-col>
+  <ion-col size="5">
+    <!-- <ion-label>CASA</ion-label>
+    <ion-input id="selectfield" class="ionSelect" placeholder="Broking Branch" disabled interface="action-sheet"  
+    class="inputBox"></ion-input> -->
+  </ion-col>
+  <ion-col size="1"></ion-col>
+
+</ion-row>
+
+
+<ion-row *ngIf="assignedvisit.calltype=='P'">
+  <ion-col size="1"></ion-col>
+  <ion-col size="5">
+    <ion-item>
+    <ion-checkbox slot="start"  [(ngModel)]="assignedvisit.JointVisit" (click)=" checkboxClick($event)"></ion-checkbox>
+    <ion-label>jointVisit</ion-label>
+    </ion-item>
+  </ion-col>
+  <ion-col size="5">
+  
+  </ion-col>
+  <ion-col size="1"></ion-col>
+
+</ion-row>
+
+
+
+<ion-row *ngIf="assignedvisit.JointVisit=='Y' && assignedvisit.calltype=='P'">
+  <ion-col size="1">
+  </ion-col>
+  <ion-col size="10">
+    <ion-label class="select_placeholder">Emp Code</ion-label>
+    <ion-input id="selectfield" class="ionSelect" placeholder="Emp Code" interface="action-sheet"  
+    class="inputBox" [(ngModel)]="assignedvisit.jointcode"></ion-input>
+  </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="assignedvisit.JointVisit=='Y' && assignedvisit.calltype=='P'">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col size="10">
+      <ion-label class="select_placeholder">Emp Name</ion-label>
+      <ion-input id="selectfield" [ngModel]="assignedvisit.jointusername" class="ionSelect" disabled placeholder="" interface="action-sheet"  
+      class="inputBox"></ion-input>
+    </ion-col>
+    </ion-row>
+    <ion-row *ngIf="assignedvisit.calltype=='P'">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="10">
+        <ion-label class="select_placeholder">Enter Location</ion-label>
+        <ion-input id="selectfield" class="ionSelect"  [(ngModel)]="assignedvisit.addressname" placeholder="" interface="action-sheet"  
+        class="inputBox"></ion-input>
+      </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="assignedvisit.Purpose == 'NPA followup' ">
+        <ion-col size="4"></ion-col>
+        <ion-col size="4">
+          <ion-checkbox [(ngModel)]="assignedvisit.current" ng-true-value="'Y'" ng-false-value="'N'" ng-disabled="myBooleanValue1" style="font-size: 15px;background-color: transparent;"> &nbsp; <span class="namealign">Amt-Collected</span></ion-checkbox>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+        <ion-col size="4"></ion-col>
+        <ion-col size="4">
+          <ion-label class="select_placeholder">collected date</ion-label>
+      <ion-input id="selectfield" type="date" class="ionSelect" [(ngModel)]="assignedvisit.collected_date" placeholder="" interface="action-sheet"  
+      class="inputBox"></ion-input>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+      <ion-row *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+        <ion-col size="4"></ion-col>
+        <ion-col size="4">
+          <ion-label class="select_placeholder">Account Number</ion-label>
+      <ion-input id="selectfield" type="date" class="ionSelect" [(ngModel)]="assignedvisit.collected_accno" placeholder="" interface="action-sheet"  
+      class="inputBox"></ion-input>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+        <ion-col size="4"></ion-col>
+        <ion-col size="4">
+          <ion-label class="select_placeholder">Amount</ion-label>
+      <ion-input id="selectfield" type="date" class="ionSelect" [(ngModel)]="assignedvisit.collectamount" placeholder="" interface="action-sheet"  
+      class="inputBox"></ion-input>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="10">
+          <ion-label class="select_placeholder">Remarks</ion-label>
+          <ion-input id="selectfield" class="ionSelect"  [(ngModel)]="assignedvisit.remarks" placeholder="" interface="action-sheet"  ng
+          class="inputBox"></ion-input>
+        </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"></ion-col>
+          <ion-col size="4">
+            <ion-button 
+            style="background-color:#ec0576;font-size: 16px;border-radius: 5px;padding: 5px;margin-top: 15px;margin-left: 25px;"
+           (click)="saveassignedvisits(assignedvisit)" 
+            >Save</ion-button>
+          </ion-col>
+          <ion-col size="4"></ion-col>
+        </ion-row>
+
+
+
+
+
+
+              </ion-grid>
+             
+          
+
+
+        </ion-card-content>
+      </ion-card>
+    
+      
+      
+     
+  <!-- </script> -->
+</div>
+</ion-content>

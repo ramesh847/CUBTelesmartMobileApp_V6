@@ -1,0 +1,190 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Assigned Visits</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+
+  <ion-grid >
+    <ion-row>
+      <ion-col size="6">
+        <div class="content_item">
+          <ion-label position="stacked" class="input_heading">Customer ID</ion-label>
+          <ion-item class="input_field">
+            <ion-input [(ngModel)]="exposure_other_bngname"></ion-input>
+          </ion-item>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        
+<div class="content_item">
+  <ion-label position="stacked" class="input_heading">Type</ion-label>
+  <ion-item class="input_field">
+    <ion-select [(ngModel)]="crdit_facility" class="select_field" placeholder="Select">
+      <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
+      <ion-select-option *ngFor="let items of callPurpose" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+      
+    </ion-select>
+  </ion-item>
+</div>
+      </ion-col>
+    </ion-row>
+
+
+<!-- <div *ngIf="divshowhide==true">
+<p style="text-align: center;">{{textbind}}</p>
+</div> -->
+
+<div >
+    <ion-card *ngFor="let items of assignedvisitdata" >
+      <ion-card-header class="card_heder">
+        <span class="card_heading">{{items.CBSCustomerID}}</span>
+      
+        <span style="float:right;color:white;cursor: pointer;" class="fa fa-mobile" (click)="mobilenumber(items)" *ngIf="ClickAccess"><u>{{items.Mobile}}</u></span>
+        <span style="float:right;color:white;cursor: pointer;" class="fa fa-mobile" (click)="mobilenumber(items)" *ngIf="! ClickAccess"><u>{{items.Mobile}}</u></span>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_left_text"  >Name</p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <p class="card_right_text">{{items.CustomerName}}</p>
+            </div>
+            </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_left_text"  >Courtesy Date</p>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="col_height">
+                <div>
+                  <p class="card_right_text">{{items.CourtesyDate ||"-"}}</p>
+                </div>
+                </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="6" class="col_height">
+                    <div>
+                      <p class="card_left_text"  >Purpose</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size="6" class="col_height">
+                    <div>
+                      <p class="card_right_text">{{items.Purpose}}</p>
+                    </div>
+                    </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                      <ion-col size="6" class="col_height">
+                        <div>
+                          <p class="card_left_text"  >Amount</p>
+                        </div>
+                      </ion-col>
+                      <ion-col size="6" class="col_height">
+                        <div>
+                          <p class="card_right_text">{{items.DNPAAmount  ||"-"}}</p>
+                        </div>
+                        </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                          <ion-col size="6" class="col_height">
+                            <div>
+                              <p class="card_left_text"  >Cust-Category</p>
+                            </div>
+                          </ion-col>
+                          <ion-col size="6" class="col_height">
+                            <div>
+                              <p class="card_right_text">{{items.CustomerCategory ||"-"}}</p>
+                            </div>
+                            </ion-col>
+                            </ion-row>
+                            <ion-row>
+                              <ion-col size="6" class="col_height">
+                                <div>
+                                  <p class="card_left_text"  >Priority</p>
+                                </div>
+                              </ion-col>
+                              <ion-col size="6" class="col_height">
+                                <div>
+                                  <p class="card_right_text">{{items.Priority||"-"}}</p>
+                                </div>
+                                </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                  <ion-col size="6" class="col_height">
+                                    <div>
+                                      <p class="card_left_text"  >Account No</p>
+                                    </div>
+                                  </ion-col>
+                                  <ion-col size="6" class="col_height">
+                                    <div>
+                                      <p class="card_right_text">{{items.AccountNumber}}</p>
+                                    </div>
+                                    </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                      <ion-col size="6" class="col_height">
+                                        <div>
+                                          <p class="card_left_text"  >Account No</p>
+                                        </div>
+                                      </ion-col>
+                                      <ion-col size="6" class="col_height">
+                                        <div>
+                                          <p class="card_right_text">{{items.AccountNumber}}</p>
+                                          <p>  <a (click)="hideMore($index) "><i class="fa fa-angle-double-up iconcolor " aria-hidden="true " style="border-radius: 50%;width: 26px;height: 26px;text-align: center;box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3);background-color: #607d8b;padding-top: 3px;font-size: 20px;color: white;float:right; "></i></a></p>
+                                        </div>
+                                        </ion-col>
+                                        </ion-row>
+                                        <div class="ion-padding row" slot="content">
+                                          <ion-button class="col-4" style="--background:#87ceeb;
+                                          margin: auto;"  (click)="assignedvisitupdatemodal(items)" expand="block">Action</ion-button>
+                                          </div>
+                                          
+
+            </ion-grid>
+            </ion-card-content>
+            </ion-card>
+
+
+
+            <p *ngIf="assignedvisitdata==0"  style="text-align: center">No Record Found</p>
+            </div>
+  
+  
+
+
+
+
+
+
+
+
+
+    </ion-grid>
+
+
+
+
+
+ 
+
+
+
+
+
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>

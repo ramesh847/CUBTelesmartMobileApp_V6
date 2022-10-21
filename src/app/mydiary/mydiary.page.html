@@ -1,0 +1,229 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="home" class="home_icon"></ion-icon>
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title >My Diary</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <ion-card>
+    <ion-card-content> -->
+      <form [formGroup]="MyDiaryForm" (submit)="onSubmitForm(MyDiaryForm)">
+        <ion-row>
+          <ion-col size="6" class="col_height">
+            <div>
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">Start Date</ion-label>
+                </div>
+                <ion-item>
+                  <ion-input value="{{ date | date: 'dd/MM/yyyy' }}" id="date" class="ion-text-end"></ion-input>
+                  <ion-popover trigger="date" size="cover">
+                    <ng-template>
+                      <ion-datetime presentation="date" [(ngModel)]="date" formControlName="startDate"
+                        [showDefaultButtons]="true"></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+          
+              </ion-col>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="col_height">
+            <div>
+              <ion-col class="col_height">
+                <div class="input_heading">
+                  <ion-label position="stacked">To Date</ion-label>
+                </div>
+                <ion-item>
+                  <ion-input value="{{ todate | date: 'dd/MM/yyyy' }}" id="todate"    class="ion-text-end"></ion-input>
+                  <ion-popover trigger="todate" size="cover">
+                    <ng-template>
+                      <ion-datetime presentation="todate" 
+                        [showDefaultButtons]="true" [(ngModel)]="todate" formControlName="toDate"></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+          
+              </ion-col>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row style="width: 100%;
+        margin: auto;">
+          <ion-col size="3" class="col_height">
+            <ion-button style="--background:#87ceeb; position: relative;
+            top: 15px;"  (click)="getdiarycount(MyDiaryForm)" expand="block">Search</ion-button>
+            </ion-col>
+            <ion-col size="3" class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">T-Call</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-input  type="text"  disabled formControlName="teleCall"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3" class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">P-Visits</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-input  type="text"  disabled formControlName="pCall"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3" class="col_height">
+              <div class="input_heading">
+                <ion-label position="stacked">Lead-Gen</ion-label>
+              </div>
+              <ion-item class="input_field">
+                <ion-input  type="text"  disabled formControlName="lCall"></ion-input>
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+          <ion-row style="width: 100%;
+          margin: auto;">
+            <ion-col size="4" class="col_height">
+              
+              </ion-col>
+              <ion-col size="4" class="col_height">
+                <ion-button style="--background:#87ceeb"  (click)="viewdetails()" expand="block">View Details</ion-button>
+              </ion-col>
+              <ion-col size="4" class="col_height">
+               
+              </ion-col>
+  
+  
+            </ion-row>
+
+            <ion-row style="width: 100%;
+            margin: auto;">
+            <div style="margin: auto;">
+              <ion-card  *ngFor="let item of customerDetails">
+                <ion-card-header class="card_heder">
+                  <span class="card_heading">{{item.id}}</span>
+                  <!-- <ion-card-title>Card Title</ion-card-title> -->
+                  <span style="float:right;color:white">{{item.mobile}}</span>
+                </ion-card-header>
+            
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Name</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.custname}}</p>
+                      </div>
+                    </ion-col>
+            
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Purpose</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.purpose}}</p>
+                      </div>
+            
+                    </ion-col>
+            
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Call Type</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.cType}}</p>
+                      </div>
+            
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Authorized Status</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.AuthorizeStatus}}</p>
+                      </div>
+            
+                    </ion-col>
+
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Remarks</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.Remarks}}</p>
+                      </div>
+            
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Reason</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.Reason}}</p>
+                      </div>
+            
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Comments</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{item.Comments}}</p>
+                      </div>
+            
+                    </ion-col>
+                  </ion-row>
+                  </ion-grid>
+            
+            
+            
+                  <br>
+            <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+                </ion-card-content>
+              </ion-card>
+            </div>
+             <!-- <ion-card *ngFor="let customer of customers"> -->
+           
+          
+    
+    
+              </ion-row>
+        </form>
+    <!-- </ion-card-content>
+  </ion-card> -->
+
+  <!-- [(ngModel)]="date" formControlName="followupdate" -->
+  <!-- <div class="w-100-p">
+ 
+  </div> -->
+</ion-content>
+<ion-footer class="footer">
+  <p class="footer_content">City Union Bank Ltd</p>
+</ion-footer>
