@@ -108,7 +108,7 @@ this.usertype=localStorage.getItem('userType')
 this.usercode=localStorage.getItem('usercode')
 
 //this.followupvisits = {};
-//console.log(obj);
+
 
 
 //this.setlatlong(obj.LADDRESS);
