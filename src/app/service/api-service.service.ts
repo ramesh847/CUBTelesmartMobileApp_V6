@@ -799,4 +799,19 @@ clickToCallCall (callerMobile:any,customerMobile:any,purpose:any) {
                            //  console.log(ipLink1 + "VerifyOtp/" + usercode + "/" + otp);
                              return this.http.get(this.LoginbaseUrl + Constant.verifypwd + usercode + "/" + otp,{},{});
                            }
+                           //followup vist end modal
+                           callStatusLead(ID:any) {
+                            debugger
+                          //  console.log(ipLink1 + "ClickToCallStatus_Leads/" + ID);
+                            return this.http.get(this.ipLink1 + Constant.ClickToCallStatus_Leads + ID,{},{});
+                          }
+                          EndCAllClickvisit(customerId,customerName,customerMobile,userid,branchid,callerMobile,currDate,endDate,PrimaryWishList,duration,bill,credit,status,status2,rec,location,provider) {
+                            debugger
+                          //  console.log(ipLink1 + "EndCall_Click/" + customerId + "/" + customerName + "/" + customerMobile + "/" + userid + "/" + branchid + "/" + callerMobile + "/" + currDate + "/" + endDate + "/" + purpose);
+                            return this.http.get(this.ipLink1 + Constant.EndCall_Clickvisit + customerId + "/" + customerName + "/" + customerMobile + "/" + userid + "/" + branchid + "/" + callerMobile + "/" + "currDate" + "/" + "endDate" + "/" + PrimaryWishList+"/"+duration+"/"+bill+"/"+credit+"/"+status+"/"+status2+"/"+rec+"/"+location+"/"+provider,{},{});
+                          }
+                          callStatusFollowUp(ID) {
+                            //  console.log(ipLink1 + "ClickToCallStatus_Followup/" + ID);
+                              return this.http.get(this.ipLink1 + "ClickToCallStatus_Followup/" + ID,{},{});
+                            }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams ,ModalController} from '@ionic/angular';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { DatePipe } from '@angular/common';
@@ -48,6 +48,7 @@ export class MyfollowupvisitendmodelPage implements OnInit {
   InsuranceVal: number;
   Collectiondate1: any;
   Collectiondate: any;
+  calloutcome:any;
   AccountNo: any;
   Amount: any;
   colectionmode: any;
@@ -98,17 +99,25 @@ export class MyfollowupvisitendmodelPage implements OnInit {
   iscrosssell: boolean=false;
   issourcelead: boolean=false;
   isrefered: boolean=false;
-  constructor(private datepipe:DatePipe,private Apiservice:ApiServiceService,private navParams:NavParams,private AlertService:AlertServiceService) { }
+  custDetails:any;
+  data: any;
+  success: any;
+  end_disable:boolean=false;
+action_disable:boolean=false;
+  getusername: any;
+  constructor(public modalController: ModalController,private datepipe:DatePipe,private Apiservice:ApiServiceService,private navParams:NavParams,private AlertService:AlertServiceService) { }
 
   ngOnInit() {
 debugger
+// this.followupvisits.addressname="chennai"
+this.calloutcome1()
 this.userid=localStorage.getItem('userID')
 this.branchid=localStorage.getItem('branchID')
 this.usertype=localStorage.getItem('userType')
 this.usercode=localStorage.getItem('usercode')
 
-//this.followupvisits = {};
-
+//this.followupvisits = {};save
+//console.log(obj);
 
 
 //this.setlatlong(obj.LADDRESS);
@@ -134,6 +143,7 @@ this.followupvisits.InsuranceType=Cusdata.InsuranceType
 this.followupvisits.customerid=Cusdata.CUSTOMER_ID
 this.followupvisits.customername=Cusdata.CUSTOMER_NAME
 this.followupvisits.Purpose=Cusdata.Purpose
+Cusdata.LADDRESS="chennai"
 this.followupvisits.addressname=Cusdata.LADDRESS
 
 localStorage.setItem('customerID',Cusdata.CUSTOMER_ID)
@@ -235,7 +245,7 @@ this.objdataupdtime={}
         //alert("Reached the Location");
         var timestart = new Date();
         console.log(timestart);
-      this.endmeetingtime = this.datepipe.transform('date')(timestart, 'yyyy-MM-dd hh-mm-ss');
+      this.endmeetingtime = this.datepipe.transform(timestart, 'yyyy-MM-dd hh-mm-ss');
        // console.log(this.endmeetingtime);
 debugger
 
@@ -265,18 +275,23 @@ debugger
       }, 500);
 
 this.followupvisitsUpdateModal(Cusdata)
-this.calloutcome()
+
 
   }
+
+  modelDissmiss(){
+    this.modalController.dismiss();
+  }
+
   handleChange(){
     debugger
-  console.log('event',this.followupvisits.crdit_facility)
+  console.log('event',this.followupvisits.calloutcome)
   debugger
-  if(this.followupvisits.crdit_facility==2){
+  if(this.followupvisits.calloutcome==2){
     // this.followupvisits.crdit_facility='2'
     this.isfollowupdate=true
     this.islead=false
-  }else if(this.followupvisits.crdit_facility==3){
+  }else if(this.followupvisits.calloutcome==3){
     // this.followupvisits.crdit_facility='3'
     this.isfollowupdate=false
     this.islead=true
@@ -291,7 +306,7 @@ this.calloutcome()
   
   }
 
-getprod
+// getprod
 
 
 
@@ -467,11 +482,11 @@ this.ispgroup=true
       }else{
      // this.showspin();
      this.Apiservice.getcustomerdetails(this.cust_id)
-        .then(function (response:any) {
+        .then( (response:any) =>{
           debugger
          // this.hidespin();
           console.log(response);
-         this.custDetails = JSON.parse(response);
+         this.custDetails = JSON.parse(response.data);
          this.followupvisitscustomerdata = JSON.parse(this.custDetails);
 debugger
           if(this.followupvisitscustomerdata != "" && this.followupvisitscustomerdata != undefined)
@@ -564,7 +579,7 @@ this.followupvisits={};
 
   }
 
-  calloutcome(){
+  calloutcome1(){
     debugger
     this.Apiservice.calloutcomeapi().then((res:any)=>{
       debugger
@@ -669,6 +684,55 @@ this.Apiservice.getinsurancedetails('Refferals')
   var itemrefarr = JSON.parse(JSON.parse(response.data)).Table;
  this.ins_ref = itemrefarr.Table;
 })
+}
+
+
+getamount(customer_id, date, acc_num) {
+  debugger
+  var formatted_date = this.datepipe.transform(date, 'dd-MM-yyyy');
+  // $scope.showspin();
+  this.Apiservice.getamount(formatted_date, acc_num, customer_id).then( (resp:any)=> {
+    // $scope.hidespin();
+    
+    if (JSON.parse(JSON.parse(resp.data))== '"No collection entry is available.Please check"') {
+    
+      this.AlertService.presentAlert("Alert","No Collection Entry Is Available.Please Check")
+      return false;
+
+    } else {
+      var amount = resp.data;
+      amount = amount.replace(/\"/g, "")
+    this.data.collectamount = amount;
+    }
+  })
+}
+
+checkusercode(val) {
+  var usercode = val;
+  var branchid = window.localStorage['branchID'];
+
+  // $scope.showspin();
+  this.Apiservice.getusername(usercode, branchid)
+    .then( (response:any)=> {
+      // $scope.hidespin();
+      debugger
+      console.log(response);
+      response = JSON.parse(JSON.parse(response.data));
+      if (response == "This User Not in this Branch") {
+
+        this.AlertService.presentAlert("Alert","Please Enter The Valid Emp Code")
+        return false;
+        this.followupvisits.jointusername = "";
+       this.followupvisits.jointcode = "";
+
+      } else {
+        this.getusername = response;
+       this.followupvisits.jointusername = this.getusername;
+        console.log(this.getusername)
+      }
+
+    })
+    
 }
 
 savecallout(data:any){
@@ -885,9 +949,9 @@ savecallout(data:any){
       this.nextcalldate1 = this.datepipe.transform( this.followupvisits.followdate,'yyyy-MM-dd')
     //  $filter('date')(this.followupvisits.followdate, 'yyyy-MM-dd');
    
-      this.followuptime = this.datepipe.transform(this.followupvisits.followtime, 'h.mm a')
+      this.followuptime =  this.followupvisits.followtime   //this.datepipe.transform(, 'hh:mm:ss')
       // $filter('date')(this.followupvisits.followtime, 'h.mm a');
-      var NEXTCALLDATE = this.nextcalldate1 + ' ' + this.followuptime;
+      var NEXTCALLDATE = this.nextcalldate1 ;
 
      
     }
@@ -1004,12 +1068,12 @@ var STRUSERID=window.localStorage['userID']
     console.log("call type is personal visit");
     //this.showspin();
     this.Apiservice.updatefollowcalls(STRUSERID, CUSTID, RESPONSE, REMARKS, this.branchid, NEXTCALLDATE, CALLID, CALLTYPE, this.usercode, AccountNo, Amount, Collectiondate, colectionmode, jointvisit, jointcode, Endtime, Totime)
-      .then(function (response) {
+      .then( (res:any)=> {
         debugger
-        this.hidespin();
-        console.log(response.data);
+        // this.hidespin();
+        console.log(res.data);
       
-        this.success = response.data;
+        this.success = JSON.parse(res.data);
         window.localStorage['date'] = "";
 
         if (this.success !== '') {
@@ -1053,12 +1117,12 @@ var STRUSERID=window.localStorage['userID']
     console.log("call type is not a personal visit");
    // this.showspin();
     this.Apiservice.updatefollowcalls(STRUSERID, CUSTID, RESPONSE, REMARKS, this.branchid, NEXTCALLDATE, CALLID, CALLTYPE, this.usercode, AccountNo, Amount, Collectiondate, colectionmode, jointvisit, jointcode, Endtime, Totime)
-      .then(function (response) {
+      .then( (response:any) =>{
        // this.hidespin();
        debugger
         console.log(response.data);
         // response = JSON.parse(response);
-        this.success = response.data;
+        this.success = JSON.parse(response.data);
         window.localStorage['date'] = "";
         this.AlertService.presentAlert("Alert","Successfully Saved")
         return false
@@ -1764,6 +1828,8 @@ console.log(this.followupvisits.deposits)
       
       this.AlertService.presentAlert("Alert","Enter Your Location")
 
+
+      // var address="checnnai"
       // var myPopup = $ionicPopup.show({
       //   template: '<center>Enter Your Location</center>',
       //   title: 'Warning',

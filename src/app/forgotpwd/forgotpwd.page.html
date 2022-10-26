@@ -13,21 +13,19 @@
         </ion-toolbar>
           <ion-content class="has-header-new" style="--background: url(/assets/img/loginbg.jpg) 0 0/100% 100% no-repeat !important">
               <div class="container centerwidth" style="text-align: center;width: 80%;margin-left: 13%;">
-                  <form>
+                  <!-- <form> -->
                       <img src="../../assets/img/logo.png" class="animated fadeInDown" alt="Welcome" style="width:120px;height:auto; margin-top:70px;margin-right: 20px;">
                       <div *ngIf="showVerify==true">
-                   <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;margin-top: 20%;">
-                          <i class="fa fa-user" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
-          font-size: 18px;"></i>
-                          <input type="number" placeholder="Emp Code" ng-model="logindata.user_name">
+                   <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                          <i class="fa fa-user" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;color:black;font-size: 18px;"></i>
+                          <input type="number" placeholder="Emp Code" [ngModelOptions]="{standalone: true}" [(ngModel)]="logindata.user_name" style="color: black;">
                       </div>
-                      <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
-                          <i class="fa fa-calendar-o" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
-          font-size: 18px;"></i>
-                          <input class="input" max={{dateToday}} placeholder="Enter your DOB" ng-model="logindata.dob" onfocus="(this.type='date')" style="border:none;">
+                      <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                          <i class="fa fa-calendar-o" aria-hidden="true" style="margin-left:-33px;margin-right:10px;padding-top: 10px;color:black;font-size: 18px;"></i>
+                          <input class="input"  placeholder="Enter your DOB" [(ngModel)]="logindata.dob" type="date" style="color: black;">
                       </div>
                       <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
-                          <ion-button class="button button-assertive round" ng-disabled="" ng-click="sendOtp()">
+                          <ion-button class="button button-assertive round" ng-disabled="" (click)="sendOtp()">
                               Send Otp
                           </ion-button>
                           </div>
@@ -73,9 +71,9 @@
                                   </div>
                           </div> -->
                           <div *ngIf="showotpdiv==true"> 
-                            <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;" >
+                            <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;" >
                                    
-                                    <input type="number" placeholder="OTP" ng-model="logindata.otp">
+                                    <input type="number" placeholder="OTP" [(ngModel)]="logindata.otp">
         
                                 </div>
                            
@@ -88,16 +86,14 @@
                                 </div>
 
                                 <div *ngIf="showUpdatepwd==true">
-                                    <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;margin-top: 20%;">
-                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
-                        font-size: 18px;"></i>
-                                        <input type="password" placeholder="New Password" id="pwd" ng-model="logindata.pwd" ng-change="test_str('pwd')"  required>
+                                    <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;color:black;font-size: 18px;"></i>
+                                        <input type="password" placeholder="New Password" id="pwd" [(ngModel)]="logindata.pwd" ng-change="test_str('pwd')"  required>
                                     </div>
                                     <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck1">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
-                                    <div class="row animated fadeInDown" style="padding: 5px;margin-top: 10px;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
-                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;
-                        font-size: 18px;"></i>
-                                        <input type="password" placeholder="Confirm Password" id="cnfpwd" ng-model="logindata.cnfpwd" ng-change="test_str('cnfpwd')"  required>
+                                    <div class="row animated fadeInDown" style="padding: 5px;margin: 15px 0 0 0 !important;border-bottom: 1px solid rgba(144, 136, 136, 0.47);background-color: white;border-radius: 5px;">
+                                        <i class="fa fa-key" aria-hidden="true" style="margin-left:26px;margin-right:10px;padding-top: 10px;color:black;font-size: 18px;"></i>
+                                        <input type="password" placeholder="Confirm Password" id="cnfpwd" [(ngModel)]="logindata.cnfpwd" ng-change="test_str('cnfpwd')"  required>
                                     </div>
                                     <p style="color: white;font-size: small;text-align: left;margin: 5px 0px im !important;" ng-show="pwdcheck2">Password Should contain atleast 1 uppercase, 1 lowercase, 1 digit, 1 special Character and Minimum 8 characters on total</p>
                                     <div style="padding-top: 15px;padding-right: 15px;" class="animated slideInUp">
@@ -108,7 +104,7 @@
                                 </div> 
 
 
-                  </form>
+                  <!-- </form> -->
   
                 
                   <!-- <form >

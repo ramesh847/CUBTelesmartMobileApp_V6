@@ -1,87 +1,117 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>commonvisit</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar class="header">
+    <ion-buttons slot='end'>
+      <ion-icon name="home" class="home_icon"></ion-icon>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>CommonVisits</ion-title>
+    </ion-toolbar>
 
-<ion-content>
-   <div class="animated bounceInRight" style=""> 
+<ion-content class="body_bg">
+   
 
-               <div class="row col-md-12" style="padding-bottom: 0px;">
-                <div class="col-xs-6 col-sm-6" style="margin-left: 20px;">
-                    <label>Customer ID</label>
-                <input class="input-md textinput textInput form-control inputcolor" style="padding: 1em ; border: 1px solid #ddd4d4;" placeholder="Customer ID" [(ngModel)]="search.CBSCustomerID" />
+               <ion-row>
+                <ion-col size="6">
+                    <div class="content_item">
+                    <ion-label>Customer ID</ion-label>
+                    <ion-item class="input_field">
+                <ion-input class="input-md textinput textInput form-control inputcolor" style="padding: 1em ; border: 1px solid #ddd4d4;" placeholder="Customer ID" [(ngModel)]="search.CBSCustomerID" (ionBlur)="searchCommonVisits(search.Purpose,search.CBSCustomerID)"></ion-input>
+                </ion-item>
                 </div>
-                <div class=" col-xs-6 col-sm-6">
-                    <label>Purpose</label>
-                    <ion-select class="form-control" name="Purpose" style="margin-bottom: 10px;" [(ngModel)]="search.Purpose" (ionChange)="searchCommonVisits(search.Purpose,search.CBSCustomerID)">
+                </ion-col>
+                <ion-col size="6">
+                    <div class="content_item">
+                    <ion-label>Purpose</ion-label>
+                    <ion-item class="input_field">
+                    <ion-select class="select_field" name="Purpose" style="margin-bottom: 10px;" [(ngModel)]="search.Purpose" (ionChange)="searchCommonVisits(search.Purpose,search.CBSCustomerID)">
                         <ion-select-option value="">Select</ion-select-option>
-                        <ion-select-option *ngFor="items in callPurpose" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+                        <ion-select-option *ngFor="let items of callPurpose" value="{{items.Value}}">{{items.Text}}</ion-select-option>
                     </ion-select>
+                    </ion-item>
                 </div>
-            </div> 
+                </ion-col>
+               </ion-row> 
 
-            <!-- <div class="col-sm-6 col-md-6 " *ngFor="items in filtered ">
-                <div class="card col-xs-11 col-sm-11 col-md-11 cardcolor" style="padding: 0px;margin-bottom: 0px;">
+               <ion-card *ngFor="let items of commonvisitdataonload">
+                <ion-card-header class="card_heder">
+                  <span class="card_heading">{{items.CUSTOMER_ID}}</span>
+                
+                  <span style="float:right;color:white;cursor: pointer;" class="fa fa-mobile" (click)="callNumber(items)"><u>{{items.CONTACT_NO}}</u></span>
+                </ion-card-header>
+            
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text"  >Name</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{items.CustomerName}}</p>
+                      </div>
+                    </ion-col>   
+                     <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Account No</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{items.AccountNumber}}</p>
+                      </div>
+            
+                    </ion-col>
+            
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_left_text">Purpose</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{items.Purpose}}</p>
+                      </div>
+            
+                    </ion-col>
+                     <ion-col size="6" class="col_height">
+              <div>
+                        <p class="card_right_text">Call Date</p>
+                      </div>
+            </ion-col>
+    <ion-col size="6" class="col_height">
+                      <div>
+                        <p class="card_right_text">{{items.ToCallDate || "-"}}</p>
+                      </div>
+            
+                    </ion-col>
+       <div class="container-fluid">
+                         <div class="col-sm-12 text-center" style="padding-bottom: 10px;">
+                          <ion-button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;"  (click)="commonvisitUpdateModal(items)" center>Action</ion-button>
+                            
+                         </div>
+                      </div> 
+                 
+                  </ion-row>
+                  </ion-grid>
+            
+            
+            
+                  <br>
+            <!-- <div class="update_button">
+              <ion-button style="--background:#87ceeb"  (click)="myassignActionModal(customer)" expand="block">Action</ion-button>
+            
+            </div> -->
+                </ion-card-content>
+              </ion-card>
 
-    <div class="item item-divider" style="background-color:#ec0576!important">
-                    <span style="color: white;font-size: 14px;font-weight: 500;" [(ngModel)]="customerCode"> {{items.CBSCustomerID}}</span>
-                    <span style="float:right;" [(ngModel)]="mobileNumber" (click)="callNumber(items)" *ngIf="ClickAccess">
-                    <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.Mobile}}</u></a></span>
-                    <span style="float:right;" [(ngModel)]="mobileNumber" ng-hide="ClickAccess">
-                        <i style="color:white;" class="fa fa-mobile" aria-hidden="true"></i>&nbsp;<a style="color: white !important;background-color:#ec0576!important;font-size: 14px;font-weight: 500;" ><u>{{items.Mobile}}</u></a></span>
-                </div>
-         
-                     <div class="item item-text-wrap" style="padding-left: 35px;padding-top:0px !important; ">
-                    <div class="row" style="">
-                        <div class="col col-50" style="padding: 0px;">
-                            <p style="font-weight:bold;">Name</p>
-                        </div>
-                        <div class="col col-50" style="padding: 0px;">
-                            <span style="font-size: 14px;">{{items.CustomerName}}</span>
-                        </div>
-                    </div>
-                      <div class="row" style="">
-                        <div class="col col-50" style="padding: 0px;">
-                            <p style="font-weight:bold;">Account No</p>
-                        </div>
-                        <div class="col col-50" style="padding: 0px;">
-                            <span style="font-size: 14px;">{{items.AccountNumber}}</span>
-                        </div>
-                    </div>
-                      <div class="row" style="">
-                        <div class="col col-50" style="padding: 0px;">
-                            <p style="font-weight:bold;">Purpose</p>
-                        </div>
-                        <div class="col col-50" style="padding: 0px;">
-                            <span style="font-size: 14px;">{{items.Purpose}}</span>
-                        </div>
-                    </div>
-                     <div class="row" style="">
-                        <div class="col col-50" style="padding: 0px;">
-                            <p style="font-weight:bold;">Call Date</p>
-                        </div>
-                        <div class="col col-50" style="padding: 0px;">
-                            <span style="font-size: 14px;">{{items.ToCallDate || "-"}}</span>
-                               
-                        </div>
-                    </div>
-                         
-            <div class="container-fluid">
-                       <div class="col-sm-12 text-center" style="padding-bottom: 10px;">
-                        <button class="schedulebutn fa fa-pencil-square-o" style="font-size: 13px;letter-spacing: 1px;"  (click)="commonvisitUpdateModal(items)" center>Action</button>
-                          
-                       </div>
-                    </div>              
 
-                    </div>
-                </div>
-            </div>  -->
-        </div>
+            
+        
 
-         <!-- <center>
-                        <p style="margin-top: 20px !important;color: black;font-size: bold;" *ngIf="filtered==0"> No Record Found</p>
-                    </center> -->
+         <center>
+                        <p style="margin-top: 20px !important;color: black;font-size: bold;" *ngIf="commonvisitdataonload==0"> No Record Found</p>
+                    </center>
 </ion-content>
 
 

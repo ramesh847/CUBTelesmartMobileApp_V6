@@ -1,0 +1,230 @@
+<ion-toolbar class="header">
+  <ion-buttons slot='end'>
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+  <ion-title n>common visit update</ion-title>
+  </ion-toolbar>
+<ion-content class="body_bg">
+  <ion-card>
+    <ion-header-bar align-title="center" class="barcolor">
+      <h1 class="title" style="color:white;font-weight:normal !important;background-color: #2e3192 ;">{{assignedvisit.fullname}}
+  </h1>
+        
+  </ion-header-bar>
+  
+    <ion-card-content>
+   
+    <ion-content style="background: url('img/bg32.png') repeat;">
+        <div class="container">
+        <div class="panel panel-default" style="margin-top: 10px;">
+
+<ion-item class="panel-heading" style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid!='11' && purposeid!='12' && purposeid!='13'">Purpose: {{assignedvisit.Purpose}}<span style="float:right;">{{assignedvisit.customerid}}</span></ion-item>
+<ion-item class="panel-heading" style="background-color: #ec0576 !important;color:white; font-weight: bold;" *ngIf="purposeid=='11' || purposeid=='12' || purposeid=='13'">Purpose: Lead Generation&nbsp;{{assignedvisit.Purpose}}<span style="float:right;">{{assignedvisit.customerid}}</span></ion-item>
+<form  style="margin-top: 10px;"> 
+<div class="">
+     
+
+
+<div class="col-sm-6 col-xs-6 rowfield responsive_sm">
+<div class="form-group" >
+<ion-label>Call OutCome<span class="mandfield">*</span></ion-label>
+
+
+<ion-select class="form-control" name="calloutcome" [(ngModel)]="assignedvisit.calloutcome" style="margin-bottom: 10px;" type="text" *ngIf="hidecalloutcome">
+<ion-select-option value="">ion-select</ion-select-option>
+<ion-select-option ng-repeat="items in callOutCome |filter:item.Text='Calls-FollowUp'" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+</ion-select>
+<ion-select class="form-control" name="calloutcome" [(ngModel)]="assignedvisit.calloutcome" style="margin-bottom: 10px;" type="text"  *ngIf="!hidecalloutcome">
+<ion-select-option value="">ion-select</ion-select-option>
+<ion-select-option ng-repeat="items in callOutCome" value="{{items.Value}}">{{items.Text}}</ion-select-option>
+</ion-select>
+
+
+
+</div>
+</div>
+
+<div class="col-sm-6 col-xs-6 rowfield responsive_sm">
+<div class="form-group">
+<ion-label>Call Type<span class="mandfield">*</span></ion-label>
+<ion-select class="form-control" name="calltype" [(ngModel)]="assignedvisit.calltype" (ionChange)="mapShow(assignedvisit.calltype);" style="margin-bottom: 10px;" type="text"  ng-init="assignedvisit.calltype='P'"> 
+                       <ion-select-option value="">select</ion-select-option>
+                    <ion-select-option value="T">Telecall</ion-select-option>
+                            <ion-select-option value="P">Personal Visit</ion-select-option>
+                            </ion-select>
+</div>
+</div>
+
+
+<div class="col-xs-6 col-sm-6 rowfield responsive_sm">
+<div class="form-group" *ngIf="assignedvisit.calloutcome == 2">
+<ion-label>Followup Date<span class="mandfield">*</span></ion-label>
+<ion-input class="form-control" 
+min={{dateToday}}
+[(ngModel)]="assignedvisit.followdate" placeholder="Date" style="padding: 1em; border: 1px solid #ddd4d4;" 
+min="entry_mindate"
+type="date"/>
+</div>
+</div>
+
+<div class="col-xs-6 col-sm-6 rowfield responsive_sm">
+<div class="form-group" *ngIf="assignedvisit.calloutcome == 2">
+<ion-label>Followup Time<span class="mandfield">*</span></ion-label>
+<ion-input class="form-control" [(ngModel)]="assignedvisit.followtime" placeholder="Time" style="padding: 1em; border: 1px solid #ddd4d4;" (ionChange)="verifytime()" type="time"/>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-12">
+<div class="form-group" *ngIf="assignedvisit.calltype == 'P'">
+<ion-label></ion-label>
+<ion-checkbox [(ngModel)]="assignedvisit.JointVisit" ng-true-value="'Y'" ng-false-value="'N'" ng-disabled="myBooleanValue1" style="font-size: 15px;background-color: transparent;padding-top: 0px;padding-bottom: 0px;"> &nbsp; <span class="namealign">JointVisit</span></ion-checkbox>
+</div>
+</div>
+
+<div class="col-xs-6 col-sm-6 rowfield responsive_sm">
+
+<div class="form-group" *ngIf="assignedvisit.JointVisit == 'Y' && assignedvisit.calltype == 'P'">
+<ion-label>Emp Code<span class="mandfield">*</span></ion-label>
+<ion-input class="form-control" [(ngModel)]="assignedvisit.jointcode" placeholder="Emp Code" ng-blur="checkusercode(assignedvisit.jointcode)" style="padding: 1em;margin-top: 10px; border: 1px solid #ddd4d4;" type="number"/>
+</div>
+</div>
+
+<div class="col-xs-6 col-sm-6 rowfield responsive_sm">
+
+<div class="form-group" *ngIf="assignedvisit.JointVisit == 'Y' && assignedvisit.calltype == 'P'">
+<ion-label>Emp Name<span class="mandfield">*</span></ion-label>
+<ion-input class="form-control" [(ngModel)]="assignedvisit.jointusername" placeholder="" ng-blur="checkusercode(assignedvisit.jointcode)" style="padding: 1em;margin-top: 10px; border: 1px solid #ddd4d4;" type="text"/ disabled="">
+</div>
+</div>
+
+<div class="row">
+<div class="form-group col-xs-12 col-sm-12 rowfield required
+" *ngIf="assignedvisit.calltype=='P'" style="margin-left: 11px;">
+                    <ion-label for="name" style="font-weight: bold;">Enter Location<span class="mandfield">*</span></ion-label>
+                    
+                    <textarea type="textarea"  [(ngModel)]="assignedvisit.addressname" class="form-control" data-method="getinfoadd" details="chosenPlaceDetails" googleplacenew cols="10" rows="2" maxlength="120" (ionChange)="setlatlong(assignedvisit.addressname)" data-tap-disabled="true" ng-focus="disableTap()"  required></textarea>
+                      
+                  
+                </div>
+                 <div class="form-group col-xs-1 col-sm-1 
+" *ngIf="assignedvisit.calltype=='P'" style="margin-top: 40px;">
+
+              </div>
+            </div>
+
+<div class="row center-block" style="margin-bottom: 5px;">
+
+<div class="col" *ngIf="myvalue" *ngIf="assignedvisit.calltype=='P'">
+    
+    <div id="infowindow-content">
+        <img src="" width="16" height="16" id="place-icon">
+        <span id="place-name" class="title"></span>
+        <br>
+        <span id="place-address"></span>
+    </div>
+</div>
+</div>
+
+
+<div class="col-xs-12 col-sm-12">
+<div class="form-group" *ngIf="assignedvisit.Purpose == 'NPA followup'">
+<ion-label></ion-label>
+<ion-checkbox [(ngModel)]="assignedvisit.current" ng-true-value="'Y'" ng-false-value="'N'" ng-disabled="myBooleanValue1" style="font-size: 15px;background-color: transparent;"> &nbsp; <span class="namealign">Amt-Collected</span></ion-checkbox>
+</div>
+</div>
+
+<div class="col-sm-12 col-xs-12">
+<div class="form-group" *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+                 <ion-label>Collected Date<span class="mandfield">*</span> </ion-label>
+                
+                     <ion-input class="form-control" id="collecteddate" placeholder="Collected Date" style="padding: 1em; border: 1px solid #ddd4d4;" type="date" [(ngModel)]="assignedvisit.collected_date"/>
+                
+            </div>
+            </div>
+<div class="col-sm-12 col-xs-12">
+            <div class="form-group" *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+                 <ion-label>Account Number<span class="mandfield">*</span> </ion-label>
+              
+                     <ion-input class="form-control" id="collectedaccnumber" placeholder="Account Number" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="assignedvisit.collected_accno" ng-blur="getamount(assignedvisit.customerid,assignedvisit.collected_date,assignedvisit.collected_accno)"/>
+              
+            </div>
+            </div>
+<div class="col-sm-12 col-xs-12">
+             <div class="form-group" *ngIf="assignedvisit.Purpose == 'NPA followup' && assignedvisit.current == 'Y'">
+                 <ion-label>Amount<span class="mandfield">*</span> </ion-label>
+                
+                     <ion-input class="form-control" id="collectedamount" placeholder="Amount" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="assignedvisit.collectamount" disabled />
+              
+            </div>
+            </div>
+<!-- 
+             <div class="col-sm-12 col-xs-12 responsive_sm">
+        
+          <div class="form-group">
+        
+          <ion-label>Start Time</ion-label>
+            <ion-input class="form-control" [(ngModel)]="assignedvisit.starttime"  style="padding: 1em; border: 1px solid #ddd4d4;" type="text"/>
+                       
+                   </div>
+                   </div> -->
+<!-- <div class="col-sm-12 col-xs-12 responsive_sm">
+
+                        <div class="form-group">
+                             <ion-label>End Time</ion-label>
+                           
+                                 <ion-input class="form-control" [(ngModel)]="assignedvisit.endtime" style="padding: 1em; border: 1px solid #ddd4d4;" type="text"/>
+                           
+                        </div>
+            </div> -->
+
+            <div class="form-group col-xs-6 col-sm-6 rowfield required" *ngIf="Purpose== 'Lead Generation'">
+            
+                    <ion-label for="name" style="font-weight: bold;">Deposits<span class="mandfield">*</span></ion-label>
+                   <ion-input class="ion-input-md textion-input textion-input form-control ion-inputcolor" id="collecteddate" placeholder="Deposits" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="assigned.deposits"  required  />
+             
+            </div>
+
+              <div class="form-group col-xs-6 col-sm-6 rowfield required" *ngIf="Purpose == 'Lead Generation'">
+            
+                    <ion-label for="name" style="font-weight: bold;">CASA<span class="mandfield">*</span></ion-label>
+                   <ion-input class="ion-input-md textion-input textion-input form-control ion-inputcolor" id="collecteddate" placeholder="CASA" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="assigned.casa" required/>
+             
+            </div>
+
+              <div class="form-group col-xs-6 col-sm-6 rowfield required" *ngIf="Purpose == 'Lead Generation'">
+            
+                    <ion-label for="name" style="font-weight: bold;">Advance<span class="mandfield">*</span></ion-label>
+                   <ion-input class="ion-input-md textion-input textion-input form-control ion-inputcolor" id="collecteddate" placeholder="Advance" style="padding: 1em; border: 1px solid #ddd4d4;" type="text"  [(ngModel)]="assigned.advance" required/>
+             
+            </div>
+
+              <div class="form-group col-xs-6 col-sm-6 rowfield required" *ngIf="Purpose== 'Lead Generation'">
+            
+                    <ion-label for="name" style="font-weight: bold;">Insurance<span class="mandfield">*</span></ion-label>
+                   <ion-input class="ion-input-md textion-input textion-input form-control ion-inputcolor" id="collecteddate" placeholder="Insurance" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="assigned.insurance"  required />
+             
+            </div>
+
+
+            
+
+                    <div class="form-group col-xs-12 col-sm-12" >
+                    <ion-label>Remarks</ion-label>
+                    
+                        <textarea class="textareaField form-control" style="border-radius: 5px;width: 100%;" [(ngModel)]="assignedvisit.remarks"></textarea>
+                  
+                </div>
+
+<div class="row">
+                <ion-button class="button button-small button-full button-positive" (click)="saveassignedvisits(assignedvisit)" style="background-color:#ec0576;font-size: 16px;border-radius: 5px;padding: 5px;margin-top: 15px;margin-left: 25px;">
+                    SAVE
+                </ion-button>>
+            </div>
+</form>
+</div>
+
+  </ion-content>
+  </ion-card-content>
+  </ion-card>
+  </ion-content>

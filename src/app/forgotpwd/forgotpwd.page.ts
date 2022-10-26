@@ -23,14 +23,22 @@ export class ForgotpwdPage implements OnInit {
   pwdcheck1: boolean=false;
   pwdcheck2: boolean=false;
   resupdate: any;
+  showotpdiv:boolean=false;
+  user_name:any;
+  // dob:any
+  // showUpdatepwd:boolean=false
 
   constructor(private datepipe:DatePipe,private AlertService:AlertServiceService,private Apiservice:ApiServiceService) { }
 
   ngOnInit() {
+    debugger
+    this.showotpdiv = false
+    this.showUpdatepwd=false
   }
 
 
   sendOtp() {
+    debugger
     // this.showotpdiv = true;
     //this.showspin();
     // if(this.logindata.user_name == undefined || this.logindata.user_name == '' && this.logindata.dob == undefined || this.logindata.dob == ''){
@@ -64,14 +72,18 @@ export class ForgotpwdPage implements OnInit {
     
    // $filter('date')(this.logindata.dob, 'dd-MM-yyyy');
     console.log(this.dob);
+    debugger
     this.Apiservice.sendOTP(this.logindata.user_name,this.dob)
         .then((response:any)=> {
+          debugger
             console.log(response.data)
-            this.res= JSON.parse(response.data);
+            this.res= JSON.parse(JSON.parse(response.data));
            // this.hidespin($ionicLoading);
             if(this.res == 'OTP Sent Successfully'){
 
               this.AlertService.presentAlert("Alert",this.res)
+              this.showotpdiv = true;
+              this.showVerify=false
                 // var alertPopup = $ionicPopup.alert({
                 //     title: 'Success',
                 //     template: this.res
@@ -100,6 +112,7 @@ export class ForgotpwdPage implements OnInit {
 }
 
 verifyfwdotp(){
+  debugger
   //  this.invalidOTP = false;
   // this.showUpdatepwd = true;
   // // this.logindata = {};
@@ -121,8 +134,9 @@ if(this.otp != undefined || this.otp != null || this.otp != '' || this.otp != 'u
 this.usercode = this.logindata.user_name;
 this.Apiservice.verifyfwdOTP(this.logindata.user_name,this.otp)
 .then((response:any) =>{
+  debugger
 console.log(response)
-this.resver= JSON.parse(response.data);
+this.resver= JSON.parse(JSON.parse(response.data));
 // this.hidespin($ionicLoading);
 if(this.resver == 'Given OTP Valid'){
   // var alertPopup = $ionicPopup.alert({
@@ -159,6 +173,7 @@ if(this.resver == 'Given OTP Valid'){
 }
 }
 updatePwd(code){
+  debugger
   //this.showspin();
   if(this.logindata.pwd == undefined || this.logindata.pwd == null || this.logindata.pwd == ''|| this.logindata.pwd == 'undefined'){
      // this.hidespin($ionicLoading);
@@ -184,8 +199,9 @@ updatePwd(code){
       // callAPI.updatePWD($rootScope.usercode,this.logindata.pwd)
       this.Apiservice.updatePWD(this.logindata.user_name,this.logindata.pwd)
       .then( (response:any)=> {
+        debugger
           console.log(response)
-          this.resupdate= JSON.parse(response.data);
+          this.resupdate= JSON.parse(JSON.parse(response.data));
           // this.hidespin($ionicLoading);
           if(this.resupdate == 'Password Updated Successfully'){
             this.AlertService.presentAlert("Alert","Updated Succesfully")

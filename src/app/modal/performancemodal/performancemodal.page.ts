@@ -48,10 +48,10 @@ plpCustomerBranch(){
   this.Apiservice.getplpCustomerBranch(this.userid)
   .then((response:any)=> {
     debugger
-    console.log(response)
+    console.log(response.data)
     //this.hidespin();
-       response = JSON.parse(response);
-       this.plpBranchList = response;
+       response = JSON.parse(response.data);
+       this.plpBranchList = JSON.parse(response);
        console.log(this.plpBranchList)
 
   })
@@ -79,9 +79,9 @@ plpCustomerBaseDetails1(category,custID,custName,Branch)
     this.Apiservice.getplpCustomerBase( this.userid,this.usertype, custID, custName, Branch, category)
     .then((response:any)=> {
       debugger
-      console.log(response)
+      console.log(response.data)
       //this.hidespin();
-         response = JSON.parse(response);
+         response = JSON.parse(JSON.parse(response.data));
          this.plpCustomerList = response;
          
     })
@@ -115,9 +115,9 @@ if(Branch == undefined || Branch == ''){
   this.Apiservice.getplpCustomerBase( this.userid,this.usertype, custID, custName, Branch, category)
   .then((response:any)=> {
     debugger
-    console.log(response)
+    console.log(response.data)
     //this.hidespin();
-       response = JSON.parse(response);
+       response = JSON.parse(JSON.parse(response.data));
        this.plpCustomerList = response;
        
   })

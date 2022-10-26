@@ -1,6 +1,6 @@
 <ion-toolbar class="header">
   <ion-buttons slot='end'>
-    <!-- <ion-icon name="home" class="home_icon"></ion-icon> -->
+    <ion-icon name="close" class="home_icon" (click)="modelDissmiss()"></ion-icon>
     <!-- <ion-menu-button></ion-menu-button> -->
   </ion-buttons>
   <ion-title >{{followupvisits.customername}}</ion-title>
@@ -26,7 +26,7 @@
               <ion-col size="10">
                 <ion-label class="select_placeholder">Call OutCome</ion-label>
               <ion-item class="input_field" id="selectfield" *ngIf="hidecalloutcome">
-                  <ion-select [(ngModel)]="followupvisits.crdit_facility" class="select_field" placeholder="Select" (ionChange)="handleChange()" >
+                  <ion-select [(ngModel)]="followupvisits.calloutcome" class="select_field" placeholder="Select" (ionChange)="handleChange()" >
                     <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
                     <ion-select-option *ngFor="let items of callout" value="{{items.Value}}">{{items.Text}}</ion-select-option>
                     
@@ -34,7 +34,7 @@
                 </ion-item>
 
                 <ion-item class="input_field" id="selectfield" *ngIf="!hidecalloutcome">
-                  <ion-select [(ngModel)]="followupvisits.crdit_facility" class="select_field" placeholder="Select" (ionChange)="handleChange()">
+                  <ion-select [(ngModel)]="followupvisits.calloutcome" class="select_field" placeholder="Select" (ionChange)="handleChange()">
                     <ion-select-option selected="selected" value=""> &lt;&lt; Select &gt;&gt; </ion-select-option>
                     <ion-select-option *ngFor="let items of callout" value="{{items.Value}}">{{items.Text}}</ion-select-option>
                     
@@ -704,7 +704,7 @@
                   <ion-col size="10">
                     <ion-label class="select_placeholder">Emp Code</ion-label>
                     <ion-input id="selectfield" [(ngModel)]="followupvisits.jointcode" class="ionSelect" placeholder="Emp Code" interface="action-sheet"  
-                    class="inputBox"></ion-input>
+                    class="inputBox" (ionBlur)="checkusercode(followupvisits.jointcode)"></ion-input>
                   </ion-col>
                   </ion-row>
 
@@ -726,6 +726,50 @@
                         class="inputBox"></ion-input>
                       </ion-col>
                       </ion-row>
+
+<!-- 
+<div class="row center-block" style="margin-bottom:5px;">
+ 
+<div class="col"  *ngIf="followupvisits.calltype=='P' && myvalue">
+
+<div id="infowindow-content">
+<img src="" width="16" height="16" id="place-icon">
+<span id="place-name" class="title"></span>
+<br>
+<span id="place-address"></span>
+</div>
+</div>
+</div> -->
+
+<!-- End -->
+
+
+<!-- start -->
+<div class="col-sm-12 col-xs-12">
+  <div class="form-group" *ngIf="followupvisits.Purpose == 'NPA followup' && followupvisits.current == 'Y'">
+                           <label>Collected Date<span class="mandfield">*</span> </label>
+                          
+                               <input class="form-control" id="collecteddate" placeholder="Collected Date" style="padding: 1em;  border: 1px solid #ddd4d4;" type="date" [(ngModel)]="followupvisits.collected_date"/>
+                          
+                      </div>
+                      </div>
+<div class="col-sm-12 col-xs-12">
+                      <div class="form-group" *ngIf="followupvisits.Purpose == 'NPA followup' && followupvisits.current == 'Y'">
+                           <label>Account Number<span class="mandfield">*</span> </label>
+                        
+                               <input class="form-control" id="collectedaccnumber" placeholder="Account Number" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="followupvisits.collected_accno" (ionBlur)="getamount(followupvisits.customerid,followupvisits.collected_date,followupvisits.collected_accno)"/>
+                        
+                      </div>
+                      </div>
+<div class="col-sm-12 col-xs-12">
+                       <div class="form-group" *ngIf="followupvisits.Purpose == 'NPA followup' && followupvisits.current == 'Y'">
+                           <label>Amount<span class="mandfield">*</span> </label>
+                          
+                               <input class="form-control" id="collectedamount" placeholder="Amount" style="padding: 1em; border: 1px solid #ddd4d4;" type="text" [(ngModel)]="followupvisits.collectamount" disabled />
+                        
+                      </div>
+                      </div>
+<!-- End -->
 
                       <ion-row *ngIf="isremark==true">
                         <ion-col size="1">

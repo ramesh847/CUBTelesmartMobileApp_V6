@@ -152,8 +152,8 @@ static UvrInsertCourtesy='UvrInsertCourtesy/'
 static loginMobileLos='loginMobileLos/'
 //uvr
 //performance
-static DashBoardScore='lms.svc/DashBoardScore/'
-static NewDashBoard='lms.svc/NewDashBoard/'
+static DashBoardScore='DashBoardScore/'
+static NewDashBoard='NewDashBoard/'
 static PLBCustomerBranch ='LeadManagement.svc/PLBCustomerBranch/'
 static PLBCustomerBase='LeadManagement.svc/PLBCustomerBase/'
 
@@ -161,5 +161,10 @@ static PLBCustomerBase='LeadManagement.svc/PLBCustomerBase/'
 static UpdatePwd='LMS.svc/UpdatePwd/'
 static sentotp='LMS.svc/SendOtp/'
 static verifypwd='LMS.svc/VerifyOtp/'
+
+//followupvisitcall
+static ClickToCallStatus_Leads='ClickToCallStatus_Leads/'
+static EndCall_Clickvisit='EndCall_Click/'
+static ClickToCallStatus_Followup='ClickToCallStatus_Followup/'
 
 } 

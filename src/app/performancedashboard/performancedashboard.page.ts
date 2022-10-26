@@ -72,11 +72,13 @@ export class PerformancedashboardPage implements OnInit {
    
 this.branchCode = window.localStorage['branchCode'];
 this.branchid = window.localStorage['branchID'];
-    this. UserType = window.localStorage['userType'];
-    this. userid = window.localStorage['userID'];
+    this.UserType = window.localStorage['userType'];
+    this.userid = window.localStorage['userID'];
     this.username = window.localStorage['userName'];
     this.branchname = window.localStorage['BranchDescription'];
      this.Usercode = window.localStorage['userCode'];
+
+     
     this.performdashdata()
     this.performdashmarks()
   }
@@ -86,8 +88,8 @@ this.branchid = window.localStorage['branchID'];
     this.Apiservice.perfdashmarks(this.userid)
         .then((response:any) =>{
           debugger
-            response = JSON.parse(response);
-           this.performdashboard1 = response;          
+            response = JSON.parse(response.data);
+           this.performdashboard1 = JSON.parse(response);         
           console.log('dashboard1',this.performdashboard1)
       
           for(let i=0;i<this.performdashboard1.length;i++){
@@ -113,7 +115,7 @@ this.branchid = window.localStorage['branchID'];
     this.Apiservice.getperformdashboard(this.userid,this.branchid)
         .then((response:any)=> {
           debugger
-            response = JSON.parse(response);
+            response = JSON.parse(JSON.parse(response.data));
 
               for(var i=0;i<response.length;i++)
             {
